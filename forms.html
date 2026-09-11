@@ -155,6 +155,14 @@ table td:first-child{font-weight:700; color:var(--ink); width:34%;}
 
 footer{margin-top:clamp(3rem,7vw,4rem); padding:1.5rem 0 3rem; border-top:1px solid var(--rule); font-size:.79rem; color:var(--ink-3); line-height:1.9;}
 :focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+
+.mine{margin-top:1.4rem; border:1px solid var(--indigo-line); background:var(--card); padding:1.1rem 1.25rem; box-shadow:var(--shadow);}
+.mine h3{font-size:1rem; margin-bottom:.5rem; color:var(--indigo);}
+.mine ul{margin:.6rem 0 0; padding-left:1.1rem; display:flex; flex-direction:column; gap:.6rem;}
+.mine li{font-size:.9rem; line-height:1.85;}
+.mine li a{color:var(--indigo); word-break:break-all; font-weight:700;}
+.mine li span{display:block; font-size:.83rem; color:var(--ink-2); line-height:1.8;}
+.mine .note{font-size:.82rem; color:var(--ink-3); line-height:1.8;}
 </style>
 
 <header>
@@ -174,6 +182,16 @@ footer{margin-top:clamp(3rem,7vw,4rem); padding:1.5rem 0 3rem; border-top:1px so
 <main class="wrap">
 
 <div class="tip" style="margin-top:0;"><b>先に全体像。</b>Googleの「Apps Script」という機能に、用意したコードを貼って1回実行します。するとフォーム3つと集計用スプレッドシートが自動で作られ、あなたのGoogleドライブに入ります。あとは受講者にURLを送るだけです。プログラミングの知識は要りません。</div>
+
+<div class="mine">
+  <h3>この案件で作ったもの（実物）</h3>
+  <p class="note">開くにはご自身のGoogleアカウントでのログインが必要です。</p>
+  <ul>
+    <li><a href="https://script.google.com/home/projects/14_ijkTMaAFhmWwcyuBX0UW_etDeSl1lY2b3aN4YkUlVe3RW_PBW5OX-X/edit" target="_blank" rel="noopener">Apps Script プロジェクト</a><span>コード本体。設問や文言を直すのはここ。URLを見失ったら <code>showUrls</code> を実行すると再表示されます</span></li>
+    <li><a href="https://docs.google.com/forms/d/1-ljqUAV7M4gFfuUkFawl1BK9J_N41kHtjV1sLS1-EcU/edit" target="_blank" rel="noopener">診断フォーム（編集画面）</a><span>受講者に送るのは編集画面ではなく<strong>公開URL</strong>です。編集画面右上のプレビュー／送信から取得してください</span></li>
+  </ul>
+  <p class="note">※ <code>setupAll</code> では診断・各回ふりかえり・修了時成果報告の<strong>3フォームと集計スプレッドシート</strong>ができます。残りのURLは <code>showUrls</code> の実行ログに出ます。</p>
+</div>
 
 <div class="steps">
 
