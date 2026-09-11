@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="Apps Scriptで診断フォーム3つと自動採点シートを10分で立ち上げる手順。">
+<title>診断フォームの立ち上げ｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>📋</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html">全体像</a><a href="deliverables.html">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html" aria-current="page">フォーム設置手順</a></span></div></nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Source+Code+Pro:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F5F6F9; --card:#FFFFFF; --card-2:#EDEFF4;
+  --ink:#161A22; --ink-2:#525A6B; --ink-3:#828A9B;
+  --rule:#DEE2EA; --rule-2:#C6CCD8;
+  --indigo:#3D4A7A; --indigo-soft:#E7EAF3; --indigo-line:#A3ADCB;
+  --brick:#A8413A; --brick-soft:#F7E9E7;
+  --code-bg:#1C2030; --code-ink:#DCE0EC; --code-dim:#7F89A6;
+  --shadow:0 1px 2px rgba(22,26,34,.05), 0 10px 30px -18px rgba(22,26,34,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12141A; --card:#1A1D25; --card-2:#22262F;
+    --ink:#E7E9EF; --ink-2:#AEB4C2; --ink-3:#7E8595;
+    --rule:#2A2E38; --rule-2:#3A3F4C;
+    --indigo:#93A3D8; --indigo-soft:#1E2333; --indigo-line:#414A6B;
+    --brick:#DE8078; --brick-soft:#2E1D1B;
+    --code-bg:#0E1017; --code-ink:#DCE0EC; --code-dim:#6B7490;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -18px rgba(0,0,0,.75);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12141A; --card:#1A1D25; --card-2:#22262F;
+  --ink:#E7E9EF; --ink-2:#AEB4C2; --ink-3:#7E8595;
+  --rule:#2A2E38; --rule-2:#3A3F4C;
+  --indigo:#93A3D8; --indigo-soft:#1E2333; --indigo-line:#414A6B;
+  --brick:#DE8078; --brick-soft:#2E1D1B;
+  --code-bg:#0E1017; --code-ink:#DCE0EC; --code-dim:#6B7490;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -18px rgba(0,0,0,.75);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:56rem; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.4rem);}
+h1,h2,h3{font-family:"M PLUS 1","Noto Sans JP",sans-serif; margin:0; font-weight:800; text-wrap:balance; letter-spacing:.01em;}
+p{margin:0;}
+code{font-family:"Source Code Pro",ui-monospace,monospace; font-size:.88em; background:var(--card-2); padding:.1em .38em; border-radius:2px;}
+
+header{background:var(--card); border-bottom:1px solid var(--rule);}
+.hd{padding:clamp(2.2rem,6vw,3.6rem) 0 clamp(1.6rem,4vw,2.2rem);}
+.kick{font-family:"Source Code Pro",monospace; font-size:.7rem; letter-spacing:.2em; color:var(--indigo); font-weight:500; margin-bottom:1rem;}
+h1{font-size:clamp(1.75rem,4.6vw,2.6rem); line-height:1.4;}
+.sub{margin-top:1rem; color:var(--ink-2); max-width:38rem; line-height:2.05; font-size:.96rem;}
+.made{display:grid; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr)); gap:0; margin-top:1.8rem; border:1px solid var(--rule-2);}
+.made div{padding:.85rem 1rem; border-right:1px solid var(--rule); background:var(--bg);}
+.made div:last-child{border-right:none;}
+.made b{display:block; font-family:"Source Code Pro",monospace; font-size:.62rem; letter-spacing:.16em; color:var(--ink-3); font-weight:500;}
+.made span{font-size:.92rem; font-weight:700;}
+
+main{padding:clamp(2rem,5vw,3rem) 0 0;}
+.steps{position:relative; margin-top:.5rem;}
+.step{display:grid; grid-template-columns:3.2rem minmax(0,1fr); gap:1.1rem; padding-bottom:2rem; position:relative;}
+.step:last-child{padding-bottom:.5rem;}
+.step::before{content:""; position:absolute; left:1.55rem; top:2.6rem; bottom:0; width:1px; background:var(--rule-2);}
+.step:last-child::before{display:none;}
+.sn{
+  width:2.4rem; height:2.4rem; display:grid; place-items:center; position:relative; z-index:1;
+  background:var(--indigo); color:var(--card); border-radius:50%;
+  font-family:"Source Code Pro",monospace; font-size:.95rem; font-weight:500;
+}
+.step.warn .sn{background:var(--brick);}
+.sb{min-width:0;}
+.sb h2{font-size:1.15rem; line-height:1.55; margin-bottom:.5rem; padding-top:.3rem;}
+.sb p{font-size:.94rem; color:var(--ink-2); line-height:2;}
+.sb p + p{margin-top:.5rem;}
+.sb strong{color:var(--ink); font-weight:700;}
+.sb a{color:var(--indigo); word-break:break-all;}
+.sb ol,.sb ul{margin:.7rem 0 0; padding-left:1.3rem; display:flex; flex-direction:column; gap:.4rem;}
+.sb li{font-size:.92rem; color:var(--ink-2); line-height:1.95;}
+.sb li strong{color:var(--ink);}
+
+.quote{
+  margin:.8rem 0 0; padding:.75rem 1rem; background:var(--card); border:1px solid var(--rule-2);
+  font-family:"Source Code Pro",monospace; font-size:.82rem; color:var(--ink); line-height:1.8;
+  overflow-wrap:anywhere; word-break:break-word;
+}
+.callout{
+  margin:.9rem 0 0; padding:.95rem 1.15rem; background:var(--brick-soft); border-left:3px solid var(--brick);
+  font-size:.9rem; line-height:1.95; color:var(--ink-2);
+}
+.callout b{color:var(--brick); font-weight:700;}
+.tip{
+  margin:.9rem 0 0; padding:.95rem 1.15rem; background:var(--indigo-soft); border-left:3px solid var(--indigo);
+  font-size:.9rem; line-height:1.95; color:var(--ink-2);
+}
+.tip b{color:var(--indigo); font-weight:700;}
+
+.codewrap{margin-top:1rem; max-width:100%; overflow:hidden; border:1px solid var(--rule-2); background:var(--code-bg); box-shadow:var(--shadow);}
+.codebar{
+  display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  padding:.55rem .8rem; border-bottom:1px solid rgba(255,255,255,.09); flex-wrap:wrap;
+}
+.codebar .fn{font-family:"Source Code Pro",monospace; font-size:.72rem; color:var(--code-dim); letter-spacing:.06em;}
+.codebar .btns{display:flex; gap:.4rem; align-items:center;}
+.codebar button,.codebar a.dl{
+  font-family:"Noto Sans JP",sans-serif; font-size:.76rem; font-weight:500; text-decoration:none;
+  background:rgba(255,255,255,.09); color:var(--code-ink); border:1px solid rgba(255,255,255,.16);
+  padding:.32rem .75rem; cursor:pointer; border-radius:2px; line-height:1.7;
+}
+.codebar button:hover,.codebar a.dl:hover{background:rgba(255,255,255,.16);}
+.codebar button:focus-visible,.codebar a.dl:focus-visible{outline:2px solid var(--indigo-line); outline-offset:2px;}
+pre.code{
+  margin:0; padding:.9rem 1rem; overflow:auto; max-height:24rem;
+  font-family:"Source Code Pro",ui-monospace,monospace; font-size:.74rem; line-height:1.75;
+  color:var(--code-ink); tab-size:2; white-space:pre;
+}
+
+section.blk{margin-top:clamp(2.6rem,6vw,3.8rem);}
+section.blk > h2{font-size:clamp(1.25rem,3vw,1.6rem); margin-bottom:.5rem;}
+section.blk > .lead{color:var(--ink-2); font-size:.94rem; line-height:2; max-width:40rem; margin-bottom:1.2rem;}
+
+.tw{overflow-x:auto;}
+table{border-collapse:collapse; width:100%; min-width:30rem; font-size:.89rem; background:var(--card);}
+th,td{padding:.65rem .85rem; text-align:left; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.85;}
+thead th{background:var(--indigo); color:#fff; font-size:.76rem; letter-spacing:.06em; border-bottom:none; font-weight:700;}
+:root[data-theme="dark"] thead th{color:#12141A;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) thead th{color:#12141A;}}
+@media(max-width:520px){
+  .step{grid-template-columns:2.4rem minmax(0,1fr); gap:.85rem;}
+  .step::before{left:1.2rem;}
+  .sn{width:2rem; height:2rem; font-size:.82rem;}
+  table td:first-child{width:auto;}
+}
+tbody tr:nth-child(even){background:var(--card-2);}
+table td:first-child{font-weight:700; color:var(--ink); width:34%;}
+
+.flow{display:grid; grid-template-columns:repeat(auto-fit,minmax(12rem,1fr)); gap:0; border:1px solid var(--rule-2); margin-top:1.1rem;}
+.flow .c{padding:1rem 1.1rem; border-right:1px solid var(--rule); background:var(--card); display:flex; flex-direction:column; gap:.35rem;}
+.flow .c:last-child{border-right:none;}
+.flow .c .w{font-family:"Source Code Pro",monospace; font-size:.65rem; letter-spacing:.14em; color:var(--indigo);}
+.flow .c .n{font-size:.95rem; font-weight:700;}
+.flow .c .d{font-size:.83rem; color:var(--ink-2); line-height:1.8;}
+
+footer{margin-top:clamp(3rem,7vw,4rem); padding:1.5rem 0 3rem; border-top:1px solid var(--rule); font-size:.79rem; color:var(--ink-3); line-height:1.9;}
+:focus-visible{outline:2px solid var(--indigo); outline-offset:2px;}
+</style>
+
+<header>
+<div class="wrap hd">
+  <div class="kick">GOOGLE FORMS SETUP</div>
+  <h1>診断フォームを、<br>10分で立ち上げる。</h1>
+  <p class="sub">AIスキル診断シートをGoogleフォームに移し、回答が自動で採点されるところまでを一度に用意します。手作業でフォームを作る必要はありません。下のスクリプトを1回実行するだけです。受講者が増えるたびに作り直す必要もありません。</p>
+  <div class="made">
+    <div><b>作られるもの</b><span>フォーム 3つ</span></div>
+    <div><b>集計先</b><span>スプレッドシート 1つ</span></div>
+    <div><b>採点</b><span>送信と同時に自動</span></div>
+    <div><b>所要時間</b><span>約10分</span></div>
+  </div>
+</div>
+</header>
+
+<main class="wrap">
+
+<div class="tip" style="margin-top:0;"><b>先に全体像。</b>Googleの「Apps Script」という機能に、用意したコードを貼って1回実行します。するとフォーム3つと集計用スプレッドシートが自動で作られ、あなたのGoogleドライブに入ります。あとは受講者にURLを送るだけです。プログラミングの知識は要りません。</div>
+
+<div class="steps">
+
+  <div class="step">
+    <div class="sn">1</div>
+    <div class="sb">
+      <h2>Apps Script を開く</h2>
+      <p><a href="https://script.google.com/" target="_blank" rel="noopener">script.google.com</a> を開き、左上の<strong>「新しいプロジェクト」</strong>をクリックします。講座で使うGoogleアカウントでログインしておいてください。</p>
+      <div class="tip"><b>アカウントの選び方。</b>受講者の会社名や回答が入るので、仕事用のアカウントで作ってください。あとから別アカウントへ移すのは手間がかかります。</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="sn">2</div>
+    <div class="sb">
+      <h2>コードを貼り付ける</h2>
+      <p>画面に <code>function myFunction() {}</code> と書かれたコードが出ています。<strong>これを全部消してから</strong>、下のコードを貼り付けてください。「コピー」ボタンを押すと全文がコピーされます。</p>
+      <p>消し忘れるとエラーになります。エディタ内で <code>Ctrl</code>＋<code>A</code>（Macは <code>⌘</code>＋<code>A</code>）→ <code>Delete</code> が確実です。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="sn">3</div>
+    <div class="sb">
+      <h2>保存する</h2>
+      <p>上部のフロッピーディスクのアイコン、または <code>Ctrl</code>＋<code>S</code> で保存します。プロジェクト名を聞かれたら「AI講座フォーム」など分かる名前を付けてください。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="sn">4</div>
+    <div class="sb">
+      <h2>実行する</h2>
+      <p>上部にある実行する関数の選択欄を <strong><code>setupAll</code></strong> にして、<strong>「実行」</strong>を押します。</p>
+      <p>選択欄には他の関数名も並びますが、必ず <code>setupAll</code> を選んでください。ここを間違えると何も作られません。</p>
+    </div>
+  </div>
+
+  <div class="step warn">
+    <div class="sn">5</div>
+    <div class="sb">
+      <h2>権限を承認する ― ここだけ迷います</h2>
+      <p>初回は必ず「承認が必要です」という画面が出ます。<strong>途中で怖い警告が出ますが、正常な動きです。</strong>順番はこうなります。</p>
+      <ol>
+        <li><strong>「権限を確認」</strong>をクリック</li>
+        <li>使うGoogleアカウントを選ぶ</li>
+        <li><strong>「このアプリは Google で確認されていません」</strong>という画面が出る</li>
+        <li>左下の<strong>「詳細」</strong>をクリック</li>
+        <li>下に出てくる<strong>「（プロジェクト名）（安全ではないページ）に移動」</strong>をクリック</li>
+        <li><strong>「許可」</strong>をクリック</li>
+      </ol>
+      <div class="callout"><b>なぜ警告が出るのか。</b>この警告は「Googleが審査していない外部アプリ」に対して出るものです。今回は<strong>あなた自身のアカウントで、あなたが貼ったコードを動かしているだけ</strong>で、外部の誰かにデータが渡ることはありません。安心して進めてください。ただし、この手順は<strong>出所の分からないコードに対しては絶対にやらないでください</strong>。同じ警告は本物の危険なアプリにも出ます。この判断そのものが、そのままAIリテラシーの教材になります。</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="sn">6</div>
+    <div class="sb">
+      <h2>URLを受け取る</h2>
+      <p>実行には20〜40秒ほどかかります。終わると画面下の<strong>「実行ログ」</strong>にURLが並びます。</p>
+      <div class="quote">■ ① AIスキル診断（受講者に送るURL）<br>&nbsp;&nbsp;&nbsp;https://docs.google.com/forms/d/e/.../viewform<br><br>■ ④ 回答集計スプレッドシート<br>&nbsp;&nbsp;&nbsp;https://docs.google.com/spreadsheets/d/...</div>
+      <p>受講者に送るのは<strong>①のURL</strong>です。このログはあとから <code>showUrls</code> という関数を実行すればもう一度見られるので、消してしまっても大丈夫です。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="sn">7</div>
+    <div class="sb">
+      <h2>自分で1回テストする</h2>
+      <p>受講者に送る前に、<strong>必ず自分で一度回答してみてください。</strong>送信後、集計スプレッドシートの<strong>「診断結果」</strong>シートに、点数とレベルが1行追加されていれば成功です。</p>
+      <p>テスト行は、あとから行ごと削除すれば消せます。</p>
+      <div class="tip"><b>点数が入らないときは。</b>Apps Scriptの左メニューにある時計のアイコン（トリガー）を開き、<code>onDiagnosticSubmit</code> が登録されているか確認してください。無ければ <code>setupAll</code> をもう一度実行します。</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="codewrap" id="codebox">
+  <div class="codebar">
+    <span class="fn">AI講座フォーム作成.gs</span>
+    <span class="btns">
+      <a class="dl" href="assets/AI講座フォーム作成.gs" download>ファイルで開く</a>
+      <button type="button" id="copybtn">全文をコピー</button>
+    </span>
+  </div>
+  <pre class="code" id="code">読み込み中…</pre>
+</div>
+
+<section class="blk">
+  <h2>3つのフォームを、いつ使うか</h2>
+  <p class="lead">1対1の講座では、この3つで受講前・毎回・修了時の情報がすべて1つのスプレッドシートに集まります。</p>
+  <div class="flow">
+    <div class="c"><span class="w">BEFORE / AFTER</span><span class="n">① AIスキル診断</span><span class="d">申込時と修了時の2回、同じフォームに回答してもらう。冒頭で「受講前／修了時」を選ぶので、点数の伸びがそのまま効果測定になる</span></div>
+    <div class="c"><span class="w">EVERY SESSION</span><span class="n">② 各回ふりかえり</span><span class="d">毎回の終わりに1分。難易度と宿題の実行可能性を聞くので、次回の調整に直接使える</span></div>
+    <div class="c"><span class="w">AT THE END</span><span class="n">③ 修了時 成果報告</span><span class="d">削減時間と社員の反応を数字で回収する。事例として使ってよいかの確認も入っている</span></div>
+  </div>
+  <div class="tip"><b>設問を変えても大丈夫ですが、1か所だけ注意。</b>表形式（グリッド）の設問の<strong>行と列の文言は変えないでください</strong>。採点はこの文言を手がかりに点数を出しているため、書き換えると点数が0になります。文言を変えたい場合は、コード上部の <code>FREQ</code> / <code>AGREE</code> / <code>WANT</code> / <code>Q_USE</code> / <code>Q_SKILL</code> も同じように直してから、新しくフォームを作り直してください。</div>
+</section>
+
+<section class="blk">
+  <h2>採点のしくみ</h2>
+  <p class="lead">Excel版の診断シートと同じ基準です。両方を併用しても点数はずれません。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>項　目</th><th>内　容</th></tr></thead>
+      <tbody>
+        <tr><td>A. 利用状況</td><td>8問 × 0〜4点 ＝ 32点満点。「使っていない」が0点、「ほぼ毎日」が4点</td></tr>
+        <tr><td>B. スキル・体制</td><td>12問 × 0〜4点 ＝ 48点満点。「全く違う」が0点、「とても当てはまる」が4点</td></tr>
+        <tr><td>合計</td><td>80点満点。0〜15点 Lv.1／16〜31点 Lv.2／32〜47点 Lv.3／48〜63点 Lv.4／64〜80点 Lv.5</td></tr>
+        <tr><td>困っている業務 上位3</td><td>Cセクションで「かなり困っている」「最優先」を選んだ業務を、困り度の高い順に3つ自動抽出。初回の演習題材になる</td></tr>
+        <tr><td>目標</td><td>受講前から修了時にかけて、合計点＋25点以上（Lv.1の人がLv.3に到達する水準）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip"><b>診断だけで判定を確定させないこと。</b>初回120分では、実際にChatGPTを操作するところを20分見せてもらいます。自己申告と実演がずれることは多く、特にLv.4・Lv.5は操作の巧拙ではなく「社内に展開しているかどうか」で分かれます。判定の確定は第3回終了時です。</div>
+</section>
+
+<section class="blk">
+  <h2>うまくいかないとき</h2>
+  <div class="tw">
+    <table>
+      <thead><tr><th>症　状</th><th>対　処</th></tr></thead>
+      <tbody>
+        <tr><td>実行ログにURLが出てこない</td><td>実行に20〜40秒かかります。画面下の「実行ログ」タブが開いているか確認してください。赤いエラー文が出ている場合は、その1行目をそのまま検索してください</td></tr>
+        <tr><td>「構文エラー」と出る</td><td>元からあった <code>function myFunction() {}</code> を消し忘れているか、コードの貼り付けが途中で切れています。エディタ内で全選択して削除し、貼り直してください</td></tr>
+        <tr><td>権限の画面が繰り返し出る</td><td>ブラウザのポップアップブロックを解除してから、もう一度実行してください</td></tr>
+        <tr><td>フォームを作り直したい</td><td>Googleドライブから古いフォームとスプレッドシートを削除し、<code>setupAll</code> をもう一度実行します。削除せずに実行すると、同じものがもう一組できます</td></tr>
+        <tr><td>点数が「診断結果」シートに入らない</td><td>左メニューの時計アイコン（トリガー）で <code>onDiagnosticSubmit</code> の登録を確認。無ければ <code>setupAll</code> を再実行してください</td></tr>
+        <tr><td>受講者から「スマホだと見づらい」と言われる</td><td>表形式の設問があるため、案内に「パソコンでのご回答をおすすめします」と添えてください。フォームの説明文にも既に書いてあります</td></tr>
+        <tr><td>URLをもう一度知りたい</td><td>実行する関数を <code>showUrls</code> にして実行すると、ログにURLが再表示されます</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="blk">
+  <h2>受講者への送り方（文例）</h2>
+  <p class="lead">そのまま使える案内文です。回答の負担が軽いことと、点数が低くても問題ないことを先に伝えるのが、回収率を上げるコツです。</p>
+  <div class="quote">
+    ○○様<br><br>
+    このたびはお申し込みいただきありがとうございます。<br>
+    初回までに、下記のフォームへのご回答をお願いいたします。<br><br>
+    ▼ AIスキル診断（所要10分・パソコン推奨）<br>
+    （①のURLを貼る）<br><br>
+    正解を答えていただく必要はありません。素直な現状をご記入ください。<br>
+    点数が低いことは全く問題なく、むしろ伸びしろの大きさを示します。<br><br>
+    この回答をもとに、初回の進め方と演習の題材を御社に合わせて調整いたします。<br>
+    特に「時間がかかっている業務」の欄が、そのまま初回の題材になります。<br>
+    お手数ですが、具体的にお書きいただけますと助かります。<br><br>
+    なお初回は、普段お使いのPCでChatGPTにログインした状態でご参加ください。<br>
+    いつもの使い方を見せていただくところから始めます。
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>このスクリプトは、あなたのGoogleアカウント内だけで動きます。外部のサーバーへデータを送る処理は含まれていません。受講者の回答は、あなたのGoogleドライブ上のスプレッドシートにのみ保存されます。</p>
+  <p style="margin-top:.6rem;">関連資料：カリキュラム設計書（Word／PDF）／講師用ハンドブック／AIスキル診断シート（Excel版）／<a href="deliverables.html">受講成果物イメージ</a>／<a href="roadmap.html">講師の学習ロードマップ</a></p>
+</footer>
+
+<script>
+(function(){
+  var pre = document.getElementById('code');
+  var btn = document.getElementById('copybtn');
+  var label = btn.textContent;
+  var SRC = 'assets/AI講座フォーム作成.gs';
+
+  fetch(SRC).then(function(r){
+    if(!r.ok) throw new Error(r.status);
+    return r.text();
+  }).then(function(t){
+    pre.textContent = t;
+  }).catch(function(){
+    pre.textContent = 'コードを読み込めませんでした。上の「ファイルで開く」から ' + SRC + ' を開いてコピーしてください。';
+  });
+
+  function selectAll(){
+    try{
+      var r = document.createRange(); r.selectNodeContents(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    }catch(e){}
+  }
+  btn.addEventListener('click', function(){
+    var text = pre.textContent;
+    var done = function(msg){
+      btn.textContent = msg;
+      setTimeout(function(){ btn.textContent = label; }, 2200);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        done('コピーしました');
+      }).catch(function(){
+        selectAll(); done('選択しました → Ctrl+C');
+      });
+    } else {
+      selectAll(); done('選択しました → Ctrl+C');
+    }
+  });
+})();
+</script>
+</body>
+</html>

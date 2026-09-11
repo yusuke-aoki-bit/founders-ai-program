@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="経営者向けAI実装講座の制作物インデックス。どの資料をいつ使うか、設計判断の理由、次にやること。">
+<title>講座づくりの全体像｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🗂️</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html" aria-current="page">全体像</a><a href="deliverables.html">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html">フォーム設置手順</a></span></div></nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700;900&family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#F1F2F3; --card:#FFFFFF; --card-2:#E7E9EA; --card-3:#F7F8F8;
+  --ink:#15181B; --ink-2:#545A60; --ink-3:#848A90;
+  --rule:#DBDDE0; --rule-2:#C2C6CA;
+  --graphite:#2B3136; --graphite-soft:#E5E7E9;
+  --gold:#8C6111; --gold-soft:#F6EEDC; --gold-line:#D6BC85;
+  --green:#2F6B4F; --green-soft:#E6F1EA;
+  --shadow:0 1px 2px rgba(21,24,27,.05), 0 12px 30px -20px rgba(21,24,27,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111315; --card:#1A1D20; --card-2:#23272B; --card-3:#191C1F;
+    --ink:#E8EAEB; --ink-2:#AFB4B9; --ink-3:#80868C;
+    --rule:#292E32; --rule-2:#393F44;
+    --graphite:#C6CCD1; --graphite-soft:#22262A;
+    --gold:#D9A63C; --gold-soft:#2A2214; --gold-line:#5B4A22;
+    --green:#7FC49F; --green-soft:#1A2A21;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111315; --card:#1A1D20; --card-2:#23272B; --card-3:#191C1F;
+  --ink:#E8EAEB; --ink-2:#AFB4B9; --ink-3:#80868C;
+  --rule:#292E32; --rule-2:#393F44;
+  --graphite:#C6CCD1; --graphite-soft:#22262A;
+  --gold:#D9A63C; --gold-soft:#2A2214; --gold-line:#5B4A22;
+  --green:#7FC49F; --green-soft:#1A2A21;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -20px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:64rem; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.6rem);}
+h1,h2,h3,h4{font-family:"Noto Serif JP",serif; margin:0; font-weight:700; text-wrap:balance;}
+p{margin:0;}
+a{color:var(--gold);}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+.lbl{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.2em; font-weight:600; color:var(--gold);}
+
+header{background:var(--card); border-bottom:1px solid var(--rule);}
+.hd{padding:clamp(2.4rem,6vw,4rem) 0 clamp(1.8rem,4vw,2.6rem);}
+.hd .lbl{display:block; margin-bottom:1.2rem;}
+h1{font-size:clamp(1.95rem,5vw,3.1rem); line-height:1.36; letter-spacing:.01em;}
+.sub{margin-top:1.2rem; color:var(--ink-2); max-width:40rem; line-height:2.05; font-size:.98rem;}
+.counts{display:grid; grid-template-columns:repeat(auto-fit,minmax(9rem,1fr)); gap:0; margin-top:2rem; border:1px solid var(--rule-2);}
+.counts div{padding:.9rem 1.05rem; border-right:1px solid var(--rule); background:var(--bg);}
+.counts div:last-child{border-right:none;}
+.counts b{display:block; font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.16em; color:var(--ink-3); font-weight:600;}
+.counts span{font-size:1.02rem; font-weight:700; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;}
+
+section{padding:clamp(2.8rem,6vw,4.4rem) 0; border-bottom:1px solid var(--rule);}
+section:last-of-type{border-bottom:none;}
+.sh{display:flex; align-items:baseline; gap:.95rem; margin-bottom:.6rem;}
+.sh .k{font-family:"IBM Plex Mono",monospace; font-size:.75rem; font-weight:600; color:var(--gold); white-space:nowrap; padding-top:.3rem;}
+h2{font-size:clamp(1.35rem,3.2vw,1.9rem); line-height:1.5;}
+.lead{margin-top:.8rem; max-width:42rem; color:var(--ink-2); line-height:2.05; font-size:.95rem;}
+
+.tl{margin-top:2.2rem; border-top:1px solid var(--rule-2);}
+.ph{display:grid; grid-template-columns:9.5rem minmax(0,1fr); gap:1.6rem; padding:1.4rem 0; border-bottom:1px solid var(--rule); align-items:start;}
+.ph .when{padding-top:.15rem;}
+.ph .when .t{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.14em; color:var(--gold); font-weight:600; display:block; margin-bottom:.2rem;}
+.ph .when .n{font-family:"Noto Serif JP",serif; font-weight:700; font-size:1.02rem; line-height:1.5;}
+.ph .body p{font-size:.92rem; color:var(--ink-2); line-height:1.95;}
+.uses{display:flex; flex-wrap:wrap; gap:.45rem; margin-top:.75rem;}
+.use{
+  display:inline-flex; align-items:center; gap:.4rem; font-size:.8rem; text-decoration:none;
+  background:var(--card); border:1px solid var(--rule-2); color:var(--ink); padding:.32rem .7rem; line-height:1.6;
+}
+.use:hover{border-color:var(--gold); color:var(--gold);}
+.use .d{font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.1em; color:var(--ink-3);}
+.use:hover .d{color:var(--gold);}
+.ph.para{background:var(--gold-soft); border-bottom:none; padding-left:1.1rem; padding-right:1.1rem; margin-top:.8rem; border:1px solid var(--gold-line);}
+@media(max-width:760px){
+  .ph{grid-template-columns:1fr; gap:.5rem;}
+}
+
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(17rem,1fr)); gap:1rem; margin-top:2rem;}
+.c{background:var(--card); border:1px solid var(--rule-2); box-shadow:var(--shadow); display:flex; flex-direction:column;}
+.c .top{padding:1.1rem 1.2rem .9rem; border-bottom:1px solid var(--rule);}
+.c .num{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.16em; color:var(--gold); font-weight:600;}
+.c h3{font-size:1.06rem; line-height:1.55; margin-top:.35rem;}
+.c .fmt{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.08em; color:var(--ink-3); margin-top:.4rem;}
+.c .mid{padding:.95rem 1.2rem; font-size:.87rem; color:var(--ink-2); line-height:1.95; flex:1;}
+.c .bot{padding:.7rem 1.2rem 1rem; border-top:1px dashed var(--rule-2); font-size:.8rem;}
+.c .bot .w{font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.16em; color:var(--ink-3); font-weight:600; display:block; margin-bottom:.15rem;}
+.c a.go{display:inline-block; margin-top:.5rem; font-size:.82rem; word-break:break-all;}
+.c .file{font-family:"IBM Plex Mono",monospace; font-size:.74rem; color:var(--ink-2); margin-top:.5rem; word-break:break-all; display:block;}
+.ok{color:var(--green); font-weight:700;}
+
+.tw{overflow-x:auto; margin-top:1.8rem;}
+table{border-collapse:collapse; width:100%; min-width:34rem; font-size:.87rem; background:var(--card);}
+th,td{padding:.58rem .8rem; text-align:left; border-bottom:1px solid var(--rule); line-height:1.8; vertical-align:top;}
+thead th{background:var(--graphite); color:var(--card); font-size:.73rem; letter-spacing:.08em; border-bottom:none; font-weight:700;}
+tbody tr:nth-child(even){background:var(--card-3);}
+td.k{font-family:"IBM Plex Mono",monospace; white-space:nowrap; color:var(--ink-3); font-variant-numeric:tabular-nums;}
+tbody tr.sep td{border-top:2px solid var(--gold-line);}
+td b{font-weight:700;}
+
+.next{margin-top:1.8rem; display:flex; flex-direction:column; gap:.85rem;}
+.nx{display:grid; grid-template-columns:2.4rem minmax(0,1fr); gap:1rem; background:var(--card); border:1px solid var(--rule-2); padding:1.05rem 1.2rem; align-items:start;}
+.nx .i{width:1.9rem; height:1.9rem; display:grid; place-items:center; background:var(--gold); color:var(--card); font-family:"IBM Plex Mono",monospace; font-size:.85rem; font-weight:600;}
+:root[data-theme="dark"] .nx .i{color:#111315;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .nx .i{color:#111315;}}
+.nx h4{font-size:1rem; line-height:1.6; margin-bottom:.25rem;}
+.nx p{font-size:.88rem; color:var(--ink-2); line-height:1.9;}
+
+.dec{margin-top:1.8rem; border:1px solid var(--rule-2); background:var(--card);}
+.dec .r{display:grid; grid-template-columns:14rem minmax(0,1fr); gap:1.2rem; padding:1rem 1.2rem; border-bottom:1px solid var(--rule);}
+.dec .r:last-child{border-bottom:none;}
+.dec .q{font-family:"Noto Serif JP",serif; font-weight:700; font-size:.94rem; line-height:1.7;}
+.dec .a{font-size:.88rem; color:var(--ink-2); line-height:1.95;}
+.dec .a b{color:var(--ink); font-weight:700;}
+@media(max-width:700px){.dec .r{grid-template-columns:1fr; gap:.3rem;}}
+
+.open{margin-top:1.6rem; display:flex; flex-direction:column; gap:0; border:1px solid var(--rule-2);}
+.open .o{display:grid; grid-template-columns:1.5rem minmax(0,1fr); gap:.8rem; padding:.8rem 1.1rem; border-bottom:1px solid var(--rule); background:var(--card); font-size:.89rem; line-height:1.9;}
+.open .o:last-child{border-bottom:none;}
+.open .o .b{color:var(--gold); font-family:"IBM Plex Mono",monospace; font-weight:600;}
+.open .o i{font-style:normal; display:block; font-size:.82rem; color:var(--ink-3); margin-top:.1rem;}
+
+.warnbox{margin-top:1.6rem; padding:1.05rem 1.25rem; background:var(--gold-soft); border-left:3px solid var(--gold); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.warnbox b{color:var(--gold); font-weight:700;}
+.okbox{margin-top:1.6rem; padding:1.05rem 1.25rem; background:var(--green-soft); border-left:3px solid var(--green); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.okbox b{color:var(--green); font-weight:700;}
+
+footer{padding:2rem 0 3.2rem; font-size:.79rem; color:var(--ink-3); line-height:1.9; border-top:1px solid var(--rule);}
+:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+
+<header>
+<div class="wrap hd">
+  <span class="lbl">経営者向け AI実装講座　制作物インデックス</span>
+  <h1>1件の講座を、<br>まるごと立ち上げるための一式。</h1>
+  <p class="sub">中小企業の経営者に1対1でAI活用を教える講座を、提案から修了後のフォローまで通して動かすための資料一式です。対象は<strong>すでにChatGPTを使っている</strong>経営者・役員。「使っている」と「仕事が変わった」の間を埋めるのが、この講座の商品価値です。</p>
+  <div class="counts">
+    <div><b>制作物</b><span>7点</span></div>
+    <div><b>講座構成</b><span>全12回</span></div>
+    <div><b>1回</b><span>120分</span></div>
+    <div><b>通し</b><span>24時間</span></div>
+    <div><b>形式</b><span>1対1 オンライン</span></div>
+  </div>
+</div>
+</header>
+
+<main class="wrap">
+
+<div class="okbox" style="margin-top:2rem;"><b>2026年9月版。提案資料の差し替えは完了しています。</b>8月の初版から4点変わりました。①1回 <b>90分 → 120分</b>（全12回で18時間 → <b>24時間</b>）。増えた30分はすべて定着に使い、教える内容は増やしません。②受講者は<b>すでにChatGPTを使っている</b>前提に変更。③第2回を「入門」から「<b>今の使い方を作り直す</b>」へ。④<b>初回120分を能力把握の回</b>として独立設計（実演観察の3課題・観察記録シート・レベル判定）。進行の詳細はすべて講師用ハンドブック（07）に入っています。</div>
+
+<section>
+  <div class="sh"><span class="k">01</span><h2>いつ、どれを使うのか。</h2></div>
+  <p class="lead">7点の資料は、1件の案件の時間軸に沿って並んでいます。上から順に使えば、提案から修了後のフォローまでひと通り回ります。</p>
+  <div class="tl">
+
+    <div class="ph">
+      <div class="when"><span class="t">STEP 01</span><span class="n">提案するとき</span></div>
+      <div class="body">
+        <p>「12回で何が手に入るのか」を先に見せます。プロンプト集・AIツールの仕様書・12か月ロードマップの実物見本を並べた資料なので、抽象的な説明をせずに済みます。金額の妥当性は、この資料が説明してくれます。</p>
+        <div class="uses">
+          <a class="use" href="deliverables.html"><span class="d">WEB</span>受講成果物イメージ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="when"><span class="t">STEP 02</span><span class="n">準備するとき</span></div>
+      <div class="body">
+        <p>フォーム3つと自動採点シートを、Apps Scriptの1回実行で立ち上げます。所要10分。助成金を使う場合は、計画届が訓練開始の1か月前までなので、ここから逆算して日程を決めます。</p>
+        <div class="uses">
+          <a class="use" href="forms.html"><span class="d">WEB</span>フォーム設置手順</a>
+          <a class="use" href="assets/AI講座フォーム作成.gs"><span class="d">GS</span>AI講座フォーム作成.gs</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="when"><span class="t">STEP 03</span><span class="n">申込〜初回前</span></div>
+      <div class="body">
+        <p>受講者に診断シートを送り、現在地を数値で把握します。回答の「時間がかかっている業務」欄が、そのまま第1回の演習題材になります。Googleフォーム版とExcel版は配点が同一なので、どちらを使っても構いません。</p>
+        <div class="uses">
+          <span class="use"><span class="d">FORM</span>AIスキル診断（①のURL）</span>
+          <span class="use"><span class="d">XLSX</span>AIスキル診断_事前アンケート</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="when"><span class="t">STEP 04</span><span class="n">講座を進めるとき</span></div>
+      <div class="body">
+        <p>講師用ハンドブックのレッスンプランどおりに全12回を進めます。初回は教える回ではなく<strong>測る回</strong>で、実演を20分見て能力を把握し、レベル判定に応じて各回の深さを調整します。各回の終わりに1分のふりかえりフォームを送ると、難易度と宿題の実行可能性が回収でき、次回の調整に直接使えます。</p>
+        <div class="uses">
+          <span class="use"><span class="d">DOCX / PDF</span>講師用ハンドブック（主軸）</span>
+          <span class="use"><span class="d">FORM</span>各回ふりかえり</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph">
+      <div class="when"><span class="t">STEP 05</span><span class="n">修了時とその後</span></div>
+      <div class="body">
+        <p>成果報告フォームで削減時間と社員の反応を数字にし、同じ診断シートをもう一度回答してもらって伸び幅を測ります。1か月後・3か月後のフォロー面談で定着を確認し、集めた実測値で募集資料の数字を差し替えます。</p>
+        <div class="uses">
+          <span class="use"><span class="d">FORM</span>修了時 成果報告</span>
+          <span class="use"><span class="d">FORM / XLSX</span>AIスキル診断（再実施）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ph para">
+      <div class="when"><span class="t">ALWAYS</span><span class="n">ずっと並行して</span></div>
+      <div class="body">
+        <p>教える側が受講者の一歩先を歩き続けるための学習計画です。チェックを入れると進捗が保存されます。上級編を教えるなら、Phase 2（つなぐ）と Phase 3（コードを読む）は自分で一度通っておく必要があります。</p>
+        <div class="uses">
+          <a class="use" href="roadmap.html"><span class="d">WEB</span>講師の学習ロードマップ</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">02</span><h2>制作物 7点。</h2></div>
+  <p class="lead">Webページはこのサイト内にあります。ファイル類はプロジェクトと手元にあります。集合研修版は今回の案件では使いませんが、商工会など複数社向けの引き合いが来たときのために残してあります。</p>
+  <div class="cards">
+
+    <div class="c">
+      <div class="top">
+        <span class="num">01 ／ 受講者に渡す</span>
+        <h3>AIスキル診断シート</h3>
+        <div class="fmt">XLSX ・ 自動採点つき</div>
+      </div>
+      <div class="mid">20問80点満点。「利用状況」と「スキル・体制」の2軸でLv.1〜5を自動判定します。プルダウン入力なので10分で埋まります。講師用の集計シートも同梱。</div>
+      <div class="bot"><span class="w">使いかた</span>初回と修了時に<b>同じシート</b>を配る。設問を変えると伸び幅が比較できなくなる
+      <span class="file">AIスキル診断_事前アンケート.xlsx</span></div>
+    </div>
+
+    <div class="c">
+      <div class="top">
+        <span class="num">02 ／ 提案に使う</span>
+        <h3>受講成果物イメージ</h3>
+        <div class="fmt">WEB ページ</div>
+      </div>
+      <div class="mid">受講者が持ち帰る7点の完成見本。プロンプト集の実物、AIツールの仕様書、上級編の4成果物、12か月ロードマップを「見せる」構成にしてあります。</div>
+      <div class="bot"><span class="w">状態</span><span class="ok">✓ 1対1版（全12回・24時間）に更新済み</span>。掲載数値はすべて目標水準で実績ではない
+      <a class="go" href="deliverables.html">開く →</a></div>
+    </div>
+
+    <div class="c">
+      <div class="top">
+        <span class="num">03 ／ 提案・契約時</span>
+        <h3>1対1版 カリキュラム設計書</h3>
+        <div class="fmt">DOCX ＋ PDF ・ 25ページ</div>
+      </div>
+      <div class="mid">基礎編6回＋上級編6回の全体設計。クライアントへの提案と契約時の説明に使います。進行の実務はハンドブック（07）に移りました。</div>
+      <div class="bot"><span class="w">状態</span><span class="ok">✓ 120分・24時間で再生成済み</span>。ソースは <b>ビルドスクリプト_カリキュラム設計書120分版.md</b>
+      <span class="file">AI実装講座_1対1版_カリキュラム設計書.docx / .pdf</span></div>
+    </div>
+
+    <div class="c">
+      <div class="top">
+        <span class="num">04 ／ 予備</span>
+        <h3>集合研修版 カリキュラム設計書</h3>
+        <div class="fmt">DOCX ＋ PDF ・ 18ページ</div>
+      </div>
+      <div class="mid">8〜12社の集団向け・全6回×120分。商工会や団体からの引き合い用。最終回に他社の前で発表する設計になっています。</div>
+      <div class="bot"><span class="w">使いかた</span>複数社向けの案件が来たときに引き出す
+      <span class="file">AI実装講座_カリキュラム設計書.docx / .pdf</span></div>
+    </div>
+
+    <div class="c">
+      <div class="top">
+        <span class="num">05 ／ 自分のため</span>
+        <h3>講師の学習ロードマップ</h3>
+        <div class="fmt">WEB ページ ・ 進捗保存つき</div>
+      </div>
+      <div class="mid">「AIは毎日使う／コードは書かない」地点からの5段階。やることにチェックを入れると進捗が残ります。<b>やらなくていいこと</b>の一覧も入れてあります。</div>
+      <div class="bot"><span class="w">使いかた</span>週3時間を月・水・金に分けて進める
+      <a class="go" href="roadmap.html">開く →</a></div>
+    </div>
+
+    <div class="c">
+      <div class="top">
+        <span class="num">06 ／ 運用の道具</span>
+        <h3>Googleフォーム一括生成</h3>
+        <div class="fmt">GS スクリプト ＋ 手順ページ</div>
+      </div>
+      <div class="mid">診断・各回ふりかえり・成果報告の3フォームと、自動採点される集計シートが1回の実行でできます。クライアントが変わるたび再実行すれば新しい一式ができます。</div>
+      <div class="bot"><span class="w">使いかた</span>Apps Scriptに貼って <b>setupAll</b> を実行
+      <a class="go" href="forms.html">手順を開く →</a></div>
+    </div>
+
+    <div class="c">
+      <div class="top">
+        <span class="num">07 ／ 主軸・2026年9月新規</span>
+        <h3>1対1版 講師用ハンドブック</h3>
+        <div class="fmt">DOCX ＋ PDF ・ 49ページ</div>
+      </div>
+      <div class="mid">初回120分の完全台本（実演観察の3課題・観察記録シート）、第2〜12回のレッスンプラン、受講者側と講師側の事前習得知識、想定質問15問、運用資料一式。<b>講座を進めるときに見るのはこれ</b>。</div>
+      <div class="bot"><span class="w">使いかた</span>案件が決まったら第1部を通読。各回の3日前に該当のレッスンプランを読む
+      <span class="file">claude/AI実装講座_1対1版_講師用ハンドブック.md</span></div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">03</span><h2>講座の骨格。</h2></div>
+  <p class="lead">「自分が使う」から「会社で回る」まで積み上げ、そこから「仕組みでつなぐ」「組織に載せる」「事業を組み直す」へ進みます。前の回の成果物が次の回の材料になるため、欠席には必ず個別補講を入れます。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>回</th><th>テーマ</th><th>手元に残るもの</th></tr></thead>
+      <tbody>
+        <tr><td class="k">第1回</td><td><b>現状把握と地図づくり</b>（能力把握＋業務棚卸し）</td><td>業務棚卸しシート／AI化候補 上位3</td></tr>
+        <tr><td class="k">第2回</td><td><b>今のChatGPTの使い方を作り直す</b></td><td>指示の型／カスタム指示／プロジェクト／プロンプト集 v1（5本）</td></tr>
+        <tr><td class="k">第3回</td><td>文書とコミュニケーションのAI化</td><td>プロンプト集 v2（10本）／社内文書テンプレ3種</td></tr>
+        <tr><td class="k">第4回</td><td>数字と判断のAI化</td><td>分析プロンプト＋月次レポート雛形</td></tr>
+        <tr><td class="k">第5回</td><td>自社専用AIをつくる</td><td>実働するAIツール1つ／AI利用ルール v1</td></tr>
+        <tr><td class="k">第6回</td><td>社内へのお披露目と12か月計画　<b>【社員同席】</b></td><td>AI化ロードマップ／社内説明の完了</td></tr>
+        <tr class="sep"><td class="k">第7回</td><td>手作業のつなぎ目をなくす</td><td>つながった自動化フロー1本</td></tr>
+        <tr><td class="k">第8回</td><td>社内の知識を検索できるようにする</td><td>社内ナレッジ検索AI／不足資料リスト</td></tr>
+        <tr><td class="k">第9回</td><td>複数の工程をまとめて任せる</td><td>多工程タスクの設計書と確認ポイント</td></tr>
+        <tr><td class="k">第10回</td><td>品質を測る・壊れたら気づく</td><td>正解セット10件＋月次チェック手順</td></tr>
+        <tr><td class="k">第11回</td><td>組織に載せる</td><td>推進体制図／権限・費用管理表／効果測定シート</td></tr>
+        <tr><td class="k">第12回</td><td>AIを前提に事業を組み直す　<b>【社員同席】</b></td><td>3年構想／改訂版12か月ロードマップ</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="warnbox"><b>助成金は、24時間で単独クリアします。</b>120分×12回＝24時間なので、人材開発支援助成金（事業展開等リスキリング支援コース）の「実訓練時間10時間以上」をパッケージ単独で満たします。基礎編のみの12時間でも要件は満たします。中小企業は経費助成75%、上限は10〜100時間未満で1人30万円。計画届は訓練開始の1か月前まで、新類型では認定経営革新等支援機関の確認も要ります。2026年8月3日の改正で「汎用的な内容」と「<b>既存ソフトの操作習得のみ</b>」が対象外になりましたが、本講座は第5回以降で自社専用ツールの構築・体制設計・効果測定を扱うため、操作習得に留まらない構成であることを計画届で説明できます。<b>案件ごとに労働局へ確認する3項目：</b>①オンライン1対1のOFF-JT該当性　②社員同席回（第6・12回）の計上可否　③訓練時間の記録様式。申請の可否は断定せず、代行も請けないこと。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">04</span><h2>なぜ、この設計にしたのか。</h2></div>
+  <p class="lead">あとから「なぜこうなっているのか」が分からなくなりがちな判断を、理由ごと残しておきます。</p>
+  <div class="dec">
+    <div class="r">
+      <div class="q">なぜ知識講座にしなかったのか</div>
+      <div class="a">中小企業がAI導入で止まる理由の第1位は「成功事例・活用事例の情報が足りない」（83.3%）。<b>不足しているのは知識ではなく「自社の場合はこうなる」という具体像</b>です。だから一般論の講義を最小化し、受講者自身の実データを教材にしました。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ1対1が効くのか</div>
+      <div class="a">導入検討段階の壁の第1位は「推進人材がいない」（32.0%）。中小企業には社長の代わりに進める人がいません。1対1は<b>社長の代わりに推進役が横に座る場</b>として、この構造に直接効きます。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ社内へのお披露目を置いたのか</div>
+      <div class="a">集合研修の推進力の多くは「他社の目」から来ていました。1対1ではこれが丸ごと消え、放置すると宿題が止まります。<b>発表の相手を社内に移す</b>ことでこれを代替します。第6回・第12回の日程は初回に確定し、社員の予定も先に押さえてください。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ90分から120分にしたのか</div>
+      <div class="a">90分では演習が45分しか取れず、上級編の体制設計や評価の回が成立しませんでした。増えた30分は<b>すべて定着に使い、教える内容は増やしません</b>。演習は55分、宿題を実物で見る枠は15分に拡大。講師が話す時間は合計<b>35分以内</b>に抑えます。時間が増えたぶん教える量を増やすのが、この種の講座で最もよくある失敗です。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ上級編に品質測定の回があるのか</div>
+      <div class="a">導入後の課題として「効果測定・成果可視化が困難」が21.3%。品質を測れないと改善も社内説明もできません。正解セット10件を作って月1回流すだけの素朴な仕組みですが、<b>これを教えられる講師は少なく、そのまま差別化になります</b>。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ「ChatGPT既利用」を前提にしたのか</div>
+      <div class="a">ゼロからの導入講座は動画教材に負けます。値段がつくのは<b>「使っている」と「仕事が変わった」の間の距離</b>を埋める部分です。だから第2回は入門ではなく「作り直し」——毎回ゼロから指示を打ち、良い結果を捨てている状態を、蓄積する状態に変えます。まったく使ったことがない人は、契約前に対象外と判定します。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ初回を「測る回」にしたのか</div>
+      <div class="a">「使っています」という自己申告は当てになりません。初回は<b>20分間、講師が口を出さずに実演を見る</b>ことで実力を把握します。助け舟を出した瞬間に測定は終わります。判定は講師の手元に置き、受講者には伝えません。ただし測るだけで終わった初回は2回目の欠席理由になるので、<b>その日のうちに手応えを1つ渡す</b>ことを必ずセットにします。</div>
+    </div>
+    <div class="r">
+      <div class="q">なぜ掲載数値が「目標」なのか</div>
+      <div class="a">まだ第1期を実施していないためです。成果物イメージに載っている削減時間はすべて講座で提示する目標水準であり、実績ではありません。<b>第1期の実測値が出たら差し替えてください</b>。実名事例は本人の了解を得てから使います。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">05</span><h2>次にやること。</h2></div>
+  <div class="next">
+    <div class="nx">
+      <div class="i">1</div>
+      <div>
+        <h4>業種別のサンプルデータを3種つくる</h4>
+        <p>製造・小売・サービス。第4回のデモに必須で、受講者がデータを持ってこなかった回を成立させる保険でもあります。「何もできなかった回」を絶対に作らないための備え。学習ロードマップ Phase 1 のタスク。</p>
+      </div>
+    </div>
+    <div class="nx">
+      <div class="i">2</div>
+      <div>
+        <h4>匿名事例を13本まで積む</h4>
+        <p>毎回1本出し、初回は2本使うので最低13本。1対1では他社の使い方が構造的に手に入らず、これを埋められるのは講師だけです。<b>事例の在庫が1対1講師の最大の商品価値</b>になります。手持ちの棚卸しから始めてください。</p>
+      </div>
+    </div>
+    <div class="nx">
+      <div class="i">3</div>
+      <div>
+        <h4>フォームを立ち上げて、自分で1回テスト回答する</h4>
+        <p>Apps Scriptに貼って <b>setupAll</b> を実行し、集計シートの「診断結果」に点数とレベルが1行入るところまで確認します。受講者に送る前に必ず。所要10分。</p>
+      </div>
+    </div>
+    <div class="nx">
+      <div class="i">4</div>
+      <div>
+        <h4>受講料を決める</h4>
+        <p>「120分いくら」で考えると必ず安くなります。24時間の講座ではなく、<b>12個の成果物と、講師がいなくても回る社内体制</b>の対価として値付けします。助成金で実質負担が下がることも提案時に示します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">06</span><h2>まだ決まっていないこと。</h2></div>
+  <div class="open">
+    <div class="o"><span class="b">◇</span><span>受講料と単価設計<i>「120分いくら」で考えると必ず安くなる。24時間の講座ではなく、12個の成果物と社内体制の対価として値付けする。助成金で実質負担が下がることも提案時に示す</i></span></div>
+    <div class="o"><span class="b">◇</span><span>開催時期と、初回までの日程<i>助成金を使うなら計画届から逆算。第6回・第12回の社内お披露目の日程も初回に確定させる</i></span></div>
+    <div class="o"><span class="b">◇</span><span>録画の社内共有範囲と、機密資料の保持期限<i>初回に書面で合意する雛形が未作成。「この区間は録画を止める」運用にすると踏み込みやすい</i></span></div>
+    <div class="o"><span class="b">◇</span><span>回と回の間の質問窓口をどのツールで運用するか<i>返信の目安時間を明示する前提。1対1では詰まったまま2週間放置されると講座が止まる</i></span></div>
+    <div class="o"><span class="b">◇</span><span>掲載数値を実績に差し替えるタイミング<i>第1期の成果報告フォームが集まった時点。募集資料の説得力が別物になる</i></span></div>
+    <div class="o"><span class="b">◇</span><span>診断結果を受講者本人へ自動返信するか<i>Apps Scriptに数行足せば対応可能。まずは手動で返して反応を見てからでよい</i></span></div>
+    <div class="o"><span class="b">◇</span><span>修了後のフォローアップ商品<i>第10回の月次チェックが自然な接点。月1回の伴走として別建てにするのが有力</i></span></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>設計の根拠：中小企業基盤整備機構「中小企業のAI等の利活用に係る実態調査」（2026年3月）／商工中金「中小企業の生成AIの利用にかかる調査」（2026年1月調査・3月公表）。制度・プラン・機能名に関する記載は<b>2026年9月時点</b>のものです。この領域は数週間で変わるため、案件の開始前に料金と主要機能名だけは必ず再確認してください（3か月ごとの見直しをハンドブック第5部に定めています）。</p>
+  <p style="margin-top:.6rem;">本サイトに掲載している事例・数値は、講座の目標水準を示すための説明用の例であり、実績値ではありません。検索エンジンには登録していません（noindex）。</p>
+</footer>
+</body>
+</html>

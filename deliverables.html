@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="1対1版（全12回・24時間）で受講者が持ち帰る成果物7点の完成イメージ。">
+<title>12回で持ち帰るもの｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>📐</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html">全体像</a><a href="deliverables.html" aria-current="page">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html">フォーム設置手順</a></span></div></nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#F7F6F3; --paper-2:#FFFFFF; --paper-3:#EFEDE7;
+  --ink:#1C1F26; --ink-2:#4A4E58; --ink-3:#7A7970;
+  --rule:#D9D5CB; --rule-2:#C4BFB2;
+  --blue:#1B4E7A; --blue-soft:#E3EBF2; --blue-line:#9FBBD3;
+  --seal:#B3402E; --seal-soft:#F3E3DF;
+  --teal:#1F6F6B; --teal-soft:#E4F0EF; --teal-line:#8FC0BC;
+  --grid:rgba(27,78,122,.07);
+  --shadow:0 1px 2px rgba(28,31,38,.06), 0 8px 24px -12px rgba(28,31,38,.18);
+  --maxw:74rem; --col:62rem;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14161A; --paper-2:#1B1E24; --paper-3:#212530;
+    --ink:#E9E7E1; --ink-2:#B4B2AB; --ink-3:#87857E;
+    --rule:#2C313A; --rule-2:#3A4049;
+    --blue:#8CB6DA; --blue-soft:#1C2A38; --blue-line:#3D5771;
+    --seal:#E08872; --seal-soft:#33201C;
+    --teal:#7FC4BF; --teal-soft:#182B2A; --teal-line:#356460;
+    --grid:rgba(140,182,218,.07);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14161A; --paper-2:#1B1E24; --paper-3:#212530;
+  --ink:#E9E7E1; --ink-2:#B4B2AB; --ink-3:#87857E;
+  --rule:#2C313A; --rule-2:#3A4049;
+  --blue:#8CB6DA; --blue-soft:#1C2A38; --blue-line:#3D5771;
+  --seal:#E08872; --seal-soft:#33201C;
+  --teal:#7FC4BF; --teal-soft:#182B2A; --teal-line:#356460;
+  --grid:rgba(140,182,218,.07);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.9; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(1.1rem,4vw,3rem);}
+.col{max-width:var(--col);}
+h1,h2,h3,h4{font-family:"Shippori Mincho","Yu Mincho",serif; text-wrap:balance; margin:0; font-weight:700;}
+p{margin:0;}
+
+.lbl{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.68rem; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--blue);
+}
+.num{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+
+header{
+  border-bottom:1px solid var(--rule);
+  background:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px) 0 0/28px 28px,
+    var(--paper-2);
+}
+.hd{padding:clamp(2.6rem,7vw,5rem) 0 clamp(2rem,5vw,3.4rem);}
+.hd .eyebrow{display:flex; align-items:center; gap:.8rem; margin-bottom:1.6rem;}
+.hd .eyebrow::after{content:""; flex:1; height:1px; background:var(--rule-2);}
+h1{font-size:clamp(2.1rem,5.4vw,3.5rem); line-height:1.28; letter-spacing:.01em;}
+h1 .sm{display:block; font-size:.42em; font-weight:500; letter-spacing:.08em; color:var(--ink-2); margin-bottom:.7rem;}
+.thesis{margin-top:1.4rem; max-width:44rem; font-size:1.02rem; color:var(--ink-2); line-height:2;}
+.meta{
+  display:flex; flex-wrap:wrap; gap:0; margin-top:2.4rem;
+  border:1px solid var(--rule-2); background:var(--paper-2);
+}
+.meta div{
+  flex:1 1 8rem; padding:.85rem 1.1rem; border-right:1px solid var(--rule);
+}
+.meta div:last-child{border-right:none;}
+.meta dt{font-size:.68rem; letter-spacing:.14em; color:var(--ink-3); font-weight:500;}
+.meta dd{margin:.2rem 0 0; font-size:1.02rem; font-weight:700; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;}
+
+section{padding:clamp(3rem,7vw,5.2rem) 0; border-bottom:1px solid var(--rule);}
+.shead{display:flex; align-items:baseline; gap:1rem; margin-bottom:.6rem;}
+.shead .k{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:600;
+  color:var(--seal); letter-spacing:.1em; padding-top:.35rem; white-space:nowrap;
+}
+h2{font-size:clamp(1.45rem,3.2vw,2rem); line-height:1.5;}
+.lead{margin-top:.9rem; max-width:42rem; color:var(--ink-2); line-height:2;}
+
+.ba{display:grid; grid-template-columns:1fr auto 1fr; gap:0; margin-top:2.4rem; align-items:stretch;}
+.ba .side{padding:1.6rem 1.7rem; border:1px solid var(--rule-2);}
+.ba .before{background:var(--paper-3);}
+.ba .after{background:var(--paper-2); border-color:var(--blue-line); box-shadow:var(--shadow);}
+.ba h3{font-size:1.05rem; margin-bottom:1rem; letter-spacing:.04em;}
+.ba .before h3{color:var(--ink-3);}
+.ba .after h3{color:var(--blue);}
+.ba ul{margin:0; padding-left:1.1rem; display:flex; flex-direction:column; gap:.55rem;}
+.ba li{font-size:.93rem; line-height:1.85;}
+.ba .before li{color:var(--ink-2);}
+.arrowcol{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.5rem; padding:0 1.3rem;}
+.arrowcol .g{font-size:1.5rem; line-height:1; color:var(--seal);}
+.arrowcol .a{
+  font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em;
+  color:var(--ink-3); text-align:center; line-height:1.5; white-space:nowrap;
+}
+@media(max-width:760px){
+  .ba{grid-template-columns:1fr;}
+  .arrowcol{padding:1rem 0; flex-direction:row; gap:.7rem;}
+  .arrowcol .g{transform:rotate(90deg);}
+}
+
+.proc{margin-top:2.4rem; border-top:1px solid var(--rule-2);}
+.phase{
+  font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.2em;
+  color:var(--seal); padding:1.1rem 0 .5rem; border-bottom:1px solid var(--rule);
+}
+.phase.adv{color:var(--teal);}
+.step{
+  display:grid; grid-template-columns:5.5rem 1fr 15rem; gap:1.6rem;
+  padding:1.1rem 0; border-bottom:1px solid var(--rule); align-items:start;
+}
+.step .n{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:600; letter-spacing:.08em;
+  color:var(--blue); padding-top:.3rem;
+}
+.step .n b{display:block; font-size:1.5rem; font-weight:600; letter-spacing:0; line-height:1.2; color:var(--ink);}
+.step h3{font-size:1.06rem; margin-bottom:.35rem;}
+.step p{font-size:.9rem; color:var(--ink-2); line-height:1.85;}
+.step .got{
+  font-size:.83rem; padding:.5rem .8rem; background:var(--blue-soft);
+  border-left:2px solid var(--blue); color:var(--ink); line-height:1.7;
+}
+.step .got span{display:block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.18em; color:var(--blue); margin-bottom:.15rem;}
+.step.adv .n{color:var(--teal);}
+.step.adv .got{background:var(--teal-soft); border-left-color:var(--teal);}
+.step.adv .got span{color:var(--teal);}
+@media(max-width:820px){
+  .step{grid-template-columns:4.2rem 1fr; gap:1rem;}
+  .step .got{grid-column:2;}
+}
+
+.deliv{margin-top:2.8rem;}
+.dhead{display:flex; align-items:flex-start; gap:1.1rem; margin-bottom:1.5rem;}
+.dnum{
+  flex:none; width:2.9rem; height:2.9rem; display:grid; place-items:center;
+  border:1.5px solid var(--seal); color:var(--seal); border-radius:50%;
+  font-family:"Shippori Mincho",serif; font-size:1.15rem; font-weight:700;
+}
+.dhead h3{font-size:1.3rem; line-height:1.5;}
+.dhead .sub{font-size:.88rem; color:var(--ink-3); margin-top:.2rem;}
+
+.sheet{
+  background:var(--paper-2); border:1px solid var(--rule-2); box-shadow:var(--shadow);
+  padding:1.5rem 1.6rem; position:relative;
+}
+.sheet::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:3px; background:var(--blue);
+}
+.sheet.t::before{background:var(--teal);}
+.sheet .stag{
+  display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
+  padding-bottom:.7rem; margin-bottom:1.1rem; border-bottom:1px solid var(--rule);
+  font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.14em; color:var(--ink-3);
+}
+.sheet h4{font-size:1.08rem; margin-bottom:.9rem; font-family:"Zen Kaku Gothic New",sans-serif; font-weight:700;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; align-items:start;}
+@media(max-width:820px){.grid2{grid-template-columns:1fr;}}
+
+.pf{font-family:"IBM Plex Mono","Zen Kaku Gothic New",monospace; font-size:.83rem; line-height:1.95;}
+.pf .row{display:grid; grid-template-columns:4.4rem 1fr; gap:.7rem; padding:.28rem 0;}
+.pf .row .t{color:var(--blue); font-weight:600; font-size:.76rem; letter-spacing:.04em;}
+.pf .row .v{color:var(--ink); white-space:pre-line;}
+.usage{
+  margin-top:1.1rem; padding-top:.9rem; border-top:1px dashed var(--rule-2);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; font-size:.78rem;
+}
+.usage b{display:block; font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.16em; color:var(--ink-3); font-weight:600; margin-bottom:.15rem;}
+@media(max-width:640px){.usage{grid-template-columns:1fr;}}
+
+.idx{display:flex; flex-direction:column; gap:.15rem; font-size:.86rem;}
+.idx .g{font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.18em; color:var(--seal); margin:.9rem 0 .35rem;}
+.idx .g:first-child{margin-top:0;}
+.idx .i{display:grid; grid-template-columns:2.4rem 1fr; gap:.5rem; padding:.22rem 0; border-bottom:1px dotted var(--rule);}
+.idx .i .c{font-family:"IBM Plex Mono",monospace; font-size:.75rem; color:var(--ink-3);}
+.idx .i.hi{background:var(--seal-soft); margin:0 -.4rem; padding:.22rem .4rem;}
+.idx .i.hi .c{color:var(--seal); font-weight:600;}
+
+.spec{display:flex; flex-direction:column;}
+.spec .r{display:grid; grid-template-columns:7.2rem 1fr; gap:.9rem; padding:.6rem 0; border-bottom:1px solid var(--rule); font-size:.89rem; line-height:1.8;}
+.spec .r:last-child{border-bottom:none;}
+.spec .r dt{font-weight:700; color:var(--blue); font-size:.82rem;}
+.spec .r dd{margin:0;}
+@media(max-width:560px){.spec .r{grid-template-columns:1fr; gap:.15rem;}}
+
+.tw{overflow-x:auto; margin-top:1.3rem;}
+table{border-collapse:collapse; width:100%; min-width:32rem; font-size:.88rem;}
+th,td{padding:.62rem .8rem; text-align:left; border-bottom:1px solid var(--rule);}
+thead th{
+  background:var(--blue); color:#fff; font-weight:700; font-size:.76rem; letter-spacing:.08em;
+  border-bottom:none;
+}
+:root[data-theme="dark"] thead th{color:#0F1116;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) thead th{color:#0F1116;}}
+tbody tr:nth-child(even){background:var(--paper-3);}
+td.n{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap;}
+td .arw{color:var(--seal); font-weight:600;}
+
+.four{display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:1.6rem;}
+@media(max-width:720px){.four{grid-template-columns:1fr;}}
+.card{border:1px solid var(--teal-line); background:var(--paper-2); padding:1.2rem 1.3rem; box-shadow:var(--shadow);}
+.card .cn{font-family:"IBM Plex Mono",monospace; font-size:.64rem; letter-spacing:.18em; color:var(--teal); margin-bottom:.45rem;}
+.card h4{font-size:1.02rem; font-family:"Zen Kaku Gothic New",sans-serif; font-weight:700; margin-bottom:.45rem;}
+.card p{font-size:.86rem; color:var(--ink-2); line-height:1.85;}
+
+.road{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:1.4rem;}
+.q{border:1px solid var(--rule-2); border-right:none; padding:1.1rem 1rem; background:var(--paper-2); display:flex; flex-direction:column; gap:.55rem;}
+.q:last-child{border-right:1px solid var(--rule-2);}
+.q .qh{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.14em; color:var(--seal); padding-bottom:.5rem; border-bottom:2px solid var(--seal);}
+.q h4{font-size:.96rem; line-height:1.6; font-family:"Zen Kaku Gothic New",sans-serif; font-weight:700; margin:0;}
+.q .d{font-size:.8rem; color:var(--ink-2); line-height:1.75;}
+.q .f{margin-top:auto; padding-top:.6rem; border-top:1px dashed var(--rule-2); font-size:.76rem; font-family:"IBM Plex Mono",monospace; color:var(--blue); font-variant-numeric:tabular-nums;}
+@media(max-width:900px){
+  .road{grid-template-columns:1fr 1fr;}
+  .q{border-right:1px solid var(--rule-2); border-bottom:none;}
+  .q:nth-child(-n+2){border-bottom:none;}
+  .q:nth-child(n+3){border-top:none;}
+}
+@media(max-width:560px){
+  .road{grid-template-columns:1fr;}
+  .q{border-top:none;} .road .q:first-child{border-top:1px solid var(--rule-2);}
+}
+
+.calc{
+  margin-top:1.6rem; background:var(--paper-2); border:1px solid var(--rule-2);
+  padding:1.5rem 1.6rem; box-shadow:var(--shadow);
+}
+.calc .line{
+  display:grid; grid-template-columns:1fr auto; gap:1rem; padding:.62rem 0;
+  border-bottom:1px solid var(--rule); font-size:.92rem; align-items:baseline;
+}
+.calc .line .v{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:1rem;}
+.calc .line.sub .v{color:var(--ink-2);}
+.calc .line.tot{border-bottom:none; border-top:2px solid var(--ink); margin-top:.4rem; padding-top:.9rem;}
+.calc .line.tot .l{font-weight:700;}
+.calc .line.tot .v{font-size:1.45rem; font-weight:600; color:var(--seal);}
+.calc .yr{margin-top:.8rem; text-align:right; font-family:"IBM Plex Mono",monospace; font-size:.85rem; color:var(--ink-2);}
+
+.note{
+  margin-top:1.6rem; padding:1rem 1.2rem; background:var(--seal-soft);
+  border-left:3px solid var(--seal); font-size:.85rem; line-height:1.85; color:var(--ink-2);
+}
+.note b{color:var(--seal); font-weight:700;}
+
+footer{padding:2.6rem 0 3.4rem; font-size:.78rem; color:var(--ink-3); line-height:1.9;}
+footer .rule{height:1px; background:var(--rule); margin-bottom:1.4rem;}
+footer a{color:var(--blue);}
+:focus-visible{outline:2px solid var(--seal); outline-offset:2px;}
+@media(prefers-reduced-motion:no-preference){
+  section{animation:fade .5s ease both;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+}
+</style>
+
+<header>
+<div class="wrap hd">
+  <div class="eyebrow"><span class="lbl">受講成果物イメージ ／ 1対1版</span></div>
+  <h1><span class="sm">経営者のためのAI実装講座</span>12回で、<br>持ち帰るもの。</h1>
+  <p class="thesis">ChatGPTは、もう使っておられると思います。それでも「仕事の形が変わった」とまでは言えない。この講座が埋めるのは、その間にある距離です。持ち帰るのは知識ではなく、自社の業務でそのまま動く「もの」7点です。</p>
+  <dl class="meta">
+    <div><dt>形式</dt><dd>1対1</dd></div>
+    <div><dt>回数</dt><dd>全12回</dd></div>
+    <div><dt>1回</dt><dd>120分</dd></div>
+    <div><dt>時間</dt><dd>計24時間</dd></div>
+    <div><dt>成果物</dt><dd>7点</dd></div>
+  </dl>
+</div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="shead"><span class="k">01</span><h2>受講前と、修了時。</h2></div>
+  <p class="lead col">同じ会社の、12回のあいだの変化です。特別なIT人材を採用したわけでも、新しいツールを何本も増やしたわけでもありません。</p>
+  <div class="ba">
+    <div class="side before">
+      <h3>受講前</h3>
+      <ul>
+        <li>ChatGPTは毎日のように開いているが、会話は使い捨てで何も残っていない</li>
+        <li>うまくいった指示文が、次の日にはもう見つからない</li>
+        <li>見積・議事録・請求書づくりに、社長自身が毎月30時間以上使っている</li>
+        <li>情報漏洩が心配で、社員に何をどこまで許すか決めていない</li>
+        <li>効果を聞かれても「たぶん速くなった」としか言えない</li>
+      </ul>
+    </div>
+    <div class="arrowcol"><span class="g" aria-hidden="true">→</span><span class="a">全12回<br>24時間</span></div>
+    <div class="side after">
+      <h3>修了時</h3>
+      <ul>
+        <li>自社の業務に使える指示文が15本、決まった場所に蓄積されている</li>
+        <li>自社の資料を読んで答えるAIが動き、社員が実際に使っている</li>
+        <li>人が転記していた工程が自動で流れ、止まれば気づく仕組みがある</li>
+        <li>AIの答えの品質を、毎月同じ10件で採点して数字で言える</li>
+        <li>推進役・費用・権限が紙になっていて、講師がいなくても回る</li>
+        <li>3年後にAIが何をしていて、人が何をしているかを自分の言葉で語れる</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="k">02</span><h2>成果物ができあがるまでの12工程。</h2></div>
+  <p class="lead col">各回の終わりに、必ず形になったものが手元に残ります。前の回の成果物が次の回の材料になる積み上げ式です。基礎編だけで区切ることもできます。</p>
+  <div class="proc">
+    <div class="phase">基礎編 ── 自分の技を、会社の仕組みに移す</div>
+    <div class="step">
+      <div class="n">第<b>01</b>回</div>
+      <div><h3>現状把握と地図づくり</h3><p>いまの使い方を画面共有で実演してもらい、講師は口を出さずに観察する。そのうえで業務を棚卸しし、AI化の候補を3つに絞る。</p></div>
+      <div class="got"><span>手元に残るもの</span>業務棚卸しシート<br>（AI化候補3業務が確定）</div>
+    </div>
+    <div class="step">
+      <div class="n">第<b>02</b>回</div>
+      <div><h3>今のChatGPTの使い方を作り直す</h3><p>指示の型（役割・前提・依頼・制約・出力形式）で書き直し、カスタム指示とプロジェクトで「毎回説明し直す」をやめる。</p></div>
+      <div class="got"><span>手元に残るもの</span>自社プロンプト集 v1（5本）<br>カスタム指示／プロジェクト1つ</div>
+    </div>
+    <div class="step">
+      <div class="n">第<b>03</b>回</div>
+      <div><h3>文書とコミュニケーションのAI化</h3><p>会議の録音から議事録とタスク表まで一気通貫。自社の文体を覚えさせ、社員がそのまま使えるテンプレートに仕上げる。</p></div>
+      <div class="got"><span>手元に残るもの</span>自社プロンプト集 v2（10本）<br>社内文書テンプレ3種</div>
+    </div>
+    <div class="step">
+      <div class="n">第<b>04</b>回</div>
+      <div><h3>数字と判断のAI化</h3><p>自社の売上データを読ませて示唆を引き出す。計算はAIに任せず必ず検算する手順まで身につける。</p></div>
+      <div class="got"><span>手元に残るもの</span>分析プロンプト<br>月次レポート雛形</div>
+    </div>
+    <div class="step">
+      <div class="n">第<b>05</b>回</div>
+      <div><h3>自社専用AIをつくる</h3><p>社内資料を読み込ませ、「資料にないことは答えない」設定まで含めて構築する。実データで動くところまでやりきる。</p></div>
+      <div class="got"><span>手元に残るもの</span>実働するAIツール 1つ<br>社内AI利用ルール（A4一枚）</div>
+    </div>
+    <div class="step">
+      <div class="n">第<b>06</b>回</div>
+      <div><h3>社内へのお披露目と12か月計画</h3><p>社員に同席してもらい、社長自身の言葉で説明する。出てきた不安や反対意見を、そのまま次の設計の材料にする。</p></div>
+      <div class="got"><span>手元に残るもの</span>12か月AI化ロードマップ<br>社内説明の完了</div>
+    </div>
+    <div class="phase adv">上級編 ── 仕組みでつなぎ、組織に載せる</div>
+    <div class="step adv">
+      <div class="n">第<b>07</b>回</div>
+      <div><h3>手作業のつなぎ目をなくす</h3><p>人が貼り付けていた工程を自動でつなぐ。いま使っている基盤の中で組み、ツールは増やさない。</p></div>
+      <div class="got"><span>手元に残るもの</span>つながった自動化フロー1本<br>（通知と手動代替手順つき）</div>
+    </div>
+    <div class="step adv">
+      <div class="n">第<b>08</b>回</div>
+      <div><h3>社内の知識を検索できるようにする</h3><p>社内資料を読んで出典つきで答えるAIをつくる。10問投げて精度を測り、答えられなかった質問を記録する。</p></div>
+      <div class="got"><span>手元に残るもの</span>社内ナレッジ検索AI<br>不足資料リスト</div>
+    </div>
+    <div class="step adv">
+      <div class="n">第<b>09</b>回</div>
+      <div><h3>複数の工程をまとめて任せる</h3><p>3工程以上の仕事を渡す設計へ。どこまで任せ、どこで人が止めるかを工程図に落とし、わざと壊して確かめる。</p></div>
+      <div class="got"><span>手元に残るもの</span>多工程タスク設計書<br>（工程図＋確認ポイント）</div>
+    </div>
+    <div class="step adv">
+      <div class="n">第<b>10</b>回</div>
+      <div><h3>品質を測る・壊れたら気づく</h3><p>「なんとなく良くなった」を終わらせる回。正解セット10件をつくり、毎月同じ問題で採点する手順を決める。</p></div>
+      <div class="got"><span>手元に残るもの</span>正解セット10件<br>月次チェック手順書</div>
+    </div>
+    <div class="step adv">
+      <div class="n">第<b>11</b>回</div>
+      <div><h3>組織に載せる</h3><p>推進役・権限・費用・効果測定を紙にする。講師がいなくなっても回る状態をつくる、実質の仕上げの回。</p></div>
+      <div class="got"><span>手元に残るもの</span>推進体制図／権限・費用管理表<br>効果測定シート</div>
+    </div>
+    <div class="step adv">
+      <div class="n">第<b>12</b>回</div>
+      <div><h3>AIを前提に事業を組み直す</h3><p>道具の話を終え、事業の話に戻る。浮いた時間と変わった原価構造を、提供価値と人員計画に接続する。</p></div>
+      <div class="got"><span>手元に残るもの</span>3年構想（A4一枚）<br>改訂版12か月ロードマップ</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="k">03</span><h2>持ち帰るもの ①　自社プロンプト集</h2></div>
+  <p class="lead col">すでに書けている指示を、二度と書き直さなくてよい形にして残します。いつ・誰が使い、何を確認するかまで添えてあるので、社員にそのまま配れます。</p>
+
+  <div class="deliv">
+    <div class="dhead">
+      <div class="dnum">①</div>
+      <div><h3>収録例：No.07　値上げのお願い文をつくる</h3>
+      <div class="sub">実際に受講者が作成する1枚の見本です（製造業のケース）</div></div>
+    </div>
+    <div class="grid2">
+      <div class="sheet">
+        <div class="stag"><span>PROMPT No.07</span><span>見積・価格交渉</span></div>
+        <h4>値上げのお願い文をつくる</h4>
+        <div class="pf">
+          <div class="row"><div class="t">役割</div><div class="v">あなたは金属加工業の営業担当です。</div></div>
+          <div class="row"><div class="t">前提</div><div class="v">取引15年の建設会社が相手。材料費が前年比18%上昇。値上げ幅は8%。担当者とは良好な関係。</div></div>
+          <div class="row"><div class="t">依頼</div><div class="v">値上げのお願い文を作ってください。</div></div>
+          <div class="row"><div class="t">制約</div><div class="v">関係を壊さない／根拠の数字を入れる／600字以内</div></div>
+          <div class="row"><div class="t">出力</div><div class="v">件名＋本文。丁寧語。押しつけがましくしない。</div></div>
+        </div>
+        <div class="usage">
+          <div><b>いつ使う</b>仕入価格が変わったとき</div>
+          <div><b>だれが使う</b>社長・営業担当</div>
+          <div><b>確認すること</b>数字が実際の値と合っているか</div>
+        </div>
+      </div>
+
+      <div class="sheet">
+        <div class="stag"><span>INDEX</span><span>基礎編修了時 全15本</span></div>
+        <h4>プロンプト集の目次（例）</h4>
+        <div class="idx">
+          <div class="g">見積・価格</div>
+          <div class="i"><span class="c">06</span><span>過去実績から見積の根拠を組み立てる</span></div>
+          <div class="i hi"><span class="c">07</span><span>値上げのお願い文をつくる</span></div>
+          <div class="i"><span class="c">08</span><span>相見積で負けた理由を整理する</span></div>
+          <div class="g">会議・記録</div>
+          <div class="i"><span class="c">01</span><span>録音から議事録と決定事項を出す</span></div>
+          <div class="i"><span class="c">02</span><span>議事録からタスク表をつくる</span></div>
+          <div class="i"><span class="c">03</span><span>現場メモを日報の形に整える</span></div>
+          <div class="g">顧客対応</div>
+          <div class="i"><span class="c">09</span><span>問い合わせへの一次回答案をつくる</span></div>
+          <div class="i"><span class="c">10</span><span>丁寧なお断りの返信をつくる</span></div>
+          <div class="i"><span class="c">11</span><span>クレームへの初動返信を組み立てる</span></div>
+          <div class="g">採用・社内</div>
+          <div class="i"><span class="c">13</span><span>求人原稿を媒体ごとに書き分ける</span></div>
+          <div class="i"><span class="c">14</span><span>作業手順を新人向けに書き直す</span></div>
+          <div class="g">数字・分析</div>
+          <div class="i"><span class="c">15</span><span>売上データから伸びと落ちを説明させる</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="k">04</span><h2>持ち帰るもの ②　実働するAIツール</h2></div>
+  <p class="lead col">第5回で、自社の資料を読み込ませたAIアシスタントを1つ構築します。「作って終わり」にしないため、演習中に自社の本物のデータで動かすところまでやりきります。担当者が替わっても回るよう、仕様書の形で残します。</p>
+
+  <div class="deliv">
+    <div class="dhead">
+      <div class="dnum">②</div>
+      <div><h3>構築例：見積根拠アシスタント</h3>
+      <div class="sub">従業員18名・金属加工業のケース</div></div>
+    </div>
+    <div class="sheet">
+      <div class="stag"><span>AI ASSISTANT SPEC</span><span>作成：第5回 演習</span></div>
+      <dl class="spec">
+        <div class="r"><dt>名称</dt><dd>見積根拠アシスタント</dd></div>
+        <div class="r"><dt>役割</dt><dd>過去の見積実績をもとに、新規案件の概算金額と、その根拠になった類似案件を提示する</dd></div>
+        <div class="r"><dt>参照する資料</dt><dd>過去3年分の見積書（142件・顧客名は記号化）／材料単価表／標準工数表</dd></div>
+        <div class="r"><dt>守ること</dt><dd>資料に記載がない場合は「記載がありません」と答え、推測しない　／　提示された金額は必ず社長が確認してから提出する　／　材料単価は最新版に置き換えて検算する</dd></div>
+        <div class="r"><dt>出力形式</dt><dd>①概算金額（幅で表示）　②内訳（材料費・加工費・その他）　③根拠になった過去案件3件と、その相違点</dd></div>
+        <div class="r"><dt>使う人</dt><dd>社長・営業担当2名（第6回時点で事務1名にも展開済み）</dd></div>
+      </dl>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>業種の例</th><th>つくるものの例</th><th>対象業務の時間</th></tr></thead>
+        <tbody>
+          <tr><td>製造・加工</td><td>過去実績から見積根拠を作る支援ツール</td><td class="n">1件 60分 <span class="arw">→</span> 20分</td></tr>
+          <tr><td>小売・飲食</td><td>仕入・売上データから週次サマリーを作るツール</td><td class="n">週 3時間 <span class="arw">→</span> 30分</td></tr>
+          <tr><td>建設・工事</td><td>現場報告メモから日報と請求資料を作るツール</td><td class="n">1日 40分 <span class="arw">→</span> 10分</td></tr>
+          <tr><td>士業・サービス</td><td>問い合わせへの一次回答案を作るツール</td><td class="n">1件 20分 <span class="arw">→</span> 5分</td></tr>
+          <tr><td>共通</td><td>会議の録音から議事録とタスク表を作るツール</td><td class="n">1回 90分 <span class="arw">→</span> 15分</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note"><b>この数値について。</b>上表は講座で目標として提示する水準であり、実績値ではありません。第12回の成果報告で受講各社の実測値を集め、次期の募集資料ではその数字に差し替えてください。実在の企業名を伴う事例は、本人の了解を得たうえで掲載してください。</div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="k">05</span><h2>持ち帰るもの ③〜⑥　上級編でつくる4点</h2></div>
+  <p class="lead col">基礎編で「動くもの」が1つできたあと、上級編ではそれを仕組みに変えます。ここが、単発のセミナーと決定的に違うところです。</p>
+  <div class="four">
+    <div class="card">
+      <div class="cn">③ 第7回</div>
+      <h4>つながった自動化フロー</h4>
+      <p>人が転記していた工程が自動で流れる状態を1本つくります。判断が入る工程・金額が確定する工程・社外に出る工程は、あえて人が止める設計にします。止まったときに気づく通知と、手動に戻す手順つき。</p>
+    </div>
+    <div class="card">
+      <div class="cn">④ 第8回</div>
+      <h4>社内ナレッジ検索AIと、不足資料リスト</h4>
+      <p>社内資料を読んで出典つきで答えるAI。同時に「答えられなかった質問」が一覧になります。これは資料が存在しないか、社長の頭の中にしかない知識であり、そのまま事業承継の課題リストになります。</p>
+    </div>
+    <div class="card">
+      <div class="cn">⑤ 第10回</div>
+      <h4>正解セット10件と月次チェック手順</h4>
+      <p>自社のAIの答えを毎月同じ10件で採点します。所要20分。モデルが更新されて出力の傾向が変わっても、その月のうちに気づけます。品質を数字で社内に説明できるようになります。</p>
+    </div>
+    <div class="card">
+      <div class="cn">⑥ 第11回</div>
+      <h4>推進体制図・権限/費用管理表・効果測定シート</h4>
+      <p>誰が決め、誰が回し、誰が作り、誰が守るか。契約の名義と月額、退職時の手順。そして時間・品質・範囲・金額の4行で測る仕組み。講師がいなくなっても回る状態を紙にします。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="k">06</span><h2>持ち帰るもの ⑦　12か月ロードマップと3年構想</h2></div>
+  <p class="lead col">第6回でロードマップを作り、社員の前で説明します。第12回では、上級編で得た手応えを踏まえて書き直し、3年構想に接続します。経営計画の付属資料として、そのまま金融機関や補助金申請にも使える粒度にします。</p>
+
+  <div class="deliv">
+    <div class="dhead">
+      <div class="dnum">⑦</div>
+      <div><h3>記入例：第6回時点の12か月ロードマップ</h3>
+      <div class="sub">先ほどの金属加工業（従業員18名）の続きです</div></div>
+    </div>
+    <div class="road">
+      <div class="q">
+        <div class="qh">〜 3 か月</div>
+        <h4>見積根拠アシスタントを定着させる</h4>
+        <div class="d">営業2名が毎日使う状態にする。出てきた金額のズレを記録し、参照資料を月1回更新する。増やさない。</div>
+        <div class="f">担当：社長＋営業2名<br>月額 約3,000円 / 月10h削減</div>
+      </div>
+      <div class="q">
+        <div class="qh">4 〜 6 か月</div>
+        <h4>議事録と日報を2つ目の対象にする</h4>
+        <div class="d">現場リーダーに使い方を引き継ぐ。紙の作業日報をスマートフォン入力に切り替える。</div>
+        <div class="f">担当：現場リーダー<br>追加 約3,000円 / 月15h削減</div>
+      </div>
+      <div class="q">
+        <div class="qh">7 〜 9 か月</div>
+        <h4>受注メールから台帳への転記をつなぐ</h4>
+        <div class="d">上級編で組んだ自動化を本番運用に載せる。止まったときの通知先と、手動に戻す手順を周知する。</div>
+        <div class="f">担当：事務1名<br>月8h削減 / 転記漏れの解消</div>
+      </div>
+      <div class="q">
+        <div class="qh">10 〜 12 か月</div>
+        <h4>品質チェックを月次業務に組み込む</h4>
+        <div class="d">正解セット10件を毎月流し、点数を経営会議に報告する。顧客向けサービスへの応用可否をここで判断する。</div>
+        <div class="f">担当：推進役<br>月20分 / 次年度予算に計上</div>
+      </div>
+    </div>
+    <div class="note"><b>ロードマップに必ず書くこと。</b>各期の担当者と、「やめる判断の基準」です。始める基準しか書かれていない計画は、うまくいかなかったときに誰も止められません。</div>
+  </div>
+</section>
+
+<section>
+  <div class="shead"><span class="k">07</span><h2>投資対効果の考え方。</h2></div>
+  <p class="lead col">第6回と第11回で、削減できた時間を経営数値に換算します。下記は講座で使う試算の型で、数値は説明用の一例です。受講者は自社の人件費単価と実測時間を入れて計算します。</p>
+
+  <div class="calc col">
+    <div class="line sub"><span class="l">削減時間（1社あたり・月）</span><span class="v">10.0 時間</span></div>
+    <div class="line sub"><span class="l">人件費単価（社内の目安）</span><span class="v">× 3,000 円</span></div>
+    <div class="line"><span class="l">月あたりの効果</span><span class="v">30,000 円</span></div>
+    <div class="line sub"><span class="l">AIサービス利用料（1〜2名分）</span><span class="v">− 3,000 円</span></div>
+    <div class="line tot"><span class="l">差引・月あたり</span><span class="v">27,000 円</span></div>
+    <div class="yr">年間換算　324,000 円　／　受講料との比較はここで行います</div>
+  </div>
+  <div class="note col"><b>金額だけで語らないこと。</b>上記はいずれも試算のための仮の数字です。中小企業でのAIの効果は「効率化」に出ますが、実際の価値は品質（やり直しの減少）と範囲（使える人と業務の広がり）に出ることが多くあります。講座では「浮いた時間で何をするか」までを必ずセットで考えます。時間が浮いただけでは、経営数値は動かないためです。</div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="shead"><span class="k">08</span><h2>受講前後に、現在地を測ります。</h2></div>
+  <p class="lead col">申込時と修了時に、同じ「AIスキル診断シート」に回答していただきます。20問・80点満点で、AIの利用状況とスキル・社内体制の2軸から現在地を5段階で判定します。加えて初回の120分では、実際の操作を画面共有で見せていただき、自己申告とのずれも確認します。</p>
+  <div class="tw col">
+    <table>
+      <thead><tr><th>点数帯</th><th>レベル</th><th>この段階の課題</th></tr></thead>
+      <tbody>
+        <tr><td class="n">0 〜 15</td><td>Lv.1　検索代わり</td><td>指示の型と、文脈の与え方から</td></tr>
+        <tr><td class="n">16 〜 31</td><td>Lv.2　お試し</td><td>使いどころを決めて習慣にする</td></tr>
+        <tr><td class="n">32 〜 47</td><td>Lv.3　個人活用</td><td>社内に横展開する型をつくる</td></tr>
+        <tr><td class="n">48 〜 63</td><td>Lv.4　業務組込</td><td>ルール整備と投資判断</td></tr>
+        <tr><td class="n">64 〜 80</td><td>Lv.5　組織展開</td><td>事業モデル側への応用</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note col"><b>目標水準。</b>診断スコア＋25点以上（Lv.1の受講者がLv.3に到達する水準）／実働ツールを構築 100%／1社あたり月10時間以上の削減／修了3か月後の継続利用70%以上。1対1のため、進度は受講者に合わせて調整します。</div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="rule"></div>
+  <p>本資料は、経営者向けAI実装講座 1対1版（全12回・1回120分・計24時間）の受講成果物イメージです。掲載している事例・数値は、講座の目標水準を示すための説明用の例であり、実績値ではありません。</p>
+  <p style="margin-top:.7rem;">講座設計の背景データ：中小企業基盤整備機構「中小企業のAI等の利活用に係る実態調査」（2026年3月）— 中小企業のAI導入率20.4%、導入企業の83.2%が業務効率化の効果を実感、83.3%が「活用事例の情報が足りない」と回答。／ 商工中金「中小企業の生成AIの利用にかかる調査」（2026年1月調査）— 導入検討段階の壁の第1位は「推進人材がいない」32.0%。</p>
+  <p style="margin-top:.7rem;">関連資料：カリキュラム設計書（Word／PDF）・AIスキル診断シート（Excel）・講師用ハンドブック</p>
+</footer>
+</body>
+</html>
