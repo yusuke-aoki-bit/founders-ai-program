@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="全12回の画面共有用スライド。各回7枚、PPTXとPDF。">
+<title>登壇資料｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🖥️</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html">全体像</a><a href="deliverables.html">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html">フォーム設置手順</a><a href="slides.html" aria-current="page">登壇資料</a></span></div></nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700&family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#F1F2F3; --card:#FFFFFF; --card-2:#E7E9EA; --card-3:#F7F8F8;
+  --ink:#15181B; --ink-2:#545A60; --ink-3:#848A90;
+  --rule:#DBDDE0; --rule-2:#C2C6CA;
+  --seal:#B04A2F; --seal-soft:#F7EAE5;
+  --blue:#2F4F6B; --blue-soft:#E8EEF3;
+  --teal:#1F6F6B; --teal-soft:#E4F0EF;
+  --shadow:0 1px 2px rgba(21,24,27,.05), 0 12px 30px -20px rgba(21,24,27,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111315; --card:#1A1D20; --card-2:#23272B; --card-3:#191C1F;
+    --ink:#E8EAEB; --ink-2:#AFB4B9; --ink-3:#80868C;
+    --rule:#292E32; --rule-2:#393F44;
+    --seal:#E0876A; --seal-soft:#2C1E19;
+    --blue:#8FB4D6; --blue-soft:#1B2733;
+    --teal:#7FC4BF; --teal-soft:#182B2A;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111315; --card:#1A1D20; --card-2:#23272B; --card-3:#191C1F;
+  --ink:#E8EAEB; --ink-2:#AFB4B9; --ink-3:#80868C;
+  --rule:#292E32; --rule-2:#393F44;
+  --seal:#E0876A; --seal-soft:#2C1E19;
+  --blue:#8FB4D6; --blue-soft:#1B2733;
+  --teal:#7FC4BF; --teal-soft:#182B2A;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -20px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.95; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:64rem; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.6rem);}
+h1,h2,h3{font-family:"Noto Serif JP",serif; margin:0; font-weight:700; text-wrap:balance;}
+p{margin:0;} a{color:var(--seal);}
+.lbl{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.2em; font-weight:600; color:var(--seal);}
+
+header{background:var(--card); border-bottom:1px solid var(--rule);}
+.hd{padding:clamp(2.2rem,6vw,3.6rem) 0 clamp(1.6rem,4vw,2.4rem);}
+.hd .lbl{display:block; margin-bottom:1.1rem;}
+h1{font-size:clamp(1.8rem,4.6vw,2.7rem); line-height:1.4;}
+.sub{margin-top:1.1rem; color:var(--ink-2); max-width:40rem; line-height:2.05; font-size:.97rem;}
+.counts{display:grid; grid-template-columns:repeat(auto-fit,minmax(8rem,1fr)); gap:0; margin-top:1.9rem; border:1px solid var(--rule-2);}
+.counts div{padding:.85rem 1rem; border-right:1px solid var(--rule); background:var(--bg);}
+.counts div:last-child{border-right:none;}
+.counts b{display:block; font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.16em; color:var(--ink-3); font-weight:600;}
+.counts span{font-size:1rem; font-weight:700;}
+
+section{padding:clamp(2.4rem,5vw,3.4rem) 0; border-bottom:1px solid var(--rule);}
+section:last-of-type{border-bottom:none;}
+.sh{display:flex; align-items:baseline; gap:.9rem; margin-bottom:.6rem;}
+.sh .k{font-family:"IBM Plex Mono",monospace; font-size:.74rem; font-weight:600; color:var(--seal); padding-top:.3rem; white-space:nowrap;}
+h2{font-size:clamp(1.3rem,3vw,1.75rem); line-height:1.5;}
+.lead{margin-top:.7rem; max-width:42rem; color:var(--ink-2); line-height:2.05; font-size:.94rem;}
+
+.型{margin-top:1.5rem;}
+.kata{display:grid; grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr)); gap:.6rem; margin-top:1.4rem;}
+.kata .c{background:var(--card); border:1px solid var(--rule-2); padding:.85rem .95rem;}
+.kata .c b{display:block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.14em; color:var(--seal); margin-bottom:.25rem;}
+.kata .c span{font-size:.87rem; line-height:1.75; display:block;}
+
+.decks{margin-top:1.8rem; display:flex; flex-direction:column; gap:.7rem;}
+.d{display:grid; grid-template-columns:4.6rem minmax(0,1fr) 11rem; gap:1.2rem; background:var(--card);
+   border:1px solid var(--rule-2); border-left:3px solid var(--seal); padding:1rem 1.15rem; align-items:center; box-shadow:var(--shadow);}
+.d.adv{border-left-color:var(--teal);}
+.dn{font-family:"IBM Plex Mono",monospace; text-align:center; color:var(--ink-3); line-height:1.2;}
+.dn span{font-size:.66rem; display:block;}
+.dn b{font-size:1.9rem; color:var(--ink); display:block; line-height:1.1;}
+.dt h3{font-size:1.08rem; line-height:1.5;}
+.dt .ds{font-size:.85rem; color:var(--ink-3); margin-top:.1rem;}
+.dt .dc,.dt .dk{font-size:.83rem; color:var(--ink-2); margin-top:.4rem; line-height:1.7;}
+.dt .dc span,.dt .dk span{font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.12em;
+  color:var(--ink-3); background:var(--card-2); padding:.1rem .4rem; margin-right:.5rem; white-space:nowrap;}
+.dl{display:flex; flex-direction:column; gap:.4rem;}
+.btn{display:block; text-align:center; text-decoration:none; font-size:.83rem; font-weight:700;
+  background:var(--seal); color:#fff; padding:.42rem .6rem; border:1px solid var(--seal); line-height:1.7;}
+.d.adv .btn{background:var(--teal); border-color:var(--teal);}
+:root[data-theme="dark"] .btn{color:#111315;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#111315;}}
+.btn.ghost{background:transparent; color:var(--ink-2); border:1px solid var(--rule-2); font-weight:400;}
+.d.adv .btn.ghost{background:transparent; color:var(--ink-2); border-color:var(--rule-2);}
+.btn:hover{opacity:.88;}
+@media(max-width:760px){
+  .d{grid-template-columns:3.4rem minmax(0,1fr); gap:.8rem;}
+  .dl{grid-column:1 / -1; flex-direction:row;}
+  .dl .btn{flex:1;}
+}
+
+.warnbox{margin-top:1.5rem; padding:1rem 1.2rem; background:var(--seal-soft); border-left:3px solid var(--seal); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.warnbox b{color:var(--seal); font-weight:700;}
+.tipbox{margin-top:1.5rem; padding:1rem 1.2rem; background:var(--blue-soft); border-left:3px solid var(--blue); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.tipbox b{color:var(--blue); font-weight:700;}
+ul.plain{margin:.8rem 0 0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.4rem;}
+ul.plain li{font-size:.9rem; color:var(--ink-2); line-height:1.9;}
+ul.plain li b{color:var(--ink);}
+footer{padding:2rem 0 3.2rem; font-size:.79rem; color:var(--ink-3); line-height:1.9; border-top:1px solid var(--rule);}
+:focus-visible{outline:2px solid var(--seal); outline-offset:2px;}
+</style>
+
+<header>
+<div class="wrap hd">
+  <span class="lbl">経営者向け AI実装講座　登壇資料</span>
+  <h1>各回の画面共有用スライド。</h1>
+  <p class="sub">全12回分・各7枚。<strong>読み上げるための資料ではありません。</strong>講師が話すのは1回あたり16分の枠なので、スライドはその背景です。演習の55分はスライドを消して、受講者の画面に切り替えます。</p>
+  <div class="counts">
+    <div><b>回数</b><span>全12回</span></div>
+    <div><b>1回</b><span>7枚</span></div>
+    <div><b>形式</b><span>PPTX / PDF</span></div>
+    <div><b>版</b><span>2026年9月</span></div>
+  </div>
+</div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sh"><span class="k">01</span><h2>7枚の型。</h2></div>
+  <p class="lead">全12回とも同じ構成です。受講者が「今どこにいるか」を毎回同じ形で受け取れるようにしてあります。</p>
+  <div class="kata">
+    <div class="c"><b>1</b><span>表紙<br>この回で手元に残るもの</span></div>
+    <div class="c"><b>2</b><span>今日のゴール<br>120分の流れ</span></div>
+    <div class="c"><b>3</b><span>考え方<br>この回の型・原則</span></div>
+    <div class="c"><b>4</b><span>実演<br>失敗例 → 改善例</span></div>
+    <div class="c"><b>5</b><span>演習の段取り<br>3ステップ・55分</span></div>
+    <div class="c"><b>6</b><span>ここだけは<br>注意点・匿名事例</span></div>
+    <div class="c"><b>7</b><span>宿題<br>ひとつだけ</span></div>
+  </div>
+  <div class="tipbox"><b>全スライドのノート欄に、進め方の注意を入れてあります。</b>PowerPointで開くと発表者ノートに出ます。たとえば実演のスライドには「必ず左（失敗例）から。自分の失敗として話す。うまくいく例だけ見せると、受講者は自分の失敗を言わなくなる」と書いてあります。PDFにはノートは含まれません。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">02</span><h2>全12回。</h2></div>
+  <p class="lead">当日はPDFをブラウザで開けば、PowerPointが入っていない環境でも画面共有できます。手を入れるならPowerPointのほうを。</p>
+  <div class="decks">
+    <div class="d">
+      <div class="dn"><span>第</span><b>1</b><span>回</span></div>
+      <div class="dt">
+        <h3>現状把握と地図づくり</h3>
+        <p class="ds">どこにAIを当てるかを決める</p>
+        <p class="dc"><span>この回の型</span>AIが向く業務の3条件</p>
+        <p class="dk"><span>手元に残るもの</span>業務棚卸しシート／AI化する業務 上位3つ</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC01%E5%9B%9E_%E7%8F%BE%E7%8A%B6%E6%8A%8A%E6%8F%A1%E3%81%A8%E5%9C%B0%E5%9B%B3%E3%81%A5%E3%81%8F%E3%82%8A.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC01%E5%9B%9E_%E7%8F%BE%E7%8A%B6%E6%8A%8A%E6%8F%A1%E3%81%A8%E5%9C%B0%E5%9B%B3%E3%81%A5%E3%81%8F%E3%82%8A.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d">
+      <div class="dn"><span>第</span><b>2</b><span>回</span></div>
+      <div class="dt">
+        <h3>今のChatGPTの使い方を作り直す</h3>
+        <p class="ds">毎回ゼロから打つのを、やめます</p>
+        <p class="dc"><span>この回の型</span>指示の型 — 5つの要素</p>
+        <p class="dk"><span>手元に残るもの</span>自社の指示文 5本／カスタム指示／プロジェクト1つ</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC02%E5%9B%9E_%E4%BB%8A%E3%81%AEChatGPT%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%99.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC02%E5%9B%9E_%E4%BB%8A%E3%81%AEChatGPT%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9%E3%82%92%E4%BD%9C%E3%82%8A%E7%9B%B4%E3%81%99.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d">
+      <div class="dn"><span>第</span><b>3</b><span>回</span></div>
+      <div class="dt">
+        <h3>文書とコミュニケーションのAI化</h3>
+        <p class="ds">はじめて、社員に渡せるものを作ります</p>
+        <p class="dc"><span>この回の型</span>文書は3種類に分かれます</p>
+        <p class="dk"><span>手元に残るもの</span>指示文 10本／文書テンプレート3種</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC03%E5%9B%9E_%E6%96%87%E6%9B%B8%E3%81%A8%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AEAI%E5%8C%96.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC03%E5%9B%9E_%E6%96%87%E6%9B%B8%E3%81%A8%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AEAI%E5%8C%96.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d">
+      <div class="dn"><span>第</span><b>4</b><span>回</span></div>
+      <div class="dt">
+        <h3>数字と判断のAI化</h3>
+        <p class="ds">文章の道具から、判断を助ける道具へ</p>
+        <p class="dc"><span>この回の型</span>数字を読ませるときの3原則</p>
+        <p class="dk"><span>手元に残るもの</span>分析用の指示文／月次レポートの雛形</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC04%E5%9B%9E_%E6%95%B0%E5%AD%97%E3%81%A8%E5%88%A4%E6%96%AD%E3%81%AEAI%E5%8C%96.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC04%E5%9B%9E_%E6%95%B0%E5%AD%97%E3%81%A8%E5%88%A4%E6%96%AD%E3%81%AEAI%E5%8C%96.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d">
+      <div class="dn"><span>第</span><b>5</b><span>回</span></div>
+      <div class="dt">
+        <h3>自社専用AIをつくる</h3>
+        <p class="ds">社長の技を、会社の資産に変えます</p>
+        <p class="dc"><span>この回の型</span>「資料にないことは答えない」3行</p>
+        <p class="dk"><span>手元に残るもの</span>自社資料を読むAI 1つ／利用ルール</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC05%E5%9B%9E_%E8%87%AA%E7%A4%BE%E5%B0%82%E7%94%A8AI%E3%82%92%E3%81%A4%E3%81%8F%E3%82%8B.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC05%E5%9B%9E_%E8%87%AA%E7%A4%BE%E5%B0%82%E7%94%A8AI%E3%82%92%E3%81%A4%E3%81%8F%E3%82%8B.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d">
+      <div class="dn"><span>第</span><b>6</b><span>回</span></div>
+      <div class="dt">
+        <h3>社内へのお披露目と12か月計画</h3>
+        <p class="ds">社員のみなさんと一緒に見る回です</p>
+        <p class="dc"><span>この回の型</span>この5回で作ったもの／社員の不安4つ</p>
+        <p class="dk"><span>手元に残るもの</span>12か月ロードマップ／社内説明の完了</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC06%E5%9B%9E_%E7%A4%BE%E5%86%85%E3%81%B8%E3%81%AE%E3%81%8A%E6%8A%AB%E9%9C%B2%E7%9B%AE%E3%81%A812%E3%81%8B%E6%9C%88%E8%A8%88%E7%94%BB.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC06%E5%9B%9E_%E7%A4%BE%E5%86%85%E3%81%B8%E3%81%AE%E3%81%8A%E6%8A%AB%E9%9C%B2%E7%9B%AE%E3%81%A812%E3%81%8B%E6%9C%88%E8%A8%88%E7%94%BB.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d adv">
+      <div class="dn"><span>第</span><b>7</b><span>回</span></div>
+      <div class="dt">
+        <h3>手作業のつなぎ目をなくす</h3>
+        <p class="ds">点で使う、から、流れで使うへ</p>
+        <p class="dc"><span>この回の型</span>自動化してよい工程の3条件</p>
+        <p class="dk"><span>手元に残るもの</span>自動で流れる業務フロー 1本</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC07%E5%9B%9E_%E6%89%8B%E4%BD%9C%E6%A5%AD%E3%81%AE%E3%81%A4%E3%81%AA%E3%81%8E%E7%9B%AE%E3%82%92%E3%81%AA%E3%81%8F%E3%81%99.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC07%E5%9B%9E_%E6%89%8B%E4%BD%9C%E6%A5%AD%E3%81%AE%E3%81%A4%E3%81%AA%E3%81%8E%E7%9B%AE%E3%82%92%E3%81%AA%E3%81%8F%E3%81%99.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d adv">
+      <div class="dn"><span>第</span><b>8</b><span>回</span></div>
+      <div class="dt">
+        <h3>社内の知識を検索できるようにする</h3>
+        <p class="ds">「あの資料どこ」を減らします</p>
+        <p class="dc"><span>この回の型</span>精度は3分類で数える（○△×）</p>
+        <p class="dk"><span>手元に残るもの</span>社内資料を検索できるAI／不足資料リスト</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC08%E5%9B%9E_%E7%A4%BE%E5%86%85%E3%81%AE%E7%9F%A5%E8%AD%98%E3%82%92%E6%A4%9C%E7%B4%A2%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC08%E5%9B%9E_%E7%A4%BE%E5%86%85%E3%81%AE%E7%9F%A5%E8%AD%98%E3%82%92%E6%A4%9C%E7%B4%A2%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E3%81%99%E3%82%8B.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d adv">
+      <div class="dn"><span>第</span><b>9</b><span>回</span></div>
+      <div class="dt">
+        <h3>複数の工程をまとめて任せる</h3>
+        <p class="ds">人に仕事を任せるのと、同じ設計です</p>
+        <p class="dc"><span>この回の型</span>多工程の3通りの壊れ方</p>
+        <p class="dk"><span>手元に残るもの</span>工程図と確認ポイントの設計書</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC09%E5%9B%9E_%E8%A4%87%E6%95%B0%E3%81%AE%E5%B7%A5%E7%A8%8B%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E4%BB%BB%E3%81%9B%E3%82%8B.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC09%E5%9B%9E_%E8%A4%87%E6%95%B0%E3%81%AE%E5%B7%A5%E7%A8%8B%E3%82%92%E3%81%BE%E3%81%A8%E3%82%81%E3%81%A6%E4%BB%BB%E3%81%9B%E3%82%8B.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d adv">
+      <div class="dn"><span>第</span><b>10</b><span>回</span></div>
+      <div class="dt">
+        <h3>品質を測る・壊れたら気づく</h3>
+        <p class="ds">「なんとなく良くなった」を終わらせます</p>
+        <p class="dc"><span>この回の型</span>品質は勝手に落ちる</p>
+        <p class="dk"><span>手元に残るもの</span>正解セット10件／月次チェック手順</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC10%E5%9B%9E_%E5%93%81%E8%B3%AA%E3%82%92%E6%B8%AC%E3%82%8B%E3%83%BB%E5%A3%8A%E3%82%8C%E3%81%9F%E3%82%89%E6%B0%97%E3%81%A5%E3%81%8F.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC10%E5%9B%9E_%E5%93%81%E8%B3%AA%E3%82%92%E6%B8%AC%E3%82%8B%E3%83%BB%E5%A3%8A%E3%82%8C%E3%81%9F%E3%82%89%E6%B0%97%E3%81%A5%E3%81%8F.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d adv">
+      <div class="dn"><span>第</span><b>11</b><span>回</span></div>
+      <div class="dt">
+        <h3>組織に載せる</h3>
+        <p class="ds">講師がいなくなっても、回る形に</p>
+        <p class="dc"><span>この回の型</span>役割は4つ（決める・回す・作る・守る）</p>
+        <p class="dk"><span>手元に残るもの</span>推進体制図／権限・費用表／効果測定シート</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC11%E5%9B%9E_%E7%B5%84%E7%B9%94%E3%81%AB%E8%BC%89%E3%81%9B%E3%82%8B.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC11%E5%9B%9E_%E7%B5%84%E7%B9%94%E3%81%AB%E8%BC%89%E3%81%9B%E3%82%8B.pptx">PowerPoint</a>
+      </div>
+    </div>
+    <div class="d adv">
+      <div class="dn"><span>第</span><b>12</b><span>回</span></div>
+      <div class="dt">
+        <h3>AIを前提に事業を組み直す</h3>
+        <p class="ds">道具の話を終えて、事業の話に戻ります</p>
+        <p class="dc"><span>この回の型</span>3年構想の4つの問い</p>
+        <p class="dk"><span>手元に残るもの</span>3年構想／改訂版12か月ロードマップ</p>
+      </div>
+      <div class="dl">
+        <a class="btn" href="slides/pdf/%E7%AC%AC12%E5%9B%9E_AI%E3%82%92%E5%89%8D%E6%8F%90%E3%81%AB%E4%BA%8B%E6%A5%AD%E3%82%92%E7%B5%84%E3%81%BF%E7%9B%B4%E3%81%99.pdf" target="_blank" rel="noopener">PDFで開く</a>
+        <a class="btn ghost" href="slides/pptx/%E7%AC%AC12%E5%9B%9E_AI%E3%82%92%E5%89%8D%E6%8F%90%E3%81%AB%E4%BA%8B%E6%A5%AD%E3%82%92%E7%B5%84%E3%81%BF%E7%9B%B4%E3%81%99.pptx">PowerPoint</a>
+      </div>
+    </div>  </div>
+  <div class="warnbox"><b>第6回と第12回は、社員の方が見る資料です。</b>受講者ではなく社員に向けた書き方にしてあります。特に第6回の「みなさんが気になること」（人が減らされるのか／情報は漏れないか／間違えたら誰の責任か／使わなくてもいいのか）は、当日その場で必ず聞かれます。<b>この4つに講師が答えてはいけません。</b>経営者ご本人に答えていただく前提で作ってあります。事前の壁打ちで必ず準備してください。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">03</span><h2>直すとき。</h2></div>
+  <ul class="plain">
+    <li><b>文言はすべて <code>data.js</code> にあります。</b><code>build.js</code> はレイアウトだけです。プロジェクト内の「ビルドスクリプト_登壇資料12回分.md」から再生成できます</li>
+    <li><b>ハンドブックを直したら、こちらも直してください。</b>数字が食い違うと、資料と口頭で違うことを言うことになります</li>
+    <li>考え方の項目は3〜5個まで。6個以上入れると行が潰れます</li>
+    <li>実演の左右は4行まで。演習は必ず3ステップ（3列レイアウト固定）</li>
+    <li><b>時間が余っても、スライドを増やさないこと。</b>増やすと読み上げたくなり、講師の発話が35分を超えます</li>
+  </ul>
+  <div class="warnbox"><b>まだ実地で使っていない資料です。</b>第1期を回したら、実際に詰まった箇所・飛ばした箇所を記録して差し替えてください。特に演習の段取りは、現場で必ずずれます。</div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>登壇資料 全12回（2026年9月版）。内容の出典は「AI実装講座 1対1版 講師用ハンドブック」です。制度・料金・機能名に関する記載は2026年9月時点のもので、案件の開始前に必ず再確認してください。</p>
+  <p style="margin-top:.6rem;">掲載している事例・数値は、講座の目標水準を示すための説明用の例であり、実績値ではありません。</p>
+</footer>
+</body>
+</html>
