@@ -1,0 +1,380 @@
+<title>受講者の一歩先</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --bg:#F4F6F2; --card:#FFFFFF; --card-2:#EDF0E9;
+  --ink:#191C18; --ink-2:#565C52; --ink-3:#84897E;
+  --rule:#DBDFD3; --rule-2:#C3C9B9;
+  --pine:#2F5D4F; --pine-soft:#E4EDE8; --pine-line:#9CBFB2;
+  --brass:#A96B1F; --brass-soft:#F6EBDA;
+  --done:#2F5D4F; --shadow:0 1px 2px rgba(25,28,24,.05), 0 10px 28px -16px rgba(25,28,24,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131611; --card:#1B1F19; --card-2:#232821;
+    --ink:#E9EBE3; --ink-2:#B0B5A9; --ink-3:#82877C;
+    --rule:#2B3129; --rule-2:#3B4238;
+    --pine:#84BBA6; --pine-soft:#1B2B25; --pine-line:#3C5C4F;
+    --brass:#D9A05B; --brass-soft:#2E2416;
+    --done:#84BBA6; --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131611; --card:#1B1F19; --card-2:#232821;
+  --ink:#E9EBE3; --ink-2:#B0B5A9; --ink-3:#82877C;
+  --rule:#2B3129; --rule-2:#3B4238;
+  --pine:#84BBA6; --pine-soft:#1B2B25; --pine-line:#3C5C4F;
+  --brass:#D9A05B; --brass-soft:#2E2416;
+  --done:#84BBA6; --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.95; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:60rem; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.6rem);}
+h1,h2,h3{font-family:"Zen Old Mincho","Yu Mincho",serif; margin:0; font-weight:700; text-wrap:balance;}
+p{margin:0;}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+
+header{border-bottom:1px solid var(--rule); background:var(--card);}
+.hd{padding:clamp(2.4rem,6vw,4rem) 0 clamp(1.6rem,4vw,2.4rem);}
+.kicker{font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.24em; color:var(--brass); font-weight:600; margin-bottom:1.3rem;}
+h1{font-size:clamp(1.9rem,5vw,3rem); line-height:1.35;}
+h1 em{font-style:normal; color:var(--pine);}
+.sub{margin-top:1.1rem; color:var(--ink-2); max-width:40rem; line-height:2.05; font-size:.98rem;}
+
+.pbar{margin-top:2.2rem; border:1px solid var(--rule-2); background:var(--bg); padding:1.1rem 1.2rem;}
+.pbar .top{display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-bottom:.7rem;}
+.pbar .lab{font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.16em; color:var(--ink-3);}
+.pbar .cnt{font-family:"JetBrains Mono",monospace; font-size:1.1rem; font-weight:700; color:var(--pine); font-variant-numeric:tabular-nums;}
+.track{height:6px; background:var(--rule); overflow:hidden;}
+.fill{height:100%; width:0%; background:var(--pine); transition:width .35s ease;}
+@media(prefers-reduced-motion:reduce){.fill{transition:none;}}
+.pbar .hint{margin-top:.6rem; font-size:.74rem; color:var(--ink-3); line-height:1.6;}
+
+.start{margin:clamp(2.4rem,5vw,3.4rem) 0 0; padding:1.4rem 1.5rem; background:var(--brass-soft); border-left:3px solid var(--brass);}
+.start h2{font-size:1.05rem; margin-bottom:.6rem; color:var(--brass);}
+.start p{font-size:.92rem; line-height:1.95;}
+
+.phases{margin-top:clamp(2rem,5vw,3rem); display:flex; flex-direction:column; gap:1.4rem;}
+.phase{background:var(--card); border:1px solid var(--rule-2); box-shadow:var(--shadow); overflow:hidden;}
+.ph-hd{display:grid; grid-template-columns:auto 1fr auto; gap:1.1rem; align-items:start; padding:1.3rem 1.5rem 1.1rem; border-bottom:1px solid var(--rule);}
+.ph-n{
+  flex:none; width:2.8rem; height:2.8rem; display:grid; place-items:center;
+  background:var(--pine-soft); border:1.5px solid var(--pine); color:var(--pine);
+  font-family:"JetBrains Mono",monospace; font-size:1rem; font-weight:700;
+}
+.phase.complete .ph-n{background:var(--pine); color:var(--card); }
+.ph-t h2{font-size:1.22rem; line-height:1.5;}
+.ph-t .when{font-family:"JetBrains Mono",monospace; font-size:.7rem; letter-spacing:.1em; color:var(--ink-3); margin-top:.25rem;}
+.ph-cnt{font-family:"JetBrains Mono",monospace; font-size:.82rem; color:var(--ink-3); white-space:nowrap; padding-top:.5rem; font-variant-numeric:tabular-nums;}
+.phase.complete .ph-cnt{color:var(--done); font-weight:700;}
+.ph-body{padding:1.2rem 1.5rem 1.4rem;}
+.why{font-size:.9rem; color:var(--ink-2); line-height:1.95; padding:.75rem .95rem; background:var(--card-2); border-left:2px solid var(--pine-line); margin-bottom:1.1rem;}
+.why b{color:var(--pine); font-weight:700;}
+
+ul.todo{list-style:none; margin:0; padding:0; display:flex; flex-direction:column;}
+ul.todo li{border-bottom:1px dotted var(--rule); }
+ul.todo li:last-child{border-bottom:none;}
+label.chk{display:grid; grid-template-columns:1.4rem 1fr; gap:.75rem; align-items:start; padding:.6rem .2rem; cursor:pointer; font-size:.92rem; line-height:1.8;}
+label.chk input{
+  appearance:none; -webkit-appearance:none; margin:.42rem 0 0; width:1.05rem; height:1.05rem;
+  border:1.5px solid var(--rule-2); background:var(--bg); cursor:pointer; flex:none; display:grid; place-items:center;
+}
+label.chk input:checked{background:var(--pine); border-color:var(--pine);}
+label.chk input:checked::after{content:"✓"; color:var(--card); font-size:.75rem; line-height:1; font-weight:700;}
+label.chk input:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+label.chk input:checked + .tx .ttl{color:var(--ink-3); text-decoration:line-through; text-decoration-color:var(--rule-2);}
+label.chk input:checked + .tx small{opacity:.55;}
+.tx .ttl{display:block;}
+.tx small{display:block; font-size:.79rem; color:var(--ink-3); line-height:1.7; margin-top:.1rem;}
+
+.goal{margin-top:1.1rem; padding:.85rem 1rem; background:var(--pine-soft); border-left:3px solid var(--pine); font-size:.9rem; line-height:1.85;}
+.goal b{display:block; font-family:"JetBrains Mono",monospace; font-size:.63rem; letter-spacing:.18em; color:var(--pine); margin-bottom:.2rem; font-weight:700;}
+.skip{margin-top:.7rem; font-size:.83rem; color:var(--ink-3); line-height:1.8;}
+.skip b{color:var(--brass); font-weight:700;}
+
+section.blk{margin-top:clamp(2.6rem,6vw,4rem);}
+section.blk > h2{font-size:clamp(1.3rem,3vw,1.7rem); margin-bottom:.5rem;}
+section.blk > .lead{color:var(--ink-2); font-size:.94rem; line-height:2; max-width:42rem; margin-bottom:1.3rem;}
+
+.nope{display:flex; flex-direction:column; gap:0; border:1px solid var(--rule-2); background:var(--card);}
+.nope .r{display:grid; grid-template-columns:1.6rem 1fr; gap:.8rem; padding:.85rem 1.1rem; border-bottom:1px solid var(--rule); font-size:.9rem; line-height:1.85; align-items:start;}
+.nope .r:last-child{border-bottom:none;}
+.nope .x{color:var(--brass); font-weight:700; font-family:"JetBrains Mono",monospace;}
+.nope .r i{font-style:normal; display:block; font-size:.82rem; color:var(--ink-3); margin-top:.1rem;}
+
+.routine{display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:0; border:1px solid var(--rule-2);}
+.routine .c{padding:1.1rem 1.15rem; border-right:1px solid var(--rule); background:var(--card); display:flex; flex-direction:column; gap:.4rem;}
+.routine .c:last-child{border-right:none;}
+.routine .c .d{font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.14em; color:var(--brass); font-weight:600;}
+.routine .c .m{font-family:"JetBrains Mono",monospace; font-size:1.25rem; font-weight:700; color:var(--pine); line-height:1;}
+.routine .c .t{font-size:.86rem; line-height:1.8; color:var(--ink-2);}
+
+.tw{overflow-x:auto;}
+table{border-collapse:collapse; width:100%; min-width:26rem; font-size:.9rem;}
+th,td{padding:.65rem .85rem; text-align:left; border-bottom:1px solid var(--rule);}
+thead th{background:var(--pine); color:var(--card); font-size:.76rem; letter-spacing:.08em; border-bottom:none;}
+tbody tr:nth-child(even){background:var(--card-2);}
+td.n{font-family:"JetBrains Mono",monospace; font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink-3);}
+
+.tools{margin-top:1.6rem; display:flex; gap:.7rem; flex-wrap:wrap; align-items:center;}
+button.rst{
+  font-family:"BIZ UDPGothic",sans-serif; font-size:.8rem; color:var(--ink-2);
+  background:var(--card); border:1px solid var(--rule-2); padding:.45rem .9rem; cursor:pointer;
+}
+button.rst:hover{border-color:var(--brass); color:var(--brass);}
+button.rst:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+.saved{font-size:.76rem; color:var(--ink-3);}
+
+footer{margin-top:clamp(3rem,7vw,4.5rem); padding:1.6rem 0 3rem; border-top:1px solid var(--rule); font-size:.79rem; color:var(--ink-3); line-height:1.9;}
+</style>
+
+<header>
+<div class="wrap hd">
+  <div class="kicker">AI講師のための学習ロードマップ</div>
+  <h1>教える相手の、<br><em>一歩先</em>を歩き続ける。</h1>
+  <p class="sub">1対1で経営者に伴走すると、逃げ場がありません。「なぜそうなるのか」に即答できるかどうかが、そのまま商品価値になります。ここは、いまの現在地から、上級編を教えられる水準まで進むための道順です。全部やる必要はありません。<strong>教える予定のPhaseまで</strong>進めば足ります。</p>
+  <div class="pbar">
+    <div class="top">
+      <span class="lab">全体の進捗</span>
+      <span class="cnt"><span id="done">0</span> / <span id="total">0</span></span>
+    </div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <p class="hint">チェックはこのブラウザに保存されます。別の端末やブラウザには引き継がれません。</p>
+  </div>
+</div>
+</header>
+
+<main class="wrap">
+
+<div class="start">
+  <h2>いまの現在地</h2>
+  <p><strong>AIは毎日使っている。コードは書かない。</strong>　この地点は、基礎編6回を教えるには十分です。足りないのは上級編で、特に第7回（自動化）・第9回（多工程）・第10回（品質測定）は、自分で一度通っていないと教えられません。Phase 2と3が最優先です。</p>
+</div>
+
+<div class="phases" id="phases">
+
+  <article class="phase" data-p="1">
+    <div class="ph-hd">
+      <div class="ph-n">1</div>
+      <div class="ph-t"><h2>教える型を固める</h2><div class="when">いますぐ ／ 週3〜4時間 × 3週</div></div>
+      <div class="ph-cnt"><span class="pc">0</span>/<span class="pt">0</span></div>
+    </div>
+    <div class="ph-body">
+      <p class="why"><b>なぜ先にこれか。</b>自分が無意識にやっている判断を言葉にしていないと、教えられません。1対1では受講者が遠慮なく「なぜ？」と聞いてきます。技術を足す前に、いま持っているものを教材の形に変えるほうが早く効きます。</p>
+      <ul class="todo">
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">自分のプロンプトの判断基準を10個、文章で書き出す</span><small>「なぜその前提情報を足したのか」を言語化する。ここが一番の資産になる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">自分の手順を他人に1つやらせて、詰まった箇所を全部記録する</span><small>家族・知人で構わない。自分が飛ばしている説明が全部見つかる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">失敗事例ノートを始める</span><small>自分が失敗した例が最高の教材。成功例だけ見せると受講者は失敗を言わなくなる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">主要サービスの違いを、業務ベースで自分の言葉で説明できるようにする</span><small>スペック比較ではなく「議事録ならこれ、資料読ませるならこれ」の形で</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">法人向けプランのデータ取扱いを、規約レベルで確認する</span><small>「入力データは学習に使われますか」は必ず聞かれる。曖昧に答えない</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">業種別のサンプルデータを3種つくる（製造・小売・サービス）</span><small>受講者がデータを持ってこなかった回を成立させる保険。いまの最優先タスク</small></span></label></li>
+      </ul>
+      <div class="goal"><b>これができたら次へ</b>受講者の「なぜそうするんですか」に、その場で理由まで答えられる。</div>
+    </div>
+  </article>
+
+  <article class="phase" data-p="2">
+    <div class="ph-hd">
+      <div class="ph-n">2</div>
+      <div class="ph-t"><h2>つなぐ</h2><div class="when">1〜2か月 ／ 週4〜5時間</div></div>
+      <div class="ph-cnt"><span class="pc">0</span>/<span class="pt">0</span></div>
+    </div>
+    <div class="ph-body">
+      <p class="why"><b>ここが分岐点。</b>「AIを使える人」と「AIで仕組みを作れる人」が分かれる場所です。上級編 第7回・第8回はここを通っていないと教えられません。コードは書かなくて構いません。</p>
+      <ul class="todo">
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">自動化ツールを1つだけ選ぶ</span><small>ワークフロー自動化系か、表計算に紐づくスクリプトか。すでに触ったものがあればそれ。増やさない</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">自分の商売を1本自動化する</span><small>受講者管理・請求・録画の配布・アンケート集計など。自分が困っている業務でやる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">止まったときの通知を仕込む</span><small>気づけない自動化が一番危ない。ここを教えられるかで信頼が変わる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">手動に戻す手順を書いておく</span><small>壊れた前提で設計する、を自分の身で経験する</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">ナレッジベース型のAIを1つ作る</span><small>自分の教材・過去のQ&amp;Aを読ませる。上級編 第8回の中身そのもの</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">「資料にないことは答えない」設定を実際に試す</span><small>ハルシネーション対策の実務上の核心。口で説明せず、動かして見せられるようにする</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">自分が払っている月額を全部合算して把握する</span><small>受講者から必ず「いくらかかりますか」と聞かれる。実額で答える</small></span></label></li>
+      </ul>
+      <div class="goal"><b>これができたら次へ</b>自分の商売が1本、自動で回っている。壊れたら通知が来る。</div>
+      <p class="skip"><b>注意：</b>ツールを増やさないこと。3つ浅く触るより、1つを深く使えるほうが教えられます。</p>
+    </div>
+  </article>
+
+  <article class="phase" data-p="3">
+    <div class="ph-hd">
+      <div class="ph-n">3</div>
+      <div class="ph-t"><h2>コードを読む（書かなくていい）</h2><div class="when">2〜4か月 ／ 週4〜6時間</div></div>
+      <div class="ph-cnt"><span class="pc">0</span>/<span class="pt">0</span></div>
+    </div>
+    <div class="ph-body">
+      <p class="why"><b>なぜ必要か。</b>自動化は必ず壊れます。受講者の環境で壊れたとき、原因を特定できないと1対1の伴走は成立しません。ゼロから書けるようになる必要はありませんが、<b>読めないと詰みます</b>。</p>
+      <ul class="todo">
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">AIに書かせたコードを、1行ずつ説明させて意味を確認する習慣をつける</span><small>今日から始められる。これだけで読解力が上がる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">基本文法を「読める」水準まで</span><small>変数・条件分岐・繰り返し・関数・エラー処理。言語はPythonかJavaScriptのどちらか一つ</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">APIの概念を、実際に叩いて確かめる</span><small>キー・レート制限・課金単位・エラーコード。読むだけでは身につかない</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">エージェント型のコーディングツールで、自分用の小さい業務ツールを1つ作る</span><small>非エンジニアでも作れる。作れた経験そのものが受講者への説得材料になる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">わざと壊して、原因を特定する練習をする</span><small>キーを間違える・上限を超える・入力を空にする。壊し方を知っていると直せる</small></span></label></li>
+      </ul>
+      <div class="goal"><b>これができたら次へ</b>AIが書いたコードのバグを、自分で原因まで辿れる。</div>
+      <p class="skip"><b>やらなくていい：</b>ゼロから書けるようになること／フレームワークの習得／アルゴリズムの勉強／プログラミングの資格。</p>
+    </div>
+  </article>
+
+  <article class="phase" data-p="4">
+    <div class="ph-hd">
+      <div class="ph-n">4</div>
+      <div class="ph-t"><h2>仕組みの中身を理解する</h2><div class="when">4〜8か月 ／ 週3〜5時間</div></div>
+      <div class="ph-cnt"><span class="pc">0</span>/<span class="pt">0</span></div>
+    </div>
+    <div class="ph-body">
+      <p class="why"><b>ここが差になる。</b>「AIを使える講師」は増えました。「なぜ間違えるのかを構造で説明できる講師」と「品質を数字で語れる講師」は、まだ少ない。上級編 第9回・第10回を教えるための土台でもあります。</p>
+      <ul class="todo">
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">社内文書検索AIがなぜ間違えるのかを説明できる</span><small>資料を探す段階で外したのか、探せたのに答えを間違えたのか。切り分けられると原因が分かる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">長い文脈で精度が落ちる理由と、コストの構造を理解する</span><small>「資料を全部入れれば賢くなる」わけではない理由を説明できるように</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">評価（eval）の考え方を、自分の教材で一度やる</span><small>正解セットを10件つくって測る。上級編 第10回の中身。ここが最大の差別化になる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">AIと外部システムをつなぐ規格（MCP）の動向を追う</span><small>2026年7月にセッション廃止の大きな改訂があり、12か月の移行期間中。実装はしなくていいが、話せるように</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">ログ保持とデータの取扱いを、契約レベルで整理する</span><small>受講者の機密資料を扱う立場として、自分の責任範囲を明確にしておく</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">自分の教材の品質を、自分で作った正解セットで測る</span><small>教える内容を自分で検証している講師は、それだけで信頼される</small></span></label></li>
+      </ul>
+      <div class="goal"><b>これができたら</b>「なぜそうなるのか」を構造で答えられる。品質を数字で語れる。</div>
+    </div>
+  </article>
+
+  <article class="phase" data-p="5">
+    <div class="ph-hd">
+      <div class="ph-n">5</div>
+      <div class="ph-t"><h2>教える商売として組み立てる</h2><div class="when">Phase 1 と並行して継続</div></div>
+      <div class="ph-cnt"><span class="pc">0</span>/<span class="pt">0</span></div>
+    </div>
+    <div class="ph-body">
+      <p class="why"><b>技術だけでは案件になりません。</b>1対1の講師にとって最大の商品価値は、実は技術力ではなく<b>事例の在庫</b>です。「他社もそこでつまずきます」と言えるかどうかが、受講者の安心を決めます。</p>
+      <ul class="todo">
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">匿名化した事例を業種別にストックする</span><small>毎回1本出し、初回は2本使うので通しで最低13本。在庫が切れると講座の質が落ちる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">展開の順番を決める</span><small>1対1 → 少人数 → 動画教材。1対1で型ができる前に量を追うと、どれも中途半端になる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">助成金の実務を1件通す</span><small>計画届から実績報告まで。一度通すと提案時の説得力が変わる。2026年度が最終年度の見込み</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">受講者の実測値を集め、募集資料の数字を差し替える</span><small>いまの資料の数値はすべて「目標水準」。実績に置き換わった瞬間に別物になる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">週次で見る情報源を5つに絞る</span><small>増やさない。追い切れない量を抱えると、結局どれも見なくなる</small></span></label></li>
+        <li><label class="chk"><input type="checkbox"><span class="tx"><span class="ttl">四半期に1回、教材を棚卸しして古い部分を捨てる</span><small>この分野は半年で記述が古くなる。足すより捨てるほうが難しい</small></span></label></li>
+      </ul>
+      <div class="goal"><b>目指す状態</b>紹介で次の案件が来る。事例が業種ごとに揃っている。</div>
+    </div>
+  </article>
+
+</div>
+
+<div class="tools">
+  <button class="rst" id="reset" type="button">チェックをすべて消す</button>
+  <span class="saved" id="saved"></span>
+</div>
+
+<section class="blk">
+  <h2>やらなくていいこと</h2>
+  <p class="lead">この分野は「やるべきこと」より「やらなくていいこと」を決めるほうが難しく、そして効きます。以下はすべて、面白いけれど中小企業向けの1対1講座には効きません。</p>
+  <div class="nope">
+    <div class="r"><span class="x">×</span><span>最新モデルの発表を毎回追いかける<i>月1回まとめて確認すれば足ります。追いかけている時間で事例を1つ作るほうが売上になります</i></span></div>
+    <div class="r"><span class="x">×</span><span>ファインチューニング・自前モデルの構築<i>中小企業の案件でまず出番がありません。必要になったときに外部に頼めば済みます</i></span></div>
+    <div class="r"><span class="x">×</span><span>プロンプト関連の資格・検定<i>実物の事例のほうが、受講者にも紹介元にも説得力があります</i></span></div>
+    <div class="r"><span class="x">×</span><span>ゼロからコードを書けるようになること<i>読めれば足ります。書くのはAIの仕事です</i></span></div>
+    <div class="r"><span class="x">×</span><span>すべてのツールを試すこと<i>1つを深く使えるほうが教えられます。ツールの数は説得力になりません</i></span></div>
+    <div class="r"><span class="x">×</span><span>論文を読むこと<i>面白いですが、経営者の役には立ちません。優先度は最後です</i></span></div>
+  </div>
+</section>
+
+<section class="blk">
+  <h2>週次のルーティン</h2>
+  <p class="lead">まとまった時間を取ろうとすると続きません。週に3時間を分けて置きます。</p>
+  <div class="routine">
+    <div class="c"><span class="d">MON</span><span class="m">30分</span><span class="t">先週の受講者からの質問を見返す。答えられなかったものを1つ調べる</span></div>
+    <div class="c"><span class="d">WED</span><span class="m">60分</span><span class="t">いまのPhaseのやることを1つ進める。手を動かす枠</span></div>
+    <div class="c"><span class="d">FRI</span><span class="m">30分</span><span class="t">情報源5つを流し読み。教材に効くものだけメモする</span></div>
+    <div class="c"><span class="d">月末</span><span class="m">90分</span><span class="t">教材の棚卸し。古い記述を直し、事例を1つ足す</span></div>
+  </div>
+</section>
+
+<section class="blk">
+  <h2>毎月、自分について記録する4つ</h2>
+  <p class="lead">受講者に効果測定を教える立場なので、自分も測ります。数字が動かない月が続いたら、Phaseの選び方を間違えています。</p>
+  <div class="tw">
+    <table>
+      <thead><tr><th>指　標</th><th>見かた</th><th>目安</th></tr></thead>
+      <tbody>
+        <tr><td>答えられなかった質問の数</td><td>減っていれば、その領域は身についている</td><td class="n">減少</td></tr>
+        <tr><td>事例ストックの数</td><td>1対1の講師にとって最大の在庫</td><td class="n">月 +1</td></tr>
+        <tr><td>自分が自動化した業務の数</td><td>教える内容を自分でやっているか</td><td class="n">四半期 +1</td></tr>
+        <tr><td>教材を更新した回数</td><td>更新が止まった教材は半年で古くなる</td><td class="n">月 1回</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p>本ロードマップは、経営者向けAI実装講座（1対1・全12回×120分）を教える立場のための学習計画です。Phase 2 は上級編 第7・8回、Phase 3 は第7・9回、Phase 4 は第9・10回にそれぞれ対応しています。</p>
+  <p style="margin-top:.7rem;">記載の制度・仕様は2026年9月時点の情報にもとづきます。人材開発支援助成金は2026年度が最終年度の見込みで、条件も改正が続いているため、実務では必ず最新情報を確認してください。</p>
+</footer>
+
+<script>
+(function(){
+  var KEY = "ai-tutor-roadmap-v1";
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.todo input[type=checkbox]'));
+  boxes.forEach(function(b,i){ b.setAttribute('data-i', i); });
+
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(!raw) return {};
+      return JSON.parse(raw) || {};
+    }catch(e){ return {}; }
+  }
+  function save(state){
+    try{ localStorage.setItem(KEY, JSON.stringify(state)); }
+    catch(e){ /* private mode / blocked storage */ }
+  }
+  function render(){
+    var done = 0;
+    boxes.forEach(function(b){ if(b.checked) done++; });
+    document.getElementById('done').textContent = done;
+    document.getElementById('total').textContent = boxes.length;
+    var fill = document.getElementById('fill');
+    fill.style.width = boxes.length ? (done / boxes.length * 100) + '%' : '0%';
+
+    Array.prototype.forEach.call(document.querySelectorAll('.phase'), function(ph){
+      var bs = ph.querySelectorAll('.todo input[type=checkbox]');
+      var d = 0;
+      Array.prototype.forEach.call(bs, function(b){ if(b.checked) d++; });
+      ph.querySelector('.pc').textContent = d;
+      ph.querySelector('.pt').textContent = bs.length;
+      if(bs.length && d === bs.length) ph.classList.add('complete');
+      else ph.classList.remove('complete');
+    });
+  }
+
+  var state = load();
+  boxes.forEach(function(b){
+    if(state[b.getAttribute('data-i')]) b.checked = true;
+    b.addEventListener('change', function(){
+      var s = load();
+      if(b.checked) s[b.getAttribute('data-i')] = 1;
+      else delete s[b.getAttribute('data-i')];
+      save(s);
+      render();
+      var el = document.getElementById('saved');
+      el.textContent = '保存しました';
+      clearTimeout(el._t);
+      el._t = setTimeout(function(){ el.textContent = ''; }, 1600);
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click', function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    save({});
+    render();
+    document.getElementById('saved').textContent = 'すべて消しました';
+  });
+
+  render();
+})();
+</script>
