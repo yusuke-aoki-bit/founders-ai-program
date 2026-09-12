@@ -12,6 +12,8 @@ PAGES = [
      "Apps Scriptで診断フォーム3つと自動採点シートを10分で立ち上げる手順。"),
     ("slides.html",       "登壇資料", "src/slides_body.html",
      "全12回の画面共有用スライド（各回15枚・PPTX）と、読むだけで分かる各回の資料（PDF）。"),
+    ("models.html",       "モデルと用語", "src/models_body.html",
+     "主要生成AIモデルの知能スコア・API単価・月額プラン・コスト試算と、用途別の使い分け、用語集。2026年9月版。"),
     ("student.html",      "受講のご案内", "src/student_body.html",
      "受講が決まった方へ。初回の持ち物、各回の準備、12回の流れ、用語、よくあるご質問。"),
 ]
@@ -52,7 +54,7 @@ TPL = """<!doctype html>
 </html>
 """
 
-EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","student.html":"📘"}
+EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘"}
 
 for out, label, src, desc in PAGES:
     raw = io.open(src, encoding="utf-8").read()

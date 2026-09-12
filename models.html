@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="主要生成AIモデルの知能スコア・API単価・月額プラン・コスト試算と、用途別の使い分け、用語集。2026年9月版。">
+<title>モデルと用語｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🧮</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html">全体像</a><a href="deliverables.html">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html">フォーム設置手順</a><a href="slides.html">登壇資料</a><a href="models.html" aria-current="page">モデルと用語</a></span></div></nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@600;700&family=BIZ+UDPGothic:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --bg:#F1F2F3; --card:#FFFFFF; --card-2:#E7E9EA; --card-3:#F7F8F8;
+  --ink:#15181B; --ink-2:#545A60; --ink-3:#848A90;
+  --rule:#DBDDE0; --rule-2:#C2C6CA;
+  --seal:#B04A2F; --seal-soft:#F7EAE5;
+  --blue:#2F4F6B; --blue-soft:#E8EEF3;
+  --teal:#1F6F6B; --teal-soft:#E4F0EF;
+  --shadow:0 1px 2px rgba(21,24,27,.05), 0 12px 30px -20px rgba(21,24,27,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111315; --card:#1A1D20; --card-2:#23272B; --card-3:#191C1F;
+    --ink:#E8EAEB; --ink-2:#AFB4B9; --ink-3:#80868C;
+    --rule:#292E32; --rule-2:#393F44;
+    --seal:#E0876A; --seal-soft:#2C1E19;
+    --blue:#8FB4D6; --blue-soft:#1B2733;
+    --teal:#7FC4BF; --teal-soft:#182B2A;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -20px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111315; --card:#1A1D20; --card-2:#23272B; --card-3:#191C1F;
+  --ink:#E8EAEB; --ink-2:#AFB4B9; --ink-3:#80868C;
+  --rule:#292E32; --rule-2:#393F44;
+  --seal:#E0876A; --seal-soft:#2C1E19;
+  --blue:#8FB4D6; --blue-soft:#1B2733;
+  --teal:#7FC4BF; --teal-soft:#182B2A;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 30px -20px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.95; -webkit-font-smoothing:antialiased;}
+.wrap{max-width:64rem; margin:0 auto; padding:0 clamp(1.1rem,4vw,2.6rem);}
+h1,h2,h3{font-family:"Noto Serif JP",serif; margin:0; font-weight:700; text-wrap:balance;}
+p{margin:0;} a{color:var(--seal);}
+.lbl{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.2em; font-weight:600; color:var(--seal);}
+
+header{background:var(--card); border-bottom:1px solid var(--rule);}
+.hd{padding:clamp(2.2rem,6vw,3.6rem) 0 clamp(1.6rem,4vw,2.4rem);}
+.hd .lbl{display:block; margin-bottom:1.1rem;}
+h1{font-size:clamp(1.8rem,4.6vw,2.7rem); line-height:1.4;}
+.sub{margin-top:1.1rem; color:var(--ink-2); max-width:40rem; line-height:2.05; font-size:.97rem;}
+.counts{display:grid; grid-template-columns:repeat(auto-fit,minmax(8rem,1fr)); gap:0; margin-top:1.9rem; border:1px solid var(--rule-2);}
+.counts div{padding:.85rem 1rem; border-right:1px solid var(--rule); background:var(--bg);}
+.counts div:last-child{border-right:none;}
+.counts b{display:block; font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.16em; color:var(--ink-3); font-weight:600;}
+.counts span{font-size:1rem; font-weight:700;}
+
+section{padding:clamp(2.4rem,5vw,3.4rem) 0; border-bottom:1px solid var(--rule);}
+section:last-of-type{border-bottom:none;}
+.sh{display:flex; align-items:baseline; gap:.9rem; margin-bottom:.6rem;}
+.sh .k{font-family:"IBM Plex Mono",monospace; font-size:.74rem; font-weight:600; color:var(--seal); padding-top:.3rem; white-space:nowrap;}
+h2{font-size:clamp(1.3rem,3vw,1.75rem); line-height:1.5;}
+.lead{margin-top:.7rem; max-width:42rem; color:var(--ink-2); line-height:2.05; font-size:.94rem;}
+h3.sub3{font-size:1rem; margin-top:2rem; line-height:1.6;}
+
+.warnbox{margin-top:1.5rem; padding:1rem 1.2rem; background:var(--seal-soft); border-left:3px solid var(--seal); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.warnbox b{color:var(--seal); font-weight:700;}
+.tipbox{margin-top:1.5rem; padding:1rem 1.2rem; background:var(--blue-soft); border-left:3px solid var(--blue); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.tipbox b{color:var(--blue); font-weight:700;}
+.okbox{margin-top:1.5rem; padding:1rem 1.2rem; background:var(--teal-soft); border-left:3px solid var(--teal); font-size:.89rem; line-height:1.95; color:var(--ink-2);}
+.okbox b{color:var(--teal); font-weight:700;}
+ul.plain{margin:.8rem 0 0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.4rem;}
+ul.plain li{font-size:.9rem; color:var(--ink-2); line-height:1.9;}
+ul.plain li b{color:var(--ink);}
+footer{padding:2rem 0 3.2rem; font-size:.79rem; color:var(--ink-3); line-height:1.9; border-top:1px solid var(--rule);}
+:focus-visible{outline:2px solid var(--seal); outline-offset:2px;}
+
+table{width:100%; border-collapse:collapse; margin-top:1.4rem; font-size:.86rem; background:var(--card);}
+th,td{border:1px solid var(--rule); padding:.55rem .7rem; text-align:left; vertical-align:top; line-height:1.75;}
+th{background:var(--card-2); font-weight:700; font-size:.78rem; color:var(--ink);}
+td.n,th.n{text-align:right; font-family:"IBM Plex Mono",monospace; white-space:nowrap;}
+td.c,th.c{text-align:center; white-space:nowrap;}
+.tw{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.tw table{min-width:34rem;}
+caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--ink-3); padding-top:.5rem; line-height:1.8;}
+
+.bars{margin-top:1.4rem; border:1px solid var(--rule); background:var(--card);}
+.bars .row{display:grid; grid-template-columns:11rem minmax(0,1fr) 3.6rem; gap:.7rem; align-items:center;
+  padding:.42rem .8rem; border-bottom:2px solid var(--card);}
+.bars .row:last-child{border-bottom:none;}
+.bars .nm{font-size:.82rem; line-height:1.5;}
+.bars .nm i{display:block; font-style:normal; font-size:.66rem; color:var(--ink-3); font-family:"IBM Plex Mono",monospace; letter-spacing:.06em;}
+.bars .track{display:block; background:var(--card-2); height:12px;}
+.bars .fill{display:block; height:12px; background:var(--blue); border-radius:0 4px 4px 0;}
+.bars.cost .fill{background:var(--seal);}
+.bars .v{font-family:"IBM Plex Mono",monospace; font-size:.82rem; text-align:right; color:var(--ink);}
+@media(max-width:620px){ .bars .row{grid-template-columns:8.2rem minmax(0,1fr) 3.8rem; gap:.5rem;} .bars .nm{font-size:.76rem;} }
+
+.pts{margin-top:1.5rem; display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:.7rem;}
+.pt{background:var(--card); border:1px solid var(--rule-2); border-top:3px solid var(--seal); padding:1rem 1.1rem;}
+.pt b{display:block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; letter-spacing:.14em; color:var(--seal); margin-bottom:.35rem;}
+.pt h3{font-size:1rem; line-height:1.6; margin-bottom:.4rem;}
+.pt p{font-size:.85rem; color:var(--ink-2); line-height:1.9;}
+</style>
+
+<header>
+<div class="wrap hd">
+  <span class="lbl">経営者向け AI実装講座　補助資料</span>
+  <h1>各AIモデルの特徴と、用語。</h1>
+  <p class="sub">受講者から必ず聞かれる「結局どれを使えばいいのか」に、数字で答えるための一枚。<strong>数字は3か月で腐ります。</strong>長持ちするのは 06 の使い分けと 07 の用語だけなので、そこを読ませてください。</p>
+  <div class="counts">
+    <div><b>確認日</b><span>2026-09-12</span></div>
+    <div><b>比較指標</b><span>Intelligence Index v4.1.1</span></div>
+    <div><b>為替</b><span>1ドル150円換算</span></div>
+    <div><b>次の更新</b><span>2026-12月まで</span></div>
+  </div>
+  <div class="warnbox"><b>賞味期限の警告。</b>生成AIの主力モデルは月単位で入れ替わります。3か月後にこのページの数字を根拠に判断してはいけません。配布前に各社の公式価格ページで差分を確認してください。<b>この確認作業そのものを受講者の前でやると、そのままAIリテラシーの実演になります。</b></div>
+</div>
+</header>
+
+<main class="wrap">
+
+<section>
+  <div class="sh"><span class="k">01</span><h2>先に結論。3つだけ。</h2></div>
+  <p class="lead">この3つを言えれば、モデル比較の話は終わります。以下の表はすべて、この3つの裏付けです。</p>
+  <div class="pts">
+    <div class="pt"><b>CONCLUSION 1</b><h3>上位4モデルは実質横並び。</h3><p>総合知能スコアは 63・62・61・61点。差は2点以内です。「一番賢いAI」を選ぶ意味はほぼありません。</p></div>
+    <div class="pt"><b>CONCLUSION 2</b><h3>差が出るのは価格のほう。</h3><p>同世代でも1トークンあたり最大25倍の開き。コストは「どのモデルか」ではなく「どの階層に振り分けるか」で決まります。</p></div>
+    <div class="pt"><b>CONCLUSION 3</b><h3>選定軸は性能ではなく既存環境。</h3><p>Google Workspace なら Gemini、Microsoft 365 なら Copilot、どちらでもなければ ChatGPT か Claude。これで9割決まります。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">02</span><h2>総合知能スコア。</h2></div>
+  <p class="lead">Artificial Analysis の Intelligence Index v4.1.1（9つの評価を合成・すべて最大推論設定）。棒はゼロを基準にした実寸です。上位が団子になっている絵そのものが、この章の結論です。</p>
+
+  <div class="bars" role="img" aria-label="総合知能スコア。Claude Opus 5が63点で首位、以下Claude Fable 5が62点、GPT-5.6 Solが61点、Grok 4.6が61点、Kimi K3が60点、Gemini 3.7 Flashが56点、GPT-5.6 Terraが55点、Gemini 3.5 Flashが52点、GPT-5.6 Lunaが51点、Gemini 3.1 Proが48点。">
+    <div class="row"><span class="nm">Claude Opus 5<i>ANTHROPIC</i></span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">63</span></div>
+    <div class="row"><span class="nm">Claude Fable 5<i>ANTHROPIC</i></span><span class="track"><span class="fill" style="width:98.4%"></span></span><span class="v">62</span></div>
+    <div class="row"><span class="nm">GPT-5.6 Sol<i>OPENAI</i></span><span class="track"><span class="fill" style="width:96.8%"></span></span><span class="v">61</span></div>
+    <div class="row"><span class="nm">Grok 4.6<i>SPACEXAI</i></span><span class="track"><span class="fill" style="width:96.8%"></span></span><span class="v">61</span></div>
+    <div class="row"><span class="nm">Kimi K3<i>MOONSHOT / OPEN</i></span><span class="track"><span class="fill" style="width:95.2%"></span></span><span class="v">60</span></div>
+    <div class="row"><span class="nm">Gemini 3.7 Flash<i>GOOGLE</i></span><span class="track"><span class="fill" style="width:88.9%"></span></span><span class="v">56</span></div>
+    <div class="row"><span class="nm">GPT-5.6 Terra<i>OPENAI</i></span><span class="track"><span class="fill" style="width:87.3%"></span></span><span class="v">55</span></div>
+    <div class="row"><span class="nm">Gemini 3.5 Flash<i>GOOGLE</i></span><span class="track"><span class="fill" style="width:82.5%"></span></span><span class="v">52</span></div>
+    <div class="row"><span class="nm">GPT-5.6 Luna<i>OPENAI</i></span><span class="track"><span class="fill" style="width:81.0%"></span></span><span class="v">51</span></div>
+    <div class="row"><span class="nm">Gemini 3.1 Pro<i>GOOGLE / PREVIEW</i></span><span class="track"><span class="fill" style="width:76.2%"></span></span><span class="v">48</span></div>
+  </div>
+
+  <h3 class="sub3">読み取れること</h3>
+  <ul class="plain">
+    <li><b>上位4モデルの差は2点以内。</b>ベンチマークの「勝敗」は業務判断の根拠になりません。</li>
+    <li><b>Google は旗艦と廉価版が逆転しています。</b>Gemini 3.1 Pro（48）を、同社の廉価版 Gemini 3.7 Flash（56）が上回っている。3.1 Pro が2026年2月から未更新で、後継の 3.5 Pro が延期を重ねているためです。</li>
+    <li><b>オープンウェイトの Kimi K3 が60点。</b>「安い＝性能が低い」は、もう成り立ちません。ただし採用を薦めるかは別の話です（06参照）。</li>
+  </ul>
+
+  <div class="warnbox"><b>教材として重要な注意。</b>Gemini 3.1 Pro は旧 v4.0 では <b>57点で首位</b>でしたが、評価項目が入れ替わった v4.1.1 では <b>48点</b>です。ネット上には両方の数字が流通しています。<b>比較するときは指標のバージョンを必ず揃えてください。</b>「同じモデルなのに点数が違う記事がある」のは、モデルではなく物差しが変わったからです。</div>
+
+  <div class="tipbox"><b>用途別の個別指標。</b>合成スコアとは順位が変わります。エージェント指数は Claude Opus 5 が 55.3 で首位（GPT-5.6 Sol 54.0）。コーディング指数は GPT-5.6 Sol が 80 で首位（Codex harness）。Terminal-Bench v2.1 は Grok 4.6 が 88.4%、Opus 5 が Claude Code 内で 86.7%。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">03</span><h2>API従量課金の単価。</h2></div>
+  <p class="lead">100万トークンあたりのUSD。<strong>受講者が直接使う数字ではありません</strong>が、「なぜ階層を分けるとコストが下がるのか」を説明するときの根拠になります。第7回・第9回で使います。</p>
+  <div class="tw">
+  <table>
+    <caption>2026年9月12日確認。太字は期限つきの価格。</caption>
+    <thead><tr><th>提供元</th><th>モデル</th><th class="n">入力</th><th class="n">出力</th><th class="n">文脈長</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>Anthropic</td><td>Claude Fable 5</td><td class="n">$10.00</td><td class="n">$50.00</td><td class="n">100万</td><td>最上位</td></tr>
+      <tr><td>Anthropic</td><td>Claude Opus 5</td><td class="n">$5.00</td><td class="n">$25.00</td><td class="n">100万</td><td>2026/7/24</td></tr>
+      <tr><td>Anthropic</td><td>Claude Sonnet 5</td><td class="n">$2.00</td><td class="n">$10.00</td><td class="n">100万</td><td>据置が確定</td></tr>
+      <tr><td>Anthropic</td><td>Claude Haiku 4.5</td><td class="n">$1.00</td><td class="n">$5.00</td><td class="n">20万</td><td>最廉価</td></tr>
+      <tr><td>OpenAI</td><td>GPT-5.6 Sol</td><td class="n">$5.00</td><td class="n">$30.00</td><td class="n">105万</td><td><b>8/21から3か月間20%超値下げ中</b></td></tr>
+      <tr><td>OpenAI</td><td>GPT-5.6 Terra</td><td class="n">$2.00</td><td class="n">$12.00</td><td class="n">105万</td><td>7/30に20%値下げ</td></tr>
+      <tr><td>OpenAI</td><td>GPT-5.6 Luna</td><td class="n">$0.20</td><td class="n">$1.20</td><td class="n">105万</td><td>7/30に80%値下げ</td></tr>
+      <tr><td>Google</td><td>Gemini 3.1 Pro</td><td class="n">$2.00</td><td class="n">$12.00</td><td class="n">100万</td><td>20万超で $4／$18</td></tr>
+      <tr><td>Google</td><td>Gemini 3.7 Flash</td><td class="n">$0.75</td><td class="n">$3.75</td><td class="n">100万</td><td><b>導入価格・2026/12/31まで</b></td></tr>
+      <tr><td>Google</td><td>Gemini 3.5 Flash-Lite</td><td class="n">$0.30</td><td class="n">$2.50</td><td class="n">100万</td><td>大量処理向け</td></tr>
+      <tr><td>SpaceXAI</td><td>Grok 4.6</td><td class="n">$2.00</td><td class="n">$6.00</td><td class="n">—</td><td>2026/8/12</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul class="plain">
+    <li><b>額面どおりには請求されません。</b>3社ともキャッシュ利用で入力が約90%引き、バッチ処理で入出力とも50%引きになります。</li>
+    <li><b>期限つきの価格が2つあります。</b>Gemini 3.7 Flash の導入価格は2026/12/31まで（翌日から $1.50／$7.50 に倍増）。OpenAI の GPT-5.6 Sol の値下げは8/21から3か月間。</li>
+    <li><b>文脈長が長い＝ずっと安い、ではありません。</b>OpenAI は入力27.2万トークンを超えると単価が上がります（Sol は $10／$45）。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><span class="k">04</span><h2>個人向けの月額プラン。</h2></div>
+  <p class="lead">受講者が自分で契約する場合の現実的な選択肢。<strong>ここは第11回まで持ち出さないでください</strong>——序盤で有料プランを薦めると、講座が営業に見えます。</p>
+  <div class="tw">
+  <table>
+    <caption>1ドル150円換算。2026年8月時点の各社公表値。</caption>
+    <thead><tr><th>提供元</th><th>入門</th><th>標準</th><th>上位</th></tr></thead>
+    <tbody>
+      <tr><td>ChatGPT</td><td>Go 約$8（約1,000円）</td><td>Plus $20（約3,000円）</td><td>Pro $200</td></tr>
+      <tr><td>Claude</td><td>—</td><td>Pro $20（約3,000円）</td><td>Max $100 ／ $200</td></tr>
+      <tr><td>Gemini（Google AI）</td><td>Plus 月725円</td><td>Pro 月2,900円</td><td>Ultra 月14,500円〜</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <ul class="plain">
+    <li><b>標準プランは3社とも月3,000円前後で横並びです。</b>判断材料は「その3,000円に何が付くか」——Google AI Pro は Google One ストレージと Gmail・ドライブ連携、Claude Pro は Claude Code と Cowork、ChatGPT Plus は Deep Research・Sora・Codex。</li>
+    <li><b>Google だけ為替の影響を受けません。</b>ChatGPT と Claude はドル建てなので、円安が進むと請求額が上がります。Google AI は円建ての公式価格です。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sh"><span class="k">05</span><h2>社員10名で使うと、いくらか。</h2></div>
+  <p class="lead">前提：10名 × 1日20回 × 月20営業日＝月4,000リクエスト。1回あたり入力2,000／出力800トークン。月間で入力800万・出力320万トークン。</p>
+
+  <div class="bars cost" role="img" aria-label="社員10名・月4,000リクエストの月額試算（円）。有料サブスク10名分が30,000円、API GPT-5.6 Solが20,400円、API Claude Opus 5が18,000円、API Gemini 3.1 Proが8,160円、API Claude Sonnet 5が7,200円、API Grok 4.6が5,280円、API Claude Haiku 4.5が3,600円、API Gemini 3.7 Flashが2,700円、API GPT-5.6 Lunaが810円。">
+    <div class="row"><span class="nm">サブスク10名分<i>MONTHLY x10</i></span><span class="track"><span class="fill" style="width:100.0%"></span></span><span class="v">30,000</span></div>
+    <div class="row"><span class="nm">API GPT-5.6 Sol<i>$136.0</i></span><span class="track"><span class="fill" style="width:68.0%"></span></span><span class="v">20,400</span></div>
+    <div class="row"><span class="nm">API Claude Opus 5<i>$120.0</i></span><span class="track"><span class="fill" style="width:60.0%"></span></span><span class="v">18,000</span></div>
+    <div class="row"><span class="nm">API Gemini 3.1 Pro<i>$54.4</i></span><span class="track"><span class="fill" style="width:27.2%"></span></span><span class="v">8,160</span></div>
+    <div class="row"><span class="nm">API Claude Sonnet 5<i>$48.0</i></span><span class="track"><span class="fill" style="width:24.0%"></span></span><span class="v">7,200</span></div>
+    <div class="row"><span class="nm">API Grok 4.6<i>$35.2</i></span><span class="track"><span class="fill" style="width:17.6%"></span></span><span class="v">5,280</span></div>
+    <div class="row"><span class="nm">API Claude Haiku 4.5<i>$24.0</i></span><span class="track"><span class="fill" style="width:12.0%"></span></span><span class="v">3,600</span></div>
+    <div class="row"><span class="nm">API Gemini 3.7 Flash<i>$18.0</i></span><span class="track"><span class="fill" style="width:9.0%"></span></span><span class="v">2,700</span></div>
+    <div class="row"><span class="nm">API GPT-5.6 Luna<i>$5.4</i></span><span class="track"><span class="fill" style="width:2.7%"></span></span><span class="v">810</span></div>
+  </div>
+  <p class="lead" style="margin-top:.8rem; font-size:.82rem;">単位：円／月（1ドル150円換算）。サブスクは月3,000円 × 10名。</p>
+
+  <div class="warnbox"><b>この表の使いどころに注意。</b>API には<b>画面もアプリも検索機能も付いてきません</b>。社員がチャット画面で使う用途なら、迷わずサブスクです。API従量課金が効くのは、自社ツールに組み込んで大量処理を回す場面に限られます。<b>この区別を伝えないまま表だけ見せると、「サブスクは高い」という誤った結論に着地します。</b></div>
+
+  <div class="okbox"><b>それでも25倍の差は覚えておく価値があります。</b>社内ツールで全処理を最上位モデルに投げるか、簡単な処理を廉価モデルに振り分けるかで、月額が桁で変わります。第9回で多工程を設計するとき、「この工程は安いモデルでいい」と切り分けられるかどうかが、そのままコストになります。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">06</span><h2>用途別の使い分け。<span style="font-size:.62em; color:var(--ink-3);">　← ここだけは長持ちします</span></h2></div>
+  <p class="lead">モデル名も価格も入れ替わりますが、<strong>「この用途にはこの系統」という対応は、この2年ほとんど動いていません</strong>。受講者に持ち帰らせるならこの表です。</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>やりたいこと</th><th>第一候補</th><th>根拠</th></tr></thead>
+    <tbody>
+      <tr><td>長文の読解・要約・契約書チェック</td><td><b>Claude</b></td><td>知能指数63点で首位。文脈長100万トークン</td></tr>
+      <tr><td>大量の資料・PDFをまとめて分析</td><td><b>Gemini</b></td><td>全モデルが100万トークン。Flash-Lite は $0.30／$2.50 と最安水準</td></tr>
+      <tr><td>何でも一通り・機能の幅</td><td><b>ChatGPT</b></td><td>知能指数61点。画像・音声・エージェントを単一契約で網羅</td></tr>
+      <tr><td>コーディング・業務自動化</td><td><b>Claude ／ ChatGPT</b></td><td>Opus 5 がエージェント指数55.3で首位、GPT-5.6 Sol がコーディング指数80で首位</td></tr>
+      <tr><td>Office／Windows 中心の職場</td><td><b>Copilot</b></td><td>単体性能ではなく既存画面での利用。複数社のモデルを切替可能</td></tr>
+      <tr><td>出典つきで調べる</td><td><b>Perplexity</b></td><td>回答に出典を併記する設計</td></tr>
+      <tr><td>自社資料だけを読ませて答えさせる</td><td><b>NotebookLM</b></td><td>Google AI Pro に同梱。社内ナレッジ検索の入口として最も説明しやすい</td></tr>
+      <tr><td>SNS上のリアルタイム情報</td><td><b>Grok</b></td><td>X との資本・データ連携。$2／$6 と価格面でも優位</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="warnbox"><b>推奨しないもの。</b>DeepSeek・Qwen・GLM などの中国発オープンウェイトは、性能・価格とも優秀です（Kimi K3 は60点）。それでも中小企業に薦める場面は基本ありません。<b>データの扱いを社内・取引先に説明するコストが、節約額に見合わないからです。</b>「性能が低いから」ではない、という言い方をしてください。</div>
+
+  <div class="okbox"><b>法人利用の前提。</b>業務で使うなら、<b>入力データが学習に使われないプラン</b>（Team／Business／Enterprise 相当）を選びます。無料版との決定的な違いで、社内ルール作り（第6回）の出発点になります。この一点だけは、モデルが何回入れ替わっても変わりません。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">07</span><h2>用語。これだけ。</h2></div>
+  <p class="lead">初回に配る用語ミニ辞典（A4 1枚）と同じ内容です。<strong>説明は経営者の言葉に寄せてあります。</strong>講座中に用語を説明する時間を節約するために配ります。</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>用語</th><th>説明</th></tr></thead>
+    <tbody>
+      <tr><td><b>プロンプト</b></td><td>AIへの指示文。長さより、前提と条件が入っているかが効く</td></tr>
+      <tr><td><b>カスタム指示</b></td><td>全部の会話に自動で効く前提設定。会社の自己紹介を毎回書かずに済む</td></tr>
+      <tr><td><b>プロジェクト</b></td><td>会話と資料をまとめておく箱。案件・業務ごとに分けて使う</td></tr>
+      <tr><td><b>専用AI</b></td><td>自社の資料と指示をあらかじめ仕込んだAI。<b>本講座ではプロジェクト機能で作ります</b>（無料プランでも使えます）。社員に配れる形（GPTs）は法人プランからです</td></tr>
+      <tr><td><b>ハルシネーション</b></td><td>AIがもっともらしい嘘を言うこと。<b>無くならない。前提として設計する</b></td></tr>
+      <tr><td><b>コンテキスト（文脈長）</b></td><td>AIが一度に読める情報量。長くなるほど前の話を取りこぼす。上限はトークン数で示される（例：100万トークン）</td></tr>
+      <tr><td><b>モデル</b></td><td>AIの本体。定期的に入れ替わる。<b>入れ替わると出力の傾向も変わる</b></td></tr>
+      <tr><td><b>トークン</b></td><td>AIが文章を数える単位。API利用時の課金の基準。日本語はおおむね1文字1〜2トークン</td></tr>
+      <tr><td><b>知能指数（Intelligence Index）</b></td><td>複数の試験の点数を合成した、モデルの総合成績。<b>物差しのバージョンが変わると同じモデルでも点が動く</b>ので、比較時はバージョンを揃える</td></tr>
+      <tr><td><b>API</b></td><td>自社のシステムからAIを呼び出す仕組み。<b>社長が触る必要はない</b>。画面は付いてこない</td></tr>
+      <tr><td><b>従量課金</b></td><td>使った分だけ払う方式。月額固定のサブスクとは別会計。API はこちら</td></tr>
+      <tr><td><b>キャッシュ／バッチ</b></td><td>同じ前置きを使い回す（キャッシュ・約90%引き）、急がない処理をまとめて出す（バッチ・50%引き）。API のコストを下げる二大手段</td></tr>
+      <tr><td><b>オープンウェイト</b></td><td>モデルの中身が公開されていて、自社サーバーでも動かせる種類。安いが、<b>運用と説明の責任は自社に来る</b></td></tr>
+      <tr><td><b>推論設定</b></td><td>AIにどれだけ考えさせるかの設定。深く考えさせるほど賢くなるが、遅く・高くなる</td></tr>
+      <tr><td><b>RAG／ナレッジ検索</b></td><td>自社資料を検索させてから答えさせるやり方。第8回で扱う</td></tr>
+      <tr><td><b>エージェント</b></td><td>複数の工程を続けて実行させる使い方。第9回で扱う</td></tr>
+      <tr><td><b>MCP</b></td><td>自社のシステムとAIをつなぐための共通の作法。<b>今は名前を知っていれば十分</b></td></tr>
+      <tr><td><b>学習に使われる／使われない</b></td><td>入力内容がAIの改善に使われるかどうか。<b>プランと設定で決まる。必ず確認する</b></td></tr>
+      <tr><td><b>ファインチューニング</b></td><td>AI自体を自社向けに作り替えること。<b>中小企業では原則不要</b>。本講座では扱わない</td></tr>
+      <tr><td><b>評価（eval）</b></td><td>AIの答えを採点して品質を測ること。第10回で扱う</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="lead" style="margin-top:1rem;">全20語。うち<b>知能指数・従量課金・キャッシュ／バッチ・オープンウェイト・推論設定の5語</b>は、このページの数字を説明するために足したものです。受講者に配るA4 1枚は、その5語を除いた15語です。</p>
+</section>
+
+<section>
+  <div class="sh"><span class="k">08</span><h2>どれくらいの速さで古くなるか。</h2></div>
+  <p class="lead">2026年6月30日から8月21日までの<strong>8週間で7件</strong>。この年表そのものが「ネットの比較記事を信じるな」の証拠になります。</p>
+  <div class="tw">
+  <table>
+    <caption>2026年8月下旬までに確認できた動き。9月以降の発表は未反映の可能性があります。</caption>
+    <thead><tr><th class="c">日付</th><th>できごと</th><th>影響</th></tr></thead>
+    <tbody>
+      <tr><td class="c">6/30</td><td>Claude Sonnet 5 リリース</td><td>$2／$10 で Opus 4.8 級</td></tr>
+      <tr><td class="c">7/9</td><td>GPT-5.6（Sol／Terra／Luna）一般提供</td><td>3階層への再編</td></tr>
+      <tr><td class="c">7/24</td><td>Claude Opus 5 リリース</td><td>知能指数で首位交代</td></tr>
+      <tr><td class="c">7/30</td><td>OpenAI が Luna を80%値下げ</td><td>階層間の価格差が5倍→25倍に</td></tr>
+      <tr><td class="c">8/12</td><td>Grok 4.6 リリース</td><td>知能指数が56→61に</td></tr>
+      <tr><td class="c">8/13</td><td>Gemini 3.7 Flash リリース</td><td>3.6 Flash の23日後</td></tr>
+      <tr><td class="c">8/21</td><td>OpenAI が GPT-5.6 Sol を20%超値下げ</td><td>3か月間の期間限定</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="tipbox"><b>講座での使い方。</b>資料を配るだけで終わらせず、<b>受講者の前で各社の公式価格ページを開いて数字を確かめる</b>ところまでやってください。「ネットの比較記事は3か月で腐る／一次情報に当たる」という習慣は、技術知識よりずっと長く役に立ちます。第1回のデモ枠、または第11回の投資判断の回に差し込むのが自然です。</div>
+</section>
+
+<section>
+  <div class="sh"><span class="k">09</span><h2>この数字を作り直すとき。</h2></div>
+  <p class="lead">3か月ごとに更新します。手順は5つです。</p>
+  <ul class="plain">
+    <li><b>1.</b> 各社公式の価格ページで単価を確認（Anthropic: Claude Platform Docs 価格／OpenAI: 価格改定告知／Google: Gemini API pricing・Cloud Agent Platform pricing）</li>
+    <li><b>2.</b> Artificial Analysis で Intelligence Index の<b>バージョン番号を確認してから</b>スコアを取得（バージョンが変わると同一モデルのスコアが動く）</li>
+    <li><b>3.</b> 08の年表に新イベントを追記し、02の棒の幅（<code>style="width:NN%"</code>）を更新</li>
+    <li><b>4.</b> 05のコスト試算は単価を差し替えれば整合（計算式は棒のラベルに明記してある）</li>
+    <li><b>5.</b> ヘッダの「確認日」と「次の更新」を書き換える</li>
+  </ul>
+  <div class="warnbox"><b>更新しないまま3か月を超えたら、受講者に見せないでください。</b>古い数字を配ることは、この講座が一番やってはいけないことです。</div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <p><b>主な出典（2026年9月12日確認）</b>／ Artificial Analysis — Intelligence Index v4.1.1 ／ OpenAI 公式 — GPT-5.6 発表および価格改定告知（7/9・7/30・8/21）／ Anthropic 公式 — Claude Platform Docs 価格ページ ／ Google 公式 — Gemini API 価格ページ、Google Cloud Agent Platform 価格ページ ／ 個人向けプラン価格は各社公式および国内メディア（2026年8月時点の公表値、1ドル150円換算）。</p>
+  <p style="margin-top:.8rem;">講師用の内部資料です。数値は確認日時点のもので、以後の変更は反映されていません。受講者に配布する前に必ず一次情報で差分を確認してください。</p>
+</footer>
+</body>
+</html>
