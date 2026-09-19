@@ -126,18 +126,20 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
 <article class="card qa">
   <div class="qhead"><span class="qmark">Q1</span><span>ChatGPTは、GmailやGoogleカレンダーとつながりますか？</span></div>
   <div class="abody">
-    <p class="ans"><span class="amark">A</span><span>つながります。ただし、<u>勝手には動きません</u>。</span></p>
-    <p>ChatGPTにGmail・Googleカレンダーを接続すると、「今週の予定を整理して」「〇〇さんからのメールを要約して」と<strong>頼んだときに、代わりに読みに行ってくれます。</strong>一方で「メールが届いたら自動で予定を入れる」のように、こちらが何も言わずに動くことはできません。</p>
+    <p class="ans"><span class="amark">A</span><span>つながります。しかも2026年8月から、<u>こちらが話しかけなくても自動で動かせる</u>ようになりました。</span></p>
+    <p>ChatGPTにGmail・Googleカレンダーをつなぐと、「今週の予定を整理して」と<strong>頼んだときに代わりに読みに行ってくれます。</strong>さらに「<strong>スケジュール</strong>」という機能で、<strong>決まった時間に</strong>、あるいは<strong>メールが届いたことをきっかけに</strong>、自動で動かせるようになりました。</p>
     <div class="tbl"><table>
-      <thead><tr><th>やりたいこと</th><th>ChatGPTの連携</th><th>補足</th></tr></thead>
+      <thead><tr><th>やりたいこと</th><th>できるか</th><th>条件</th></tr></thead>
       <tbody>
         <tr><td>メールや予定を読んで、まとめてもらう</td><td class="ok">できる</td><td>話しかけたときに動きます</td></tr>
-        <tr><td>カレンダーに予定を入れてもらう</td><td class="ok">対応が進んでいる</td><td>変更・削除は未確認。今日、画面で確かめます</td></tr>
-        <tr><td>メールが来たら、自動で何かさせる</td><td class="no">できない</td><td><strong>第7回</strong>でGoogleの機能を使って作ります</td></tr>
+        <tr><td><strong>毎朝決まった時間に</strong>、今日の予定と届いたメールをまとめて届けてもらう</td><td class="ok">できる</td><td>全プラン。無料プランは1日1回まで、有料プランは1時間ごとまで。結果はスマホの通知かメールで届きます</td></tr>
+        <tr><td><strong>特定の人からメールが届いたら</strong>、要約して知らせてもらう</td><td class="ok">できる</td><td>有料プラン（Plus以上）。Gmail と Slack の新着をきっかけにできます</td></tr>
+        <tr><td>返信メールを送る／カレンダーに予定を入れる</td><td class="ok">できる（確認つき）</td><td>送る・入れる前に、<strong>必ずご本人の承認が入ります</strong></td></tr>
+        <tr><td>カレンダーに予定が入ったら、何かさせる</td><td class="no">できない</td><td>カレンダーは「きっかけ」には使えません。必要なら<strong>第7回</strong>で補います</td></tr>
       </tbody>
     </table></div>
-    <p>使えるかどうかは、ChatGPTのご契約プランと、会社のGoogleアカウントの設定で変わります。<strong>今日、実際の画面でつないで確認しましょう。</strong></p>
-    <p class="where">扱う回：<b>第2回（今日）</b>で一度つないでみる／<b>第7回</b>で「自動で動く」ほうを作る</p>
+    <p>どこまで使えるかは、<strong>ChatGPTのご契約プラン</strong>と、<strong>会社のGoogleアカウントの設定</strong>（管理者がChatGPTとの接続を許可しているか）で変わります。<strong>今日、実際の画面で確認して、毎朝のまとめを1つ作ってみましょう。</strong></p>
+    <p class="where">扱う回：<b>第2回（今日）</b>で「毎朝のまとめ」を1つ予約する／<b>第7回</b>で、ChatGPTだけでは足りない部分をGoogleの機能で補う</p>
   </div>
 </article>
 
@@ -212,7 +214,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
   <div class="qhead"><span class="qmark">Q6</span><span>ChatGPT、Claude、Codexなど、どれを使えばよいですか？</span></div>
   <div class="abody">
     <p class="ans"><span class="amark">A</span><span>ChatGPT一本で進めます。第1回でおっしゃった「今はどれでも大丈夫」が正解です。</span></p>
-    <p>御社はGoogleのサービス（カレンダー・ドライブ）をお使いなので、つなぐ先もGoogleで揃います。道具を増やすほど管理と費用が増え、続かなくなります。<strong>増やすのは、第7回で「これが無いとできない」と分かったときの1つだけ</strong>にします。</p>
+    <p>御社はGoogleのサービス（カレンダー・ドライブ）をお使いなので、つなぐ先もGoogleで揃います。道具を増やすほど管理と費用が増え、続かなくなります。「スケジュール」もChatGPTの中の機能なので、道具は増えません。<strong>増やすのは、第7回で「これが無いとできない」と分かったときの1つだけ</strong>にします。</p>
     <p class="where">扱う回：全12回を通して</p>
   </div>
 </article>
@@ -247,6 +249,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
     <ul>
       <li>頼み方に前提と条件を入れる（第2回）</li>
       <li>うまくいった頼み方を保存して使い回す（第2回）</li>
+      <li>決まった時間に、AIに自動で動いてもらう（第2回・第7回）</li>
       <li>資料や数字を読ませて考えさせる（第4回）</li>
       <li>AIの答えを確かめる習慣（第4回・第10回）</li>
       <li>社員の方に渡せる形にする（第3回・第5回）</li>
@@ -270,7 +273,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
   <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
   <tbody>
     <tr><td>1</td><td>現状把握と地図づくり</td><td>AI化の候補</td><td class="adj">済。候補は2つまで挙がっています。3つ目を今日確定させます</td></tr>
-    <tr class="today"><td>2<span class="tdb">今日</span></td><td>今のChatGPTの使い方を作り直す</td><td>業務の棚卸し表／頼み方の型／保存した頼み方</td><td class="adj">冒頭で棚卸しを一緒に仕上げます。頼み方の型と「毎回効く前提設定」に絞り、じっくり手を動かします</td></tr>
+    <tr class="today"><td>2<span class="tdb">今日</span></td><td>今のChatGPTの使い方を作り直す</td><td>業務の棚卸し表／頼み方の型／保存した頼み方</td><td class="adj">冒頭で棚卸しを一緒に仕上げます。頼み方の型と「毎回効く前提設定」に絞り、最後に<strong>毎朝のまとめを1つ予約</strong>します</td></tr>
     <tr><td>3</td><td>文書とコミュニケーションのAI化</td><td>社内文書のひな形</td><td class="adj">ひな形は2種にし、1種は講師と一緒に作ります。<strong>社員の方に渡す1本は必ず作ります</strong>（提案書の型をここに）</td></tr>
     <tr><td>4</td><td>数字と判断のAI化</td><td>月次レポートのひな形</td><td class="adj">計算は表計算に任せ、AIには「なぜこうなったか」を聞くところまで。会長向けの型もここで</td></tr>
     <tr><td>5</td><td>自社専用のAIをつくる</td><td>自社専用AI／AI利用ルール</td><td class="adj">作る操作は講師が画面で先導します。何を載せるかと、指示の中身を決めることに集中していただきます</td></tr>
@@ -284,7 +287,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
 <table class="plan">
   <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
   <tbody>
-    <tr><td>7</td><td>手作業のつなぎ目をなくす</td><td>自動化の設計メモ</td><td class="adj">Googleの機能で「自動で動く」ものを講師が組んで見せます。ご自身は「どの作業を渡すか」を決め、<strong>外部に頼める設計図</strong>を持ち帰ります</td></tr>
+    <tr><td>7</td><td>手作業のつなぎ目をなくす</td><td>自動化の設計メモ</td><td class="adj">まず<strong>ChatGPTの「スケジュール」とメール起点の自動実行</strong>で組みます。それで足りない部分（カレンダー起点・表への書き込みなど）だけ、講師がGoogleの機能で組んで見せます。<strong>外部に頼める設計図</strong>も持ち帰ります</td></tr>
     <tr><td>8</td><td>社内の知識を検索できるようにする</td><td>社内検索AI／足りない資料の一覧</td><td class="adj">題材は<strong>会長への情報共有</strong>（Q2）を第一候補にします</td></tr>
     <tr><td>9</td><td>複数の工程をまとめて任せる</td><td>仕事の任せ方の設計書</td><td class="adj">工程を図に書くところまで。実際に流すのは講師が見せます（提案書の点検を題材に）</td></tr>
     <tr><td>10</td><td>品質を測る・壊れたら気づく</td><td>確認用の質問10問／毎月の点検手順</td><td class="adj">10問のうち5問は講師が下書きし、残り5問を一緒に埋めます</td></tr>
@@ -302,8 +305,8 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
     <li><strong>ChatGPTのご契約プランを画面で確認する。</strong>Q1の連携がどこまで使えるかも、ここで分かります</li>
     <li><strong>頼み方の型を覚える。</strong>議事録を題材に、いつもの頼み方 → 型を入れた頼み方を比べます</li>
     <li><strong>ご自身の手で1本作って、保存する。</strong>次からはコピーして直すだけになります</li>
-    <li><strong>Gmail・カレンダーを1回つないでみる。</strong>「頼んだら読みに行く」を体験します</li>
-    <li><strong>宿題を1つ決める。</strong>今日作った頼み方を、今週1回使ってみるだけです</li>
+    <li><strong>毎朝のまとめを1つ予約する。</strong>Gmail・カレンダーをつなぎ、「毎朝、今日の予定と届いたメールをまとめて届ける」を設定します。<strong>明日の朝から、何もしなくても届きます</strong></li>
+    <li><strong>宿題を1つ決める。</strong>今日作った頼み方を、今週1回使ってみるだけです。毎朝のまとめは勝手に届くので、読んで「足りない・多すぎる」を次回教えてください</li>
   </ol>
 </div>
 
