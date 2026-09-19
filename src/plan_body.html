@@ -107,33 +107,18 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
 .foot{margin-top:3.2rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-3)}
 @media print{.toc{display:none}.card,.promise .p,.step{box-shadow:none;break-inside:avoid}.pl{padding-block:0}}
 
-/* 日程と準備 */
-.pl input[type=text],.pl textarea{width:100%;font:inherit;font-size:.9rem;padding:.35rem .55rem;border:1px solid var(--rule-2);border-radius:6px;background:var(--card);color:var(--ink)}
-.pl textarea{min-height:3.6rem;resize:vertical}
-.pl input[type=text]:focus,.pl textarea:focus{outline:2px solid var(--pine);outline-offset:-1px}
-.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:.8rem}
-.fields label{display:block;font-size:.78rem;color:var(--ink-2);margin-bottom:.2rem}
-.sched td:first-child{white-space:nowrap;font-weight:700;color:var(--pine)}
-.sched tr.stage td{background:var(--brass-soft)}
-.editbar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.2rem 0 1rem;font-size:.82rem;color:var(--ink-3)}
-.editbar button{font:inherit;font-size:.82rem;padding:.35rem .9rem;border-radius:7px;border:1px solid var(--pine-line);background:var(--card);color:var(--pine);cursor:pointer}
-.editbar button:hover{background:var(--pine-soft)}
-.saved{position:fixed;right:16px;bottom:16px;background:var(--pine);color:#fff;padding:.4rem .9rem;border-radius:999px;font-size:.78rem;opacity:0;transition:opacity .25s;pointer-events:none;z-index:60}
-.saved.on{opacity:1}
-@media print{.editbar,.saved{display:none}.pl input[type=text],.pl textarea{border:none;padding:0;background:none}}
 </style>
 
 <main class="pl">
 <p class="eyebrow">AI実装講座 1対1版 ／ 2026年9月時点</p>
 <h1>第1回のご質問への回答と、<br>これからの進め方</h1>
-<p class="lead">第1回でいただいたご質問に、ひとつずつお答えします。あわせて、第1回で拝見した今の使い方をもとに、この先12回をどう進めるか、日程と毎回のご準備をまとめました。</p>
+<p class="lead">第1回でいただいたご質問に、ひとつずつお答えします。あわせて、第1回で拝見した今の使い方をもとに、この先12回をどう進めるかをまとめました。</p>
 
 <nav class="toc">
   <a href="#answers">1｜ご質問への回答</a>
   <a href="#now">2｜いまの現在地</a>
   <a href="#plan">3｜12回の進め方</a>
   <a href="#today">4｜今日やること</a>
-  <a href="#schedule">5｜日程とご準備</a>
 </nav>
 
 <!-- ============ 1 ============ -->
@@ -248,7 +233,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
     <div class="step"><div class="k">D</div><div><div class="t">仕組みにする</div><div class="d">会社専用のAIを作り、仕事の流れに組み込む</div></div></div>
     <div class="step goal"><div class="k">E</div><div><div class="t">会社全体で使う<span class="tag goal">12回後の目標</span></div><div class="d">社員が使い、ルールと担当者があり、社長がいなくても回る</div></div></div>
   </div>
-  <p class="fine">「いまここ」は第1回のお話から見た目安です。今日の演習で実際に操作していただき、第3回の終わりに確定させます。</p>
+  <p class="fine">「いまここ」は第1回のお話から見た目安です。第3回の終わりに、あらためて確認します。</p>
 </div>
 
 <div class="two">
@@ -279,9 +264,9 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
 <p class="h2sub">全12回の順番は変えません。変えるのは、各回の中でどこまで深く入るかです。</p>
 
 <div class="promise">
-  <div class="p"><div class="n">1</div><h4>毎回、その場で完成させる</h4><p>作るものは講座の時間内に仕上げます。宿題で作っていただく前提にはしません。</p></div>
+  <div class="p"><div class="n">1</div><h4>毎回、その場で完成させる</h4><p>作るものは講座の時間内に、講師が画面でお見せしながら一緒に仕上げます。宿題で作っていただく前提にはしません。</p></div>
   <div class="p"><div class="n">2</div><h4>宿題は1つ、使うだけ</h4><p>宿題は「作ったものを1回使ってみる」だけにします。調べもの・検討の宿題は出しません。</p></div>
-  <div class="p"><div class="n">3</div><h4>道具はChatGPTとGoogleだけ</h4><p>新しいサービスは増やしません。ご自身の手で操作していただき、講師は横で支えます。</p></div>
+  <div class="p"><div class="n">3</div><h4>道具はChatGPTとGoogleだけ</h4><p>新しいサービスは増やしません。操作は講師が手順を追ってお見せします。同じ画面を見ながら、そのまま真似していただけます。</p></div>
 </div>
 
 <p class="phase">基礎編（第1回〜第6回）<small>自分の使い方を作り直し、社内にお披露目する</small></p>
@@ -320,80 +305,12 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
   <ol>
     <li><strong>お仕事の棚卸しを仕上げる。</strong>「これが無くなったら楽になる」を3つ挙げ、月にどれくらい時間を取られているかを一緒に書きます</li>
     <li><strong>ChatGPTのご契約プランを画面で確認する。</strong>Q1の連携がどこまで使えるかも、ここで分かります</li>
-    <li><strong>頼み方の型を覚える。</strong>議事録を題材に、いつもの頼み方 → 型を入れた頼み方を比べます</li>
-    <li><strong>ご自身の手で1本作って、保存する。</strong>次からはコピーして直すだけになります</li>
+    <li><strong>頼み方の型をお見せする。</strong>議事録を題材に、いつもの頼み方と型を入れた頼み方を、画面で並べて比べます</li>
+    <li><strong>できた頼み方を1本、保存しておく。</strong>次からはコピーして直すだけになります</li>
     <li><strong>毎朝のまとめを1つ予約する。</strong>Gmail・カレンダーをつなぎ、「毎朝、今日の予定と届いたメールをまとめて届ける」を設定します。<strong>明日の朝から、何もしなくても届きます</strong></li>
     <li><strong>宿題を1つ決める。</strong>今日作った頼み方を、今週1回使ってみるだけです。毎朝のまとめは勝手に届くので、読んで「足りない・多すぎる」を次回教えてください</li>
   </ol>
 </div>
 
-<!-- ============ 5 ============ -->
-<h2 id="schedule"><span class="no">05</span>日程と、毎回のご準備</h2>
-<p class="h2sub">日程とお約束は、初回にあらためてご確認いただいた内容を書き込んでいます。</p>
-<div class="editbar">
-  <button type="button" onclick="window.print()">印刷 / PDF にする</button>
-  <span>入力欄の内容は、このブラウザの中だけに保存されます（サーバーには送られません）。</span>
-</div>
-
-<div class="card tbl" style="padding:.4rem .6rem">
-<table class="sched">
-  <thead><tr><th>回</th><th>テーマ</th><th style="width:9.5rem">日付</th><th style="width:7rem">時刻</th><th>備考</th></tr></thead>
-  <tbody id="schedRows"></tbody>
-</table>
-</div>
-<p class="fine">第6回と第12回は、社員の方に同席いただく回です。ご参加の皆さまの予定を、先に押さえてください。</p>
-
-<div class="card" style="margin-top:1.2rem">
-  <h3 style="margin:0 0 .8rem;font-size:1rem">連絡とお約束</h3>
-  <div class="fields">
-    <div><label>ご質問の窓口</label><input type="text" data-k="c.ch" placeholder="例：LINE"></div>
-    <div><label>返信の目安</label><input type="text" data-k="c.sla" placeholder="例：平日24時間以内（土日祝は翌営業日）"></div>
-    <div><label>録画の受け渡し</label><input type="text" data-k="c.rec"></div>
-    <div><label>録画の保存期間</label><input type="text" data-k="c.recterm" placeholder="例：修了後6か月で削除"></div>
-    <div><label>録画の社内共有の範囲</label><input type="text" data-k="c.recshare"></div>
-    <div><label>成果物の置き場所</label><input type="text" data-k="c.place" placeholder="例：共有フォルダ名"></div>
-  </div>
-  <div style="margin-top:.8rem"><label style="display:block;font-size:.78rem;color:var(--ink-2);margin-bottom:.2rem">演習に使うデータについて（伏せ方のお約束）</label>
-    <textarea data-k="c.data" placeholder="社名はA社、個人名はイニシャル、金額は桁だけ など"></textarea></div>
-  <div style="margin-top:.6rem"><label style="display:block;font-size:.78rem;color:var(--ink-2);margin-bottom:.2rem">この12回で達成したいこと（ご本人のお言葉で一文）</label>
-    <textarea data-k="c.goal"></textarea></div>
-</div>
-
-<div class="card tbl" style="padding:.4rem .6rem;margin-top:1.2rem">
-<table class="sched">
-  <thead><tr><th>回</th><th>お持ちいただくもの・ご準備</th></tr></thead>
-  <tbody>
-    <tr><td>2</td><td>週に3回以上やっている文書業務を1つ／会社概要の文章</td></tr>
-    <tr><td>3</td><td>社内で量の多い文書3種の実物／最初に渡す相手（社員の方1名）</td></tr>
-    <tr><td>4</td><td>直近12か月の月次の数字（Excel等）／前月の会議資料</td></tr>
-    <tr><td>5</td><td>専用AIに載せる自社資料3〜5本（規則・価格表・よくある質問など）</td></tr>
-    <tr class="stage"><td>6</td><td><strong>社員の方3名以上のご出席</strong>／発表資料5枚以内（1週間前に打ち合わせます）</td></tr>
-    <tr><td>7</td><td>Googleの管理者権限が誰にあるか、ChatGPTとの接続が許可されているかをご確認ください</td></tr>
-    <tr><td>8</td><td>対象にする資料一式／過去に社内で出た質問10件</td></tr>
-    <tr><td>9</td><td>3つ以上の工程がある業務を1つ選んでおく</td></tr>
-    <tr><td>10</td><td>社内で実際に出た質問・依頼10件</td></tr>
-    <tr><td>11</td><td>ご契約中のサービスの月額一覧／アカウント名義の情報</td></tr>
-    <tr class="stage"><td>12</td><td>今期の事業計画／<strong>社員の方のご出席</strong>（1週間前に打ち合わせます）</td></tr>
-  </tbody>
-</table>
-</div>
-<p class="fine">機密に触れるものは、社名・個人名を伏せていただいて構いません。伏せ方もこちらでお伝えします。宿題は毎回1つだけです。多くて終わらないときは、遠慮なくおっしゃってください。</p>
-
 <p class="foot">本資料の機能名・プラン名は2026年9月時点のものです。AIのサービスは短い期間で変わるため、講座の中でその都度、実際の画面で確認しながら進めます。</p>
 </main>
-<div class="saved" id="saved">保存しました</div>
-<script>
-(function(){
-  var T=["現状把握と地図づくり","今のChatGPTの使い方を作り直す","文書とコミュニケーションのAI化","数字と判断のAI化","自社専用のAIをつくる","社内へのお披露目と12か月計画","手作業のつなぎ目をなくす","社内の知識を検索できるようにする","複数の工程をまとめて任せる","品質を測る・壊れたら気づく","組織に載せる","AIを前提に事業を組み直す"];
-  var tb=document.getElementById('schedRows');
-  T.forEach(function(t,i){var n=i+1,sh=(n===6||n===12);var tr=document.createElement('tr');if(sh)tr.className='stage';
-    tr.innerHTML='<td>'+n+'</td><td>'+t+(sh?' <b>【社員同席】</b>':'')+'</td><td><input type="text" data-k="d'+n+'"></td><td><input type="text" data-k="t'+n+'"></td><td><input type="text" data-k="n'+n+'"></td>';
-    tb.appendChild(tr);});
-  var KEY='case-page-v1',st={};
-  try{st=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){st={};}
-  var tm=null;
-  document.querySelectorAll('.pl [data-k]').forEach(function(el){var k=el.dataset.k;if(k in st)el.value=st[k];
-    el.addEventListener('input',function(){st[k]=el.value;try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){return;}
-      var b=document.getElementById('saved');b.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){b.classList.remove('on');},1100);});});
-})();
-</script>
