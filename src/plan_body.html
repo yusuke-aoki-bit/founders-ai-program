@@ -1,0 +1,311 @@
+<title>第1回のご質問への回答と、これからの進め方</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#F4F6F2; --card:#FFFFFF; --card-2:#EDF0E9;
+  --ink:#191C18; --ink-2:#565C52; --ink-3:#84897E;
+  --rule:#DBDFD3; --rule-2:#C3C9B9;
+  --pine:#2F5D4F; --pine-soft:#E4EDE8; --pine-line:#9CBFB2;
+  --brass:#A96B1F; --brass-soft:#F6EBDA;
+  --shadow:0 1px 2px rgba(25,28,24,.05), 0 10px 28px -16px rgba(25,28,24,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131611; --card:#1B1F19; --card-2:#232821;
+    --ink:#E9EBE3; --ink-2:#B0B5A9; --ink-3:#82877C;
+    --rule:#2B3129; --rule-2:#3B4238;
+    --pine:#84BBA6; --pine-soft:#1B2B25; --pine-line:#3C5C4F;
+    --brass:#D9A05B; --brass-soft:#2E2416;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131611; --card:#1B1F19; --card-2:#232821;
+  --ink:#E9EBE3; --ink-2:#B0B5A9; --ink-3:#82877C;
+  --rule:#2B3129; --rule-2:#3B4238;
+  --pine:#84BBA6; --pine-soft:#1B2B25; --pine-line:#3C5C4F;
+  --brass:#D9A05B; --brass-soft:#2E2416;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{background:var(--bg)!important;color:var(--ink)!important}
+.pl{font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  font-size:15.5px;line-height:1.85;max-width:62rem;margin:0 auto;
+  padding-block:2.6rem 5rem;padding-left:clamp(1.1rem,4vw,2.6rem);padding-right:clamp(1.1rem,4vw,2.6rem)}
+.pl h1,.pl h2,.pl .qhead{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;font-weight:700;color:var(--brass);margin:0 0 .6rem}
+.pl h1{font-size:clamp(1.65rem,4.2vw,2.35rem);line-height:1.35;margin:0 0 .9rem;font-weight:900;letter-spacing:.01em}
+.lead{color:var(--ink-2);margin:0 0 1.6rem;max-width:44rem}
+.toc{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 2.6rem}
+.toc a{font-size:.85rem;text-decoration:none;color:var(--pine);border:1px solid var(--pine-line);
+  padding:.35rem .85rem;border-radius:999px;background:var(--card)}
+.toc a:hover{background:var(--pine-soft)}
+.pl h2{font-size:clamp(1.3rem,3vw,1.6rem);margin:3.4rem 0 .5rem;font-weight:700;display:flex;gap:.7rem;align-items:baseline}
+.pl h2 .no{font-family:"BIZ UDPGothic",sans-serif;font-size:.8rem;color:var(--brass);letter-spacing:.12em;font-weight:700}
+.h2sub{color:var(--ink-2);margin:0 0 1.4rem}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;box-shadow:var(--shadow);padding:1.4rem 1.5rem;margin:0 0 1.1rem}
+.qa{padding:0;overflow:hidden}
+.qhead{display:flex;gap:.9rem;align-items:flex-start;padding:1.15rem 1.5rem;background:var(--card-2);border-bottom:1px solid var(--rule);font-size:1.08rem;font-weight:700;line-height:1.6}
+.qmark{flex:none;font-family:"BIZ UDPGothic",sans-serif;font-size:.78rem;font-weight:700;color:#fff;background:var(--brass);border-radius:6px;padding:.1rem .5rem;margin-top:.25rem}
+.abody{padding:1.15rem 1.5rem 1.3rem}
+.ans{font-weight:700;font-size:1.05rem;color:var(--pine);margin:0 0 .6rem;display:flex;gap:.9rem;align-items:flex-start}
+.amark{flex:none;font-size:.78rem;font-weight:700;color:#fff;background:var(--pine);border-radius:6px;padding:.1rem .5rem;margin-top:.2rem}
+.abody p{margin:.5rem 0}
+.where{margin-top:.9rem;font-size:.86rem;color:var(--ink-2);border-top:1px dashed var(--rule-2);padding-top:.7rem}
+.where b{color:var(--pine)}
+.tbl{overflow-x:auto;margin:.8rem 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:.6rem .7rem;text-align:left;vertical-align:top}
+th{font-weight:700;color:var(--ink-2);font-size:.82rem;background:var(--card-2);white-space:nowrap}
+td.ok{color:var(--pine);font-weight:700;white-space:nowrap}
+td.no{color:var(--brass);font-weight:700;white-space:nowrap}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.two .col{background:var(--card-2);border-radius:10px;padding:1rem 1.2rem}
+.two h4{margin:0 0 .4rem;font-size:.95rem}
+.two ul{margin:.2rem 0;padding-left:1.2em}
+.two li{margin:.25rem 0}
+
+/* 現在地 */
+.ladder{display:grid;gap:.5rem;margin:1rem 0 .4rem}
+.step{display:grid;grid-template-columns:2.4rem 1fr;gap:.9rem;align-items:center;
+  border:1px solid var(--rule);border-radius:10px;padding:.75rem 1rem;background:var(--card)}
+.step .k{font-family:"Zen Old Mincho",serif;font-weight:900;font-size:1.3rem;text-align:center;color:var(--ink-3)}
+.step .t{font-weight:700}
+.step .d{font-size:.87rem;color:var(--ink-2)}
+.step.now{border-color:var(--pine);background:var(--pine-soft)}
+.step.now .k{color:var(--pine)}
+.step.goal{border-color:var(--brass);background:var(--brass-soft)}
+.step.goal .k{color:var(--brass)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;border-radius:999px;padding:.05rem .6rem;margin-left:.5rem;vertical-align:.1em}
+.tag.now{background:var(--pine);color:#fff}
+.tag.goal{background:var(--brass);color:#fff}
+.fine{font-size:.84rem;color:var(--ink-3);margin:.6rem 0 0}
+
+/* 約束 */
+.promise{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.promise .p{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--pine);border-radius:10px;padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+.promise .n{font-family:"Zen Old Mincho",serif;font-size:1.6rem;font-weight:900;color:var(--pine);line-height:1}
+.promise h4{margin:.5rem 0 .35rem;font-size:1rem}
+.promise p{margin:0;font-size:.9rem;color:var(--ink-2)}
+
+/* 12回 */
+.phase{font-family:"Zen Old Mincho",serif;font-weight:700;font-size:1.08rem;margin:1.8rem 0 .5rem;color:var(--pine)}
+.phase small{font-family:"BIZ UDPGothic",sans-serif;font-weight:400;color:var(--ink-3);font-size:.82rem;margin-left:.6rem}
+.plan td:first-child{white-space:nowrap;font-weight:700;color:var(--pine)}
+.plan td.adj{color:var(--ink)}
+.plan tr.stage td{background:var(--brass-soft)}
+.plan .badge{display:inline-block;font-size:.7rem;font-weight:700;background:var(--brass);color:#fff;border-radius:4px;padding:0 .4rem;margin-left:.3rem}
+.plan tr.today td{background:var(--pine-soft)}
+.plan .tdb{display:inline-block;font-size:.7rem;font-weight:700;background:var(--pine);color:#fff;border-radius:4px;padding:0 .4rem;margin-left:.3rem}
+
+.today-box{border:2px solid var(--pine);border-radius:12px;background:var(--card);padding:1.3rem 1.5rem}
+.today-box ol{margin:.4rem 0 0;padding-left:1.3em}
+.today-box li{margin:.45rem 0}
+.foot{margin-top:3.2rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-3)}
+@media print{.toc{display:none}.card,.promise .p,.step{box-shadow:none;break-inside:avoid}.pl{padding-block:0}}
+</style>
+
+<main class="pl">
+<p class="eyebrow">AI実装講座 1対1版 ／ 2026年9月時点</p>
+<h1>第1回のご質問への回答と、<br>これからの進め方</h1>
+<p class="lead">第1回でいただいたご質問に、ひとつずつお答えします。あわせて、第1回で拝見した今の使い方をもとに、この先12回をどう進めるかをまとめました。</p>
+
+<nav class="toc">
+  <a href="#answers">1｜ご質問への回答</a>
+  <a href="#now">2｜いまの現在地</a>
+  <a href="#plan">3｜12回の進め方</a>
+  <a href="#today">4｜今日やること</a>
+</nav>
+
+<!-- ============ 1 ============ -->
+<h2 id="answers"><span class="no">01</span>第1回のご質問への回答</h2>
+<p class="h2sub">6つのご質問をいただきました。講座のどの回で扱うかも添えています。</p>
+
+<article class="card qa">
+  <div class="qhead"><span class="qmark">Q1</span><span>ChatGPTは、GmailやGoogleカレンダーとつながりますか？</span></div>
+  <div class="abody">
+    <p class="ans"><span class="amark">A</span><span>つながります。ただし、<u>勝手には動きません</u>。</span></p>
+    <p>ChatGPTにGmail・Googleカレンダーを接続すると、「今週の予定を整理して」「〇〇さんからのメールを要約して」と<strong>頼んだときに、代わりに読みに行ってくれます。</strong>一方で「メールが届いたら自動で予定を入れる」のように、こちらが何も言わずに動くことはできません。</p>
+    <div class="tbl"><table>
+      <thead><tr><th>やりたいこと</th><th>ChatGPTの連携</th><th>補足</th></tr></thead>
+      <tbody>
+        <tr><td>メールや予定を読んで、まとめてもらう</td><td class="ok">できる</td><td>話しかけたときに動きます</td></tr>
+        <tr><td>カレンダーに予定を入れてもらう</td><td class="ok">対応が進んでいる</td><td>変更・削除は未確認。今日、画面で確かめます</td></tr>
+        <tr><td>メールが来たら、自動で何かさせる</td><td class="no">できない</td><td><strong>第7回</strong>でGoogleの機能を使って作ります</td></tr>
+      </tbody>
+    </table></div>
+    <p>使えるかどうかは、ChatGPTのご契約プランと、会社のGoogleアカウントの設定で変わります。<strong>今日、実際の画面でつないで確認しましょう。</strong></p>
+    <p class="where">扱う回：<b>第2回（今日）</b>で一度つないでみる／<b>第7回</b>で「自動で動く」ほうを作る</p>
+  </div>
+</article>
+
+<article class="card qa">
+  <div class="qhead"><span class="qmark">Q2</span><span>会長への報告や連絡は、どうするのがよいですか？</span></div>
+  <div class="abody">
+    <p class="ans"><span class="amark">A</span><span>「Webで定期的に更新して、自由に見ていただく」案で進めます。順番だけ整えます。</span></p>
+    <p>いきなり置き場所を作っても、見ていただけるものにはなりません。次の順で進めます。</p>
+    <div class="tbl"><table>
+      <thead><tr><th>順番</th><th>やること</th><th>扱う回</th></tr></thead>
+      <tbody>
+        <tr><td>①</td><td><strong>会長が見たいものを1つ決める</strong>（数字か、進み具合か、人の話か）</td><td>第2回〜第3回</td></tr>
+        <tr><td>②</td><td>それを毎回同じ形でまとめる「型」をAIで作る</td><td>第3回・第4回</td></tr>
+        <tr><td>③</td><td>型が固まったら、置き場所を作る</td><td>第8回</td></tr>
+      </tbody>
+    </table></div>
+    <p class="where">扱う回：<b>第3回・第4回</b>で型を作る／<b>第8回</b>（社内の知識を検索できるようにする）の題材にします</p>
+  </div>
+</article>
+
+<article class="card qa">
+  <div class="qhead"><span class="qmark">Q3</span><span>社員からの提案の質や、適材適所の問題に、AIは使えますか？</span></div>
+  <div class="abody">
+    <p class="ans"><span class="amark">A</span><span>使えます。ただし「判断」ではなく「下ごしらえ」に使います。</span></p>
+    <p>提案の質は、AIに評価させるより<strong>出す側の書き方を揃える</strong>ほうが確実に上がります。「費用・期間・担当・やめる基準の4つが書いてあるか」をAIに点検させるだけで、提案の粒が揃い、比べやすくなります。</p>
+    <div class="two">
+      <div class="col"><h4>AIに任せてよいこと</h4><ul>
+        <li>提案書に<strong>抜けている論点</strong>の指摘</li>
+        <li>バラバラな提案を<strong>同じ形式に揃える</strong></li>
+        <li>提案者に返す<strong>質問の候補</strong>を出す</li>
+      </ul></div>
+      <div class="col"><h4>人が決めること</h4><ul>
+        <li>提案を<strong>採用するかどうか</strong></li>
+        <li>人の<strong>評価や配置</strong></li>
+        <li>向き不向きの判断</li>
+      </ul></div>
+    </div>
+    <p>人の評価や配置は、間違えたときに取り返しがつきません。この講座では、ここはAIに決めさせない線を守ります。</p>
+    <p class="where">扱う回：<b>第3回</b>で提案書の型を作る／<b>第9回</b>で点検を複数の工程に分けて任せる</p>
+  </div>
+</article>
+
+<article class="card qa">
+  <div class="qhead"><span class="qmark">Q4</span><span>家電の操作など、「自分を楽にする」ことにも使えますか？</span></div>
+  <div class="abody">
+    <p class="ans"><span class="amark">A</span><span>この講座では、会社のお仕事を先に扱います。「楽にする」という考え方はそのまま使います。</span></p>
+    <p>家電の操作には別の道具が必要になり、この講座の「道具は増やさない」方針から外れます。一方で、<strong>「これが無くなったら楽になる」は、仕事の棚卸しで一番よく効く問い</strong>です。今日の冒頭で、この問いを使ってお仕事を3つ挙げていただきます。</p>
+    <p class="where">扱う回：<b>第2回（今日）</b>の業務の棚卸しで使う</p>
+  </div>
+</article>
+
+<article class="card qa">
+  <div class="qhead"><span class="qmark">Q5</span><span>AIとの相性が良くない気がします。</span></div>
+  <div class="abody">
+    <p class="ans"><span class="amark">A</span><span>相性ではなく、「渡し方」の問題です。これが今日の本題です。</span></p>
+    <p>社員の方に仕事を頼むとき、いきなり「やっといて」とは言わないはずです。何のためか、誰に出すものか、どこまでやるか。AIも同じで、それを伝えないと当たり障りのない答えしか返ってきません。</p>
+    <div class="tbl"><table>
+      <thead><tr><th>伝えること</th><th>中身</th><th>抜けるとどうなるか</th></tr></thead>
+      <tbody>
+        <tr><td>① 役割</td><td>誰として答えるか</td><td>一般論しか出ない</td></tr>
+        <tr><td>② 前提</td><td>会社・相手・状況</td><td>毎回説明し直すことになる</td></tr>
+        <tr><td>③ 依頼</td><td>何をしてほしいか（1つに絞る）</td><td>話が広がる</td></tr>
+        <tr><td>④ 条件</td><td>文字数・口調・避けたい表現</td><td>手直しが増える</td></tr>
+        <tr><td>⑤ 形</td><td>箇条書き・表・メール本文など</td><td>そのまま使えない</td></tr>
+      </tbody>
+    </table></div>
+    <p class="where">扱う回：<b>第2回（今日）</b>。一度作れば、次からはコピーして直すだけになります</p>
+  </div>
+</article>
+
+<article class="card qa">
+  <div class="qhead"><span class="qmark">Q6</span><span>ChatGPT、Claude、Codexなど、どれを使えばよいですか？</span></div>
+  <div class="abody">
+    <p class="ans"><span class="amark">A</span><span>ChatGPT一本で進めます。第1回でおっしゃった「今はどれでも大丈夫」が正解です。</span></p>
+    <p>御社はGoogleのサービス（カレンダー・ドライブ）をお使いなので、つなぐ先もGoogleで揃います。道具を増やすほど管理と費用が増え、続かなくなります。<strong>増やすのは、第7回で「これが無いとできない」と分かったときの1つだけ</strong>にします。</p>
+    <p class="where">扱う回：全12回を通して</p>
+  </div>
+</article>
+
+<!-- ============ 2 ============ -->
+<h2 id="now"><span class="no">02</span>いまの現在地</h2>
+<p class="h2sub">第1回のお話から見た、現時点の位置です。第3回の終わりにもう一度確かめて、確定させます。</p>
+
+<div class="card">
+  <div class="ladder">
+    <div class="step now"><div class="k">A</div><div><div class="t">調べものの代わりに使う<span class="tag now">いまここ</span></div><div class="d">短く質問して、答えを読む。会話は1〜2往復で終わる</div></div></div>
+    <div class="step now"><div class="k">B</div><div><div class="t">文章の下書きに使う<span class="tag now">いまここ</span></div><div class="d">メールや案内文を書かせる。毎回ゼロから頼んでいる</div></div></div>
+    <div class="step"><div class="k">C</div><div><div class="t">資料を読ませて考えさせる</div><div class="d">ファイルを渡して、要約や分析をさせる</div></div></div>
+    <div class="step"><div class="k">D</div><div><div class="t">仕組みにする</div><div class="d">会社専用のAIを作り、仕事の流れに組み込む</div></div></div>
+    <div class="step goal"><div class="k">E</div><div><div class="t">会社全体で使う<span class="tag goal">12回後の目標</span></div><div class="d">社員が使い、ルールと担当者があり、社長がいなくても回る</div></div></div>
+  </div>
+  <p class="fine">「いまここ」は第1回のお話から見た目安です。今日の演習で実際に操作していただき、第3回の終わりに確定させます。</p>
+</div>
+
+<div class="two">
+  <div class="col">
+    <h4>すでにできていること</h4>
+    <ul>
+      <li>ChatGPTに質問して、答えを読む</li>
+      <li>Googleカレンダー・Slackで日々の仕事を回す</li>
+      <li><strong>自社のどこにAIが効きそうかを、ご自身の言葉で言える</strong>（議事録、ノベルティ選定などの判断業務）</li>
+      <li>AIに向く仕事の見分け方（回数・型・取り返し）を理解している</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>これから身につけること</h4>
+    <ul>
+      <li>頼み方に前提と条件を入れる（第2回）</li>
+      <li>うまくいった頼み方を保存して使い回す（第2回）</li>
+      <li>資料や数字を読ませて考えさせる（第4回）</li>
+      <li>AIの答えを確かめる習慣（第4回・第10回）</li>
+      <li>社員の方に渡せる形にする（第3回・第5回）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2 id="plan"><span class="no">03</span>この現在地に合わせた、12回の進め方</h2>
+<p class="h2sub">全12回の順番は変えません。変えるのは、各回の中でどこまで深く入るかです。</p>
+
+<div class="promise">
+  <div class="p"><div class="n">1</div><h4>毎回、その場で完成させる</h4><p>作るものは講座の時間内に仕上げます。宿題で作っていただく前提にはしません。</p></div>
+  <div class="p"><div class="n">2</div><h4>宿題は1つ、使うだけ</h4><p>宿題は「作ったものを1回使ってみる」だけにします。調べもの・検討の宿題は出しません。</p></div>
+  <div class="p"><div class="n">3</div><h4>道具はChatGPTとGoogleだけ</h4><p>新しいサービスは増やしません。ご自身の手で操作していただき、講師は横で支えます。</p></div>
+</div>
+
+<p class="phase">基礎編（第1回〜第6回）<small>自分の使い方を作り直し、社内にお披露目する</small></p>
+<div class="card tbl" style="padding:.4rem .6rem">
+<table class="plan">
+  <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>現状把握と地図づくり</td><td>AI化の候補</td><td class="adj">済。候補は2つまで挙がっています。3つ目を今日確定させます</td></tr>
+    <tr class="today"><td>2<span class="tdb">今日</span></td><td>今のChatGPTの使い方を作り直す</td><td>業務の棚卸し表／頼み方の型／保存した頼み方</td><td class="adj">冒頭で棚卸しを一緒に仕上げます。頼み方の型と「毎回効く前提設定」に絞り、じっくり手を動かします</td></tr>
+    <tr><td>3</td><td>文書とコミュニケーションのAI化</td><td>社内文書のひな形</td><td class="adj">ひな形は2種にし、1種は講師と一緒に作ります。<strong>社員の方に渡す1本は必ず作ります</strong>（提案書の型をここに）</td></tr>
+    <tr><td>4</td><td>数字と判断のAI化</td><td>月次レポートのひな形</td><td class="adj">計算は表計算に任せ、AIには「なぜこうなったか」を聞くところまで。会長向けの型もここで</td></tr>
+    <tr><td>5</td><td>自社専用のAIをつくる</td><td>自社専用AI／AI利用ルール</td><td class="adj">作る操作は講師が画面で先導します。何を載せるかと、指示の中身を決めることに集中していただきます</td></tr>
+    <tr class="stage"><td>6<span class="badge">社員同席</span></td><td>社内へのお披露目と12か月計画</td><td>12か月の計画／社内説明</td><td class="adj">1週間前に30分の打ち合わせで発表を一緒に準備します。発表資料は5枚まで</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="phase">上級編（第7回〜第12回）<small>つなぐ・任せる・測る・組織に載せる</small></p>
+<div class="card tbl" style="padding:.4rem .6rem">
+<table class="plan">
+  <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
+  <tbody>
+    <tr><td>7</td><td>手作業のつなぎ目をなくす</td><td>自動化の設計メモ</td><td class="adj">Googleの機能で「自動で動く」ものを講師が組んで見せます。ご自身は「どの作業を渡すか」を決め、<strong>外部に頼める設計図</strong>を持ち帰ります</td></tr>
+    <tr><td>8</td><td>社内の知識を検索できるようにする</td><td>社内検索AI／足りない資料の一覧</td><td class="adj">題材は<strong>会長への情報共有</strong>（Q2）を第一候補にします</td></tr>
+    <tr><td>9</td><td>複数の工程をまとめて任せる</td><td>仕事の任せ方の設計書</td><td class="adj">工程を図に書くところまで。実際に流すのは講師が見せます（提案書の点検を題材に）</td></tr>
+    <tr><td>10</td><td>品質を測る・壊れたら気づく</td><td>確認用の質問10問／毎月の点検手順</td><td class="adj">10問のうち5問は講師が下書きし、残り5問を一緒に埋めます</td></tr>
+    <tr><td>11</td><td>組織に載せる</td><td>推進体制・費用の一覧・効果の測り方</td><td class="adj">役割は「決める人」と「回す人」の2つに絞ります</td></tr>
+    <tr class="stage"><td>12<span class="badge">社員同席</span></td><td>AIを前提に事業を組み直す</td><td>3年後の構想</td><td class="adj">AIの将来像のお話はここでじっくり扱います。社員の方には「空いた時間を何に使うか」をお伝えします</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2 id="today"><span class="no">04</span>今日（第2回）やること</h2>
+<div class="today-box">
+  <ol>
+    <li><strong>お仕事の棚卸しを仕上げる。</strong>「これが無くなったら楽になる」を3つ挙げ、月にどれくらい時間を取られているかを一緒に書きます</li>
+    <li><strong>ChatGPTのご契約プランを画面で確認する。</strong>Q1の連携がどこまで使えるかも、ここで分かります</li>
+    <li><strong>頼み方の型を覚える。</strong>議事録を題材に、いつもの頼み方 → 型を入れた頼み方を比べます</li>
+    <li><strong>ご自身の手で1本作って、保存する。</strong>次からはコピーして直すだけになります</li>
+    <li><strong>Gmail・カレンダーを1回つないでみる。</strong>「頼んだら読みに行く」を体験します</li>
+    <li><strong>宿題を1つ決める。</strong>今日作った頼み方を、今週1回使ってみるだけです</li>
+  </ol>
+</div>
+
+<p class="foot">本資料の機能名・プラン名は2026年9月時点のものです。AIのサービスは短い期間で変わるため、講座の中でその都度、実際の画面で確認しながら進めます。</p>
+</main>
