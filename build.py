@@ -21,12 +21,9 @@ PAGES = [
 ]
 
 # 受講者向けページには講師用ナビを出さない
-NO_NAV = {"student.html", "plan.html"}
+NO_NAV = {"student.html"}
 
-# ナビには出すが、そのページ自体にはナビを出さない（受講者に画面共有するため）
-SHOW_IN_NAV = {"plan.html"}
-
-NAV_ITEMS = [(f, label) for f, label, _, _ in PAGES if f not in NO_NAV or f in SHOW_IN_NAV]
+NAV_ITEMS = [(f, label) for f, label, _, _ in PAGES if f not in NO_NAV]
 
 def nav(current):
     if current in NO_NAV:
