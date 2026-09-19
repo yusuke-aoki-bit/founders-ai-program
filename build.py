@@ -16,8 +16,6 @@ PAGES = [
      "主要生成AIモデルの知能スコア・API単価・月額プラン・コスト試算と、用途別の使い分け、用語集。2026年9月版。"),
     ("student.html",      "受講のご案内", "src/student_body.html",
      "受講が決まった方へ。初回の持ち物、各回の準備、12回の流れ、用語、よくあるご質問。"),
-    ("tutor.html",        "講師用メモ", "src/tutor_body.html",
-     "1対1案件の進行ページ（講師用）。各回の段取り・観察8項目・習得チェック。入力はブラウザ内にのみ保存。"),
     ("plan.html",         "受講者向け資料", "src/plan_body.html",
      "第1回のご質問への回答、現在地に合わせた12回の進め方、日程と毎回の準備。受講者に画面共有でお見せする資料。"),
 ]
@@ -61,7 +59,7 @@ TPL = """<!doctype html>
 </html>
 """
 
-EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘","tutor.html":"🎓","plan.html":"💬"}
+EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘","plan.html":"💬"}
 
 for out, label, src, desc in PAGES:
     raw = io.open(src, encoding="utf-8").read()
