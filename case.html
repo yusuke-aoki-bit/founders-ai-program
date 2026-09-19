@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="受講者向けの日程表と毎回の準備。講師が埋めて印刷・PDFでお渡しする。入力はブラウザ内にのみ保存。">
+<title>個別案件 日程と準備（受講者用）｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🗓️</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<style>
+:root{color-scheme:light}
+:root{
+  --bg:#f7f7f5; --card:#fff; --ink:#1c1c1a; --muted:#6b6b66; --line:#e2e2dd;
+  --accent:#2f5d50; --accent-soft:#e8f0ed; --warn:#8a4b2a; --warn-soft:#fbf0e8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;
+  line-height:1.8;font-size:15px}
+.wrap{max-width:900px;margin:0 auto;padding-block:28px;padding-left:20px;padding-right:20px}
+nav.site{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+nav.site a{display:inline-block;padding:6px 12px;border:1px solid var(--line);border-radius:999px;
+  background:#fff;color:var(--muted);text-decoration:none;font-size:13px}
+nav.site a:hover{border-color:var(--accent);color:var(--accent)}
+nav.site a.here{background:var(--accent);border-color:var(--accent);color:#fff}
+h1{font-size:23px;margin:0 0 4px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 22px}
+h2{font-size:17px;margin:34px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.note{background:var(--warn-soft);border-left:4px solid var(--warn);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#f0f0ec;font-weight:600;white-space:nowrap}
+.scroll{overflow-x:auto}
+input[type=text],textarea{width:100%;font:inherit;font-size:14px;padding:5px 8px;
+  border:1px solid var(--line);border-radius:6px;background:#fffef9;color:inherit}
+textarea{min-height:60px;resize:vertical}
+input[type=text]:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+.time{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--accent);font-weight:600}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.bar button{font:inherit;font-size:13px;padding:7px 15px;border-radius:7px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.bar button:hover{border-color:var(--accent);color:var(--accent)}
+.saved{position:fixed;right:16px;bottom:16px;background:var(--accent);color:#fff;
+  padding:7px 15px;border-radius:999px;font-size:12.5px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+.saved.on{opacity:1}
+ul{padding-left:1.25em}li{margin:4px 0}
+.showcase{background:var(--accent-soft)}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+@media print{nav.site,.bar,.saved,.editonly{display:none}.card{break-inside:avoid}
+  input[type=text],textarea{border:none;background:none;padding:0}}
+</style>
+<div class="wrap">
+
+<h1>日程と、毎回のご準備</h1>
+<p class="sub">全12回・各120分／オンライン・画面共有／講座の中身は「<a href="student.html" style="color:var(--accent)">受講のご案内</a>」をご覧ください。</p>
+
+<div class="note editonly">
+  <strong>講師へ：</strong>このページは空の枠です。入力した内容は<strong>このブラウザの中だけ</strong>に保存され、公開ファイルには入りません。
+  埋めてから <strong>印刷 / PDF</strong> で書き出して受講者にお渡しするか、画面共有でご覧いただく使い方を想定しています。
+</div>
+
+<div class="bar editonly">
+  <button onclick="window.print()">印刷 / PDF にする</button>
+  <button onclick="exportAll()">書き出し（JSON）</button>
+  <button onclick="document.getElementById('imp').click()">読み込み</button>
+  <input type="file" id="imp" accept="application/json" hidden onchange="importAll(this)">
+</div>
+
+<h2>日程</h2>
+<div class="card scroll">
+<table>
+<thead><tr><th style="width:44px">回</th><th>テーマ</th><th style="width:150px">日付</th><th style="width:110px">時刻</th><th>備考</th></tr></thead>
+<tbody id="sched"></tbody>
+</table>
+<p style="font-size:13px;color:var(--muted);margin:6px 0 0">
+第6回と第12回は<strong>社員の方に同席いただく回</strong>です。ご参加の皆さまの予定を、先に押さえてください。
+</p>
+</div>
+
+<h2>連絡とお約束</h2>
+<div class="card">
+  <div class="grid">
+    <div class="field"><label>ご質問の窓口</label><input type="text" data-k="c.ch" placeholder="例：LINE"></div>
+    <div class="field"><label>返信の目安</label><input type="text" data-k="c.sla" placeholder="例：平日24時間以内（土日祝は翌営業日）"></div>
+    <div class="field"><label>録画の受け渡し</label><input type="text" data-k="c.rec"></div>
+    <div class="field"><label>録画の保存期間</label><input type="text" data-k="c.recterm" placeholder="例：修了後6か月で削除"></div>
+    <div class="field"><label>録画の社内共有の範囲</label><input type="text" data-k="c.recshare"></div>
+    <div class="field"><label>お預かりした資料の扱い</label><input type="text" data-k="c.mat" placeholder="例：修了後1か月以内に削除し、削除した旨をご連絡"></div>
+  </div>
+  <div class="field" style="margin-top:12px"><label>演習に使うデータについて（伏せ方のお約束）</label>
+    <textarea data-k="c.data" placeholder="社名はA社、個人名はイニシャル、金額は桁だけ など"></textarea></div>
+  <div class="field" style="margin-top:10px"><label>この12回で達成したいこと（ご本人のお言葉で一文）</label>
+    <textarea data-k="c.goal"></textarea></div>
+</div>
+
+<h2>120分の進み方</h2>
+<div class="card scroll">
+<table>
+<thead><tr><th style="width:104px">時間</th><th>やること</th></tr></thead>
+<tbody>
+<tr><td class="time">0:00–0:15</td><td>前回の宿題を実物で拝見します</td></tr>
+<tr><td class="time">0:15–0:35</td><td>今日のテーマの説明と、講師の実演</td></tr>
+<tr><td class="time">0:35–1:30</td><td><strong>ご自身の手で操作していただく時間（55分）</strong>。御社の実際の資料・数字を使います</td></tr>
+<tr><td class="time">1:30–1:45</td><td>「誰が・いつ・どの業務で使うか」を紙に書いて決めます</td></tr>
+<tr><td class="time">1:45–2:00</td><td>宿題を1つ決めて、到達状況を記録します</td></tr>
+</tbody>
+</table>
+<p style="font-size:13px;color:var(--muted);margin:6px 0 0">
+<strong>宿題は毎回1つだけ</strong>で、15分で終わる大きさにします。多くて終わらないときは、遠慮なくおっしゃってください。設計のほうを直します。
+</p>
+</div>
+
+<h2>毎回のご準備</h2>
+<div class="card scroll">
+<table>
+<thead><tr><th style="width:44px">回</th><th>お持ちいただくもの・ご準備</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>いつものPC（ChatGPTにログインした状態で）／直近1か月の社外向け文書1つ／月次の数字が入った表1つ／時間を取られている業務を3つ（メモ書きで十分です）</td></tr>
+<tr><td>2</td><td>週に3回以上やっている文書業務を1つ決めてくる／会社概要の文章</td></tr>
+<tr><td>3</td><td>社内で量の多い文書3種の実物／最初に渡す相手（社員1名）を決めておく</td></tr>
+<tr><td>4</td><td>直近12か月の月次数値（Excel等）／前月の会議資料</td></tr>
+<tr><td>5</td><td>専用AIに載せる自社資料3〜5本（規則・価格表・FAQなど）</td></tr>
+<tr><td class="showcase">6</td><td class="showcase"><strong>社員の方3名以上のご出席</strong>／発表資料5枚以内（1週間前に打ち合わせます）</td></tr>
+<tr><td>7</td><td>社内の基盤（Microsoft 365 / Google）の管理者権限が誰にあるかをご確認ください</td></tr>
+<tr><td>8</td><td>対象領域の資料一式／過去に社内で出た質問10件</td></tr>
+<tr><td>9</td><td>3工程以上ある業務を1つ選んでくる</td></tr>
+<tr><td>10</td><td>社内で実際に出た質問・依頼10件</td></tr>
+<tr><td>11</td><td>ご契約中のサービスの月額一覧／アカウント名義の情報</td></tr>
+<tr><td class="showcase">12</td><td class="showcase">今期の事業計画／<strong>社員の方のご出席</strong>（1週間前に打ち合わせます）</td></tr>
+</tbody>
+</table>
+<p style="font-size:13px;color:var(--muted);margin:6px 0 0">
+機密に触れるものは、社名・個人名を伏せていただいて構いません。伏せ方もこちらでお伝えします。
+</p>
+</div>
+
+<h2>12回で持ち帰っていただくもの</h2>
+<div class="card">
+<ul>
+<li>業務棚卸しシート（第1回）</li>
+<li>プロンプト集 v1・v2（第2回・第3回）</li>
+<li>社内文書テンプレート3種（第3回）</li>
+<li>月次レポート雛形（第4回）</li>
+<li>自社専用AI＋その指示文（第5回）／AI利用ルール v1（第5回）</li>
+<li>12か月ロードマップ（第6回・第12回に改訂）</li>
+<li>自動化フロー（第7回）</li>
+<li>不足資料リスト（第8回）</li>
+<li>多工程タスク設計書（第9回）</li>
+<li>正解セット10件＋月次チェック手順（第10回）</li>
+<li>推進体制図・権限/費用管理表・効果測定シート（第11回）</li>
+<li>3年構想（第12回）</li>
+</ul>
+  <div class="field" style="margin-top:8px"><label>成果物の置き場所</label><input type="text" data-k="c.place" placeholder="例：共有フォルダのURL・フォルダ名"></div>
+</div>
+
+<footer>
+記載の内容はご契約の内容によります。初回にあらためてご確認ください。／このページに入力された内容は、ご覧のブラウザの中にのみ保存されます。
+</footer>
+</div>
+<div class="saved" id="saved">保存しました</div>
+
+<script>
+const THEMES=["現状把握と地図づくり","今のChatGPTの使い方を作り直す","文書とコミュニケーションのAI化",
+"数字と判断のAI化","自社専用AIをつくる","社内へのお披露目と12か月計画","手作業のつなぎ目をなくす",
+"社内の知識を検索できるようにする","複数の工程をまとめて任せる","品質を測る・壊れたら気づく",
+"組織に載せる","AIを前提に事業を組み直す"];
+const tb=document.getElementById('sched');
+THEMES.forEach((t,i)=>{
+  const n=i+1, show=(n===6||n===12);
+  const tr=document.createElement('tr');
+  if(show) tr.className='showcase';
+  tr.innerHTML='<td>'+n+'</td><td>'+t+(show?'　<b>【社員同席】</b>':'')+'</td>'
+    +'<td><input type="text" data-k="d'+n+'"></td>'
+    +'<td><input type="text" data-k="t'+n+'"></td>'
+    +'<td><input type="text" data-k="n'+n+'"></td>';
+  tb.appendChild(tr);
+});
+
+const KEY='case-page-v1';
+let store={};
+try{ store=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ store={}; }
+let t=null;
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){ return; }
+  const s=document.getElementById('saved'); s.classList.add('on');
+  clearTimeout(t); t=setTimeout(()=>s.classList.remove('on'),1100);
+}
+document.querySelectorAll('[data-k]').forEach(el=>{
+  const k=el.dataset.k;
+  if(k in store) el.value=store[k];
+  el.addEventListener('input',()=>{ store[k]=el.value; save(); });
+});
+function exportAll(){
+  const blob=new Blob([JSON.stringify(store,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='案件日程_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function importAll(inp){
+  const f=inp.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ store=JSON.parse(r.result); save(); location.reload(); }catch(e){ alert('読み込めませんでした'); } };
+  r.readAsText(f); inp.value='';
+}
+</script>
+</body>
+</html>

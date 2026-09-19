@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="1対1案件の進行ページ（講師用）。各回の段取り・観察8項目・習得チェック。入力はブラウザ内にのみ保存。">
+<title>個別案件 進行ページ（講師用）｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🎓</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html">全体像</a><a href="deliverables.html">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html">フォーム設置手順</a><a href="slides.html">登壇資料</a><a href="models.html">モデルと用語</a><a href="tutor.html" aria-current="page">個別案件</a></span></div></nav>
+<style>
+:root{color-scheme:light}
+:root{
+  --bg:#f7f7f5; --card:#fff; --ink:#1c1c1a; --muted:#6b6b66; --line:#e2e2dd;
+  --accent:#2f5d50; --accent-soft:#e8f0ed; --warn:#8a4b2a; --warn-soft:#fbf0e8;
+  --danger:#963b3b; --ok:#2f5d50;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;
+  line-height:1.75;font-size:15px}
+.wrap{max-width:1060px;margin:0 auto;padding-block:28px;padding-left:20px;padding-right:20px}
+nav.site{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:22px}
+nav.site a{display:inline-block;padding:6px 12px;border:1px solid var(--line);border-radius:999px;
+  background:#fff;color:var(--muted);text-decoration:none;font-size:13px}
+nav.site a:hover{border-color:var(--accent);color:var(--accent)}
+nav.site a.here{background:var(--accent);border-color:var(--accent);color:#fff}
+h1{font-size:23px;margin:0 0 4px;letter-spacing:.01em}
+.sub{color:var(--muted);font-size:13px;margin:0 0 22px}
+h2{font-size:17px;margin:34px 0 12px;padding-bottom:7px;border-bottom:2px solid var(--accent)}
+h3{font-size:15px;margin:22px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.note{background:var(--warn-soft);border-left:4px solid var(--warn);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px}
+.note.key{background:var(--accent-soft);border-left-color:var(--accent)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#f0f0ec;font-weight:600;white-space:nowrap}
+.scroll{overflow-x:auto}
+input[type=text],textarea,select{width:100%;font:inherit;font-size:14px;padding:6px 9px;
+  border:1px solid var(--line);border-radius:6px;background:#fffef9;color:inherit}
+textarea{min-height:66px;resize:vertical}
+input[type=text]:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
+label.chk{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font-size:14px;cursor:pointer}
+label.chk input{margin-top:5px;flex:none;width:16px;height:16px;accent-color:var(--accent)}
+.tabs{display:flex;flex-wrap:wrap;gap:5px;margin:14px 0 16px}
+.tabs button{font:inherit;font-size:13px;padding:6px 13px;border:1px solid var(--line);
+  background:#fff;color:var(--muted);border-radius:7px;cursor:pointer}
+.tabs button:hover{border-color:var(--accent)}
+.tabs button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent);font-weight:600;margin-left:7px}
+.pill.today{background:var(--warn-soft);color:var(--warn)}
+.time{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--accent);font-weight:600}
+.saved{position:fixed;right:16px;bottom:16px;background:var(--accent);color:#fff;
+  padding:7px 15px;border-radius:999px;font-size:12.5px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:9}
+.saved.on{opacity:1}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.bar button{font:inherit;font-size:13px;padding:7px 15px;border-radius:7px;border:1px solid var(--line);
+  background:#fff;cursor:pointer;color:var(--ink)}
+.bar button:hover{border-color:var(--accent);color:var(--accent)}
+.bar button.danger:hover{border-color:var(--danger);color:var(--danger)}
+ul{padding-left:1.25em;margin:8px 0}
+li{margin:4px 0}
+code{background:#eeeeea;padding:1px 6px;border-radius:4px;font-size:13px}
+.say{background:#fffef9;border:1px dashed var(--accent);border-radius:8px;padding:13px 16px;margin:10px 0;font-size:14px}
+.say::before{content:"そのまま言える言い方";display:block;font-size:11px;color:var(--accent);font-weight:700;margin-bottom:5px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+@media print{nav.site,.tabs,.bar,.saved{display:none}.card{break-inside:avoid}}
+</style>
+<div class="wrap">
+
+<h1>個別案件 進行ページ<span class="pill">講師用</span></h1>
+<p class="sub">1対1版・全12回×120分／このページに入力した内容は<strong>このブラウザの中だけ</strong>に保存されます。サーバーにもリポジトリにも送られません。受講者に渡す日程表は <a href="case.html" style="color:var(--accent)">日程と準備（受講者用）</a>。</p>
+
+<div class="note">
+  <strong>このリポジトリは公開されています。</strong>受講者名・社名・レベル判定・観察メモを<strong>ファイルに直接書かないでください。</strong>
+  入力欄に打った内容はブラウザのローカル保存にだけ残るので、公開ファイルには何も入りません。
+  別のPCで開くと空になります。記録を残すなら「書き出し」でJSONを手元に保存してください。
+</div>
+
+<div class="bar">
+  <button onclick="exportAll()">書き出し（JSON）</button>
+  <button onclick="document.getElementById('imp').click()">読み込み</button>
+  <input type="file" id="imp" accept="application/json" hidden onchange="importAll(this)">
+  <button onclick="window.print()">印刷 / PDF</button>
+  <button class="danger" onclick="wipeAll()">この端末の入力を消す</button>
+</div>
+
+<!-- ============ 案件カルテ ============ -->
+<h2>案件カルテ</h2>
+<div class="card">
+  <div class="grid">
+    <div class="field"><label>受講者（呼び方）</label><input type="text" data-k="s.name" placeholder="例：◯◯さん"></div>
+    <div class="field"><label>会社・業種・人数</label><input type="text" data-k="s.co"></div>
+    <div class="field"><label>開始日</label><input type="text" data-k="s.start" placeholder="2026/09/12"></div>
+    <div class="field"><label>開催ペース・曜日時刻</label><input type="text" data-k="s.cadence" placeholder="毎週土 13:00"></div>
+    <div class="field"><label>確定レベル（第3回終了時）</label>
+      <select data-k="s.lv"><option value="">未確定</option><option>Lv.1</option><option>Lv.2</option><option>Lv.3</option><option>Lv.4</option><option>Lv.5</option></select></div>
+    <div class="field"><label>仮判定（第1回）</label><input type="text" data-k="s.lvtmp" placeholder="Lv.1〜2（暫定）"></div>
+  </div>
+</div>
+
+<h3>環境（第5回・第7回の分岐がここで決まる）</h3>
+<div class="card">
+  <div class="grid">
+    <div class="field"><label>ChatGPTのプラン 🔴</label><input type="text" data-k="e.plan" placeholder="Free/Go/Plus/Pro/Business/Enterprise"></div>
+    <div class="field"><label>契約名義</label><input type="text" data-k="e.owner" placeholder="個人 / 法人"></div>
+    <div class="field"><label>社内の利用者数</label><input type="text" data-k="e.users"></div>
+    <div class="field"><label>基盤</label><input type="text" data-k="e.base" placeholder="Google Workspace / Microsoft 365 / その他"></div>
+    <div class="field"><label>データの所在</label><input type="text" data-k="e.data" placeholder="会計ソフト/販売管理/Excel/紙"></div>
+    <div class="field"><label>制約（規制・守秘・個人情報）</label><input type="text" data-k="e.limit"></div>
+    <div class="field"><label>推進候補者 🔴</label><input type="text" data-k="e.champ" placeholder="第6回・第11回の核。いなければ「つくる」が裏テーマ"></div>
+    <div class="field"><label>決定権の所在</label><input type="text" data-k="e.decide" placeholder="本人 / 上に承認者がいる"></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin:10px 0 0">
+    基盤で第7回の自動化が決まる：Google Workspace→GAS／Microsoft 365→同社の自動化ツール／どちらも薄い場合のみワークフロー系SaaSを1つ。<strong>3種類を並べて比較しない。</strong>
+  </p>
+</div>
+
+<!-- ============ 観察8項目 ============ -->
+<h2>能力把握：観察8項目</h2>
+<p style="font-size:14px;color:var(--muted);margin:0">独立した観察枠を取らない場合は、<strong>演習の中で観察して埋める。</strong>⑦と⑧は経営者にとって最重要。</p>
+<div class="card scroll">
+<table>
+<thead><tr><th>#</th><th>見るところ</th><th>Lv.1相当</th><th>Lv.3相当</th><th>Lv.4以上</th><th style="width:74px">判定</th><th>メモ</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>会話の管理</td><td>毎回新規</td><td>使い分け</td><td>プロジェクトで管理</td><td><select data-k="o.1"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.1m"></td></tr>
+<tr><td>2</td><td>指示の長さ</td><td>一文</td><td>3〜5文・条件つき</td><td>役割/前提/制約/形式</td><td><select data-k="o.2"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.2m"></td></tr>
+<tr><td>3</td><td>前提情報の付与</td><td>渡さない</td><td>口頭で少し</td><td>ファイル添付</td><td><select data-k="o.3"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.3m"></td></tr>
+<tr><td>4</td><td>出力への反応</td><td>そのままコピー</td><td>手で直す</td><td>AIに直させる</td><td><select data-k="o.4"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.4m"></td></tr>
+<tr><td>5</td><td>結果の再利用</td><td>閉じて終わり</td><td>メモに控える</td><td>保存の仕組みあり</td><td><select data-k="o.5"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.5m"></td></tr>
+<tr><td>6</td><td>機能の使い分け</td><td>意識なし</td><td>名前は知っている</td><td>用途で切替</td><td><select data-k="o.6"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.6m"></td></tr>
+<tr><td>7</td><td><strong>出力を疑えるか</strong> 🔴</td><td>疑わない</td><td>違和感は持つ</td><td>検算・出典確認</td><td><select data-k="o.7"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.7m"></td></tr>
+<tr><td>8</td><td><strong>機密への感度</strong> 🔴</td><td>無自覚</td><td>ためらう</td><td>伏せ方が決まっている</td><td><select data-k="o.8"><option value="">-</option><option>○</option><option>△</option><option>×</option></select></td><td><input type="text" data-k="o.8m"></td></tr>
+</tbody>
+</table>
+</div>
+<div class="note">
+  <strong>この表で判定できるのは Lv.1〜3 まで。</strong>Lv.4・Lv.5 は操作の習熟ではなく<strong>組織への展開の有無</strong>（GPTs作成歴・社内の利用者数・ルールの有無）で分かれる。操作が上手いだけの人をLv.4と誤判定すると、基礎編を不必要に圧縮してしまう。
+</div>
+
+<!-- ============ 未確定チェック ============ -->
+<h2>初回で必ず取り決める6項目</h2>
+<div class="card">
+  <label class="chk"><input type="checkbox" data-k="c.g1"><span>① 12回の到達目標（<strong>受講者自身の言葉で1文</strong>。講師の言葉に置き換えない）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c.g2"><span>② 開催曜日・時刻を<strong>12回分</strong>仮押さえ（空欄を残さない）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c.g3"><span>③ 第6回・第12回の<strong>社内お披露目の日程と参加者</strong>（社員の予定を先に押さえる）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c.g4"><span>④ 演習に使ってよいデータの範囲（機密の伏せ方）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c.g5"><span>⑤ 録画の扱い（保存期間・社内共有の可否・同意）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c.g6"><span>⑥ 回と回の間の質問窓口（ツールと返信の目安時間を明示・<strong>二重窓口にしない</strong>）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c.g7"><span>＋ AIスキル診断の<strong>受講前スコア</strong>を取得（修了時と同一設問。取り逃すと伸び幅を一生示せない）</span></label>
+  <div class="field" style="margin-top:10px"><label>未確定のまま残っているもの</label><textarea data-k="c.open"></textarea></div>
+</div>
+
+<!-- ============ 各回の段取り ============ -->
+<h2>各回の段取り</h2>
+<div class="tabs" id="tabs"></div>
+<div id="panes"></div>
+
+<!-- ============ 習得チェック ============ -->
+<h2>習得チェックリスト</h2>
+<p style="font-size:14px;color:var(--muted);margin:0">毎回の最後に画面共有して1行埋める。「確認＝次回冒頭」の行は、宿題の実行を次回の冒頭で確かめてから埋める。</p>
+<div class="card scroll">
+<table>
+<thead><tr><th>回</th><th>できるようになること</th><th>判定基準</th><th>確認</th><th style="width:56px">済</th><th>メモ</th></tr></thead>
+<tbody id="skills"></tbody>
+</table>
+</div>
+
+<!-- ============ 原則 ============ -->
+<h2>毎回の自己確認</h2>
+<div class="card">
+  <label class="chk"><input type="checkbox" data-k="p.1"><span><strong>講師の発話は合計35分以内だったか</strong>（第6回は15分以内）。1対1で講師が話し続けるのは集合研修より罪が重い</span></label>
+  <label class="chk"><input type="checkbox" data-k="p.2"><span><strong>受講者の実データで演習したか</strong>。汎用の練習問題を解かせた瞬間、この講座は動画教材に負ける</span></label>
+  <label class="chk"><input type="checkbox" data-k="p.3"><span><strong>事例を1つ出したか</strong>（実在の事例に差し替えるまでは「ある会社では」と言わず、一般論として話す）</span></label>
+  <label class="chk"><input type="checkbox" data-k="p.4"><span><strong>成果物をその場で完成させたか</strong>。宿題に回したものは戻ってこない前提で組む</span></label>
+  <label class="chk"><input type="checkbox" data-k="p.5"><span><strong>宿題は1つに絞ったか</strong>。「検討する」系は次回冒頭に実物で確認できないので出さない</span></label>
+  <div class="field" style="margin-top:10px"><label>今回の気づき・次回の懸念</label><textarea data-k="p.memo"></textarea></div>
+</div>
+
+<footer>
+入力内容はこのブラウザのローカル保存のみ。公開ファイルには含まれません。／資料中の機能名・プラン名は変動するため、案件の開始前に公式ページで再確認すること。
+</footer>
+</div>
+<div class="saved" id="saved">保存しました</div>
+
+<script>
+/* ============ 各回のデータ ============ */
+const LESSONS = [
+ {n:1,t:"現状把握と地図づくり",goal:"自社のどこにAIを当てるかを自分の言葉で説明できる",out:"業務棚卸しシート／AI化候補 上位3",
+  rows:[["0:00–0:10","開始・枠組みの共有（録画可否／12回で何が変わるか／今日のゴール3つ）"],
+        ["0:10–0:30","<b>実演観察①②③</b>。受講者に手を動かしてもらい、<b>講師は口を出さない</b>"],
+        ["0:30–0:45","環境と体制の聞き取り（プラン・名義・基盤・データ・制約・推進候補者）"],
+        ["0:45–1:15","<b>業務棚卸し</b>を画面共有で一緒に埋める。AI化候補 上位3を確定"],
+        ["1:15–1:35","<b>手応えを1つ渡す</b>。悪い例→改善版→<b>本人の手で再現</b>→保存"],
+        ["1:35–1:50","12回の設計合意・お披露目の日程確定・12回分の仮押さえ"],
+        ["1:50–2:00","宿題を1つ決める／次回の持ち物"]],
+  hw:"明日の朝いちで、今日つくった指示をもう一度使う",
+  tips:["AI化候補は「頻度が高く・型が決まっていて・間違えても取り返しがつく」から選ぶ。受講者は必ず一番痛いところ（契約・与信・人事）を選びたがるので引き戻す。",
+        "実演を嫌がったら「下手な使い方を見るのが目的ではなく、どこを飛ばせるかを見たい」と目的を言い換える。",
+        "20分後に評価を口にしない。判定は手元にだけ置く。"]},
+
+ {n:2,t:"今のChatGPTの使い方を作り直す",goal:"同じ指示を毎回打たなくて済む状態になっている",out:"指示の型／カスタム指示／プロンプト集 v1（5本）",today:true,
+  rows:[["0:00–0:05","<b>今日の入口</b>：「相性ではなく渡し方」から入る（下の言い方）"],
+        ["0:05–0:30","<b>業務棚卸しを一緒に埋める</b>。上位3と月あたり時間を確定 → <b>成果物①をここで完成させる</b>"],
+        ["0:30–0:35","<b>ChatGPTのプランを画面で確認</b>（第5回の分岐＋連携可否が同時に決まる）"],
+        ["0:35–0:50","テーマ：指示の型（5要素）／デモは<b>悪い例→改善版</b>の順"],
+        ["0:50–1:35","<b>演習45分</b>：①型で1本書く ②カスタム指示を設定 ③プロンプト集v1を5本に ④<b>本人の手で保存</b>"],
+        ["1:35–1:45","Gmail・カレンダー連携を<b>1回だけ見せる</b>（第7回の予告として）"],
+        ["1:45–1:55","組み込み（誰がいつ使うか・保存場所）／宿題1つ／習得チェック記入"],
+        ["1:55–2:00","予備"]],
+  hw:"明日から1週間、その文書業務は必ずこのプロジェクト（または前提ブロック）の中でやる。新しい会話を開かない。",
+  say:"相性ではないと思います。<b>前提を渡していないだけです。</b>社員に仕事を頼むとき、いきなり「やっといて」とは言わないですよね。何のために、誰に出すもので、どこまでやるか。AIも同じで、それを言わないと当たり障りのないものしか返ってきません。今日やるのは、その渡し方を型にすることです。",
+  measure:["<b>②③ 指示の長さ・前提</b>：「いつもどおりの書き方で打ってみてください」と一度だけ打たせ、<b>口を出さない</b>。一文＝Lv.1／条件つき3〜5文＝Lv.3",
+           "<b>⑦ 出力を疑えるか</b>：数字か固有名詞を含む題材を出す。そのまま受け取る＝Lv.1 →<b>第10回を厚くする</b>",
+           "<b>⑧ 機密への感度</b>：実データを出す場面でためらうか。ためらいなし＝Lv.1 →<b>その場で伏せ方を教える。これ自体が教材</b>"],
+  tips:["5要素を先に説明しない。<b>受講者の雑な指示を、目の前で5要素に分解して見せる。</b>自分の指示が題材になると腹に落ちる。",
+        "カスタム指示に何を書くか迷ったら「会社案内を読んだ人が知っていること」。会社概要をそのまま貼らせる。",
+        "無料プランでプロジェクトが使えない場合は、指示文の先頭に貼る「前提ブロック」で代替。<b>プラン変更を勧めるのは第11回の費用の話とセット。</b>第2回で勧めると売り込みに見える。",
+        "連携は「つながるが、勝手には動かない」。トリガー起動はできず、聞いたときだけ動く。ここを今日入れておくと第7回が効く。"]},
+
+ {n:3,t:"文書とコミュニケーションのAI化",goal:"週1回以上使う文書業務が1つAI化されている",out:"プロンプト集 v2（10本）／社内文書テンプレ3種",
+  rows:[["0:00–0:15","宿題確認：会話履歴を実物で見せてもらう"],
+        ["0:15–0:35","テーマ：文書業務の3分類（定型・半定型・非定型）／議事録のデモ"],
+        ["0:35–1:30","演習：実文書3種をテンプレート化。<b>うち1つは社員に渡す前提で作る</b>"],
+        ["1:30–1:45","組み込み：誰に渡すか、渡し方の一言まで決める"],
+        ["1:45–2:00","宿題・記録"]],
+  hw:"テンプレート1本を社員1名に渡し、実際に使ってもらって感想を聞いてくる",
+  tips:["テンプレ化は「良い指示文を作る」ではなく<b>「他人が使える形にする」</b>。①何のためのテンプレか1行 ②差し替え箇所を【　】 ③「ここは人が確認する」の注意書き。",
+        "<b>非定型（謝罪・条件交渉・人事通知）を任せて事故るのが、社内でAI不信が生まれる最短ルート。</b>",
+        "「自社らしくない」と言われたら、過去の自社文書を3本読ませて「この文体に合わせて」。<b>最も感動されるポイントのひとつ。</b>"]},
+
+ {n:4,t:"数字と判断のAI化",goal:"自社の数字をAIに読ませて示唆を1つ引き出せる",out:"分析用プロンプト／月次レポート雛形",
+  rows:[["0:00–0:15","宿題確認：<b>社員の反応を丁寧に聞く。第6回の材料になる</b>"],
+        ["0:15–0:35","テーマ：数字を読ませる3原則／デモ（<b>あえて計算を間違えさせて見せる</b>）"],
+        ["0:35–1:30","演習：実データで分析→示唆→検算→月次レポート雛形化"],
+        ["1:30–1:45","組み込み：毎月いつ誰が回すか。カレンダーに入れる"],
+        ["1:45–2:00","宿題・記録"]],
+  hw:"月次レポート雛形を、今月の数字で1回そのまま回してみる",
+  tips:["3原則：①<b>計算そのものは信用しない</b>（集計は表計算、AIには意味を語らせる） ②前提を必ず渡す（期間・単位・季節性・特殊要因） ③「気になる点を3つ」より<b>「反論を3つ」</b>。経営者は褒められに来ているのではない。",
+        "示唆が当たり前すぎるときは前提不足。業界の常識・自社の特殊事情を足すと劇的に変わる。",
+        "鵜呑みにするなら、その場で1つ誤りを指摘してみせ、<b>指摘できるようになるのが第10回の到達点</b>だと予告する。"]},
+
+ {n:5,t:"自社専用AIをつくる",goal:"自社資料を読むAIが1つ動いており、社員に渡せる",out:"実働AIツール1つ／AI利用ルール v1",
+  rows:[["0:00–0:15","宿題確認：月次レポート雛形を1回回したか"],
+        ["0:15–0:35","テーマ：専用AIとは／「資料にないことは答えない」の意味／デモ"],
+        ["0:35–1:20","演習：専用AIを1つ作る。指示文＋資料3〜5本。動作確認"],
+        ["1:20–1:40","演習：AI利用ルール v1（A4 1枚）をその場で埋める"],
+        ["1:40–2:00","組み込み・宿題・記録"]],
+  hw:"作った専用AIを推進候補者1名に触ってもらい、感想を1つ聞いてくる",
+  tips:["<b>どこに作るかは受講者のプランで決まる。</b>個人アカウント（Free/Go/Plus/Pro）ではカスタムGPTの新規作成ができないため、原則は<b>プロジェクト機能</b>。法人ワークスペースがあればGPTsでもよい。既存のGPTは使用も編集も可能。",
+        "指示文に必ず入れる3行：①資料に書かれている内容だけから作る ②記載がなければ「資料に記載がありません」と答え推測しない ③根拠の資料名を末尾に書く。<b>コピーさせず手で打たせる。</b>",
+        "資料を無視して一般論を答えるときの3手：禁止事項を先頭に／PDFをテキストに／資料を減らす。",
+        "利用ルールは<b>5項目以上に増やさない。</b>読まれないルールは無いのと同じ。"]},
+
+ {n:6,t:"社内へのお披露目と12か月計画",goal:"社員が「うちはAIをこう使う」を知っている",out:"12か月ロードマップ／社内説明の完了",badge:"社員同席",
+  rows:[["0:00–0:05","講師から趣旨説明（<b>5分。「評価の場ではない」とだけ言って引く</b>）"],
+        ["0:05–0:20","<b>受講者の発表</b>：この5回でやったこと／作ったもの／これから"],
+        ["0:20–0:45","実物のデモ（第5回の専用AIを社員の前で動かす）"],
+        ["0:45–1:15","社員からの質問・不安の吸い上げ。<b>講師は板書するだけ。答えるのは受講者</b>"],
+        ["1:15–1:45","社員退席後：12か月ロードマップの作成"],
+        ["1:45–2:00","宿題・記録（上級編の方針は別枠のメールで）"]],
+  hw:"12か月ロードマップの0〜3か月に書いたことを、1つだけ着手する",
+  tips:["<b>この回の講師の発話は合計15分以内。</b>社員の前で最も長く喋るのが講師になった時点で、この回は失敗している。",
+        "2週間前に社員へ案内、<b>1週間前に発表の壁打ち（別枠30分）</b>。ここを省略すると当日が崩れる。資料は5枚以内。",
+        "「人が減らされるのか」は<b>経営者本人に答えさせる。</b>講師が代わりに答えてはいけない。壁打ちで必ず準備させる。",
+        "強い反発が出たら遮らず全部出させる。<b>反発が出た回のほうが、後の定着はよい。</b>"]},
+
+ {n:7,t:"手作業のつなぎ目をなくす",goal:"人が転記していた1工程が自動で流れている",out:"つながった自動化フロー1本",
+  rows:[["0:00–0:15","宿題確認：ロードマップ0〜3か月が動いているか"],
+        ["0:15–0:35","テーマ：つなぎ目の見つけ方／自動化の3条件／デモ（1本を最初から最後まで）"],
+        ["0:35–1:30","演習：業務から1本選び一緒に組む。<b>必ず動くところまで</b>"],
+        ["1:30–1:45","組み込み：いつから本番で流すか。止まったときの連絡先"],
+        ["1:45–2:00","宿題・記録"]],
+  hw:"組んだ自動化を1週間、本番で流し続ける。止まったら記録だけ取る（直さなくてよい）",
+  tips:["3条件：①判断が入らない ②間違えても取り返しがつく ③月に何度も起きる。1つでも欠けたら<b>「下書きまで自動・送信は人」</b>に設計する。",
+        "ツールは<b>受講者の基盤から1つだけ提示</b>。3種類を並べて比較説明しない。",
+        "権限がなくて設定できないのは事故ではなく<b>発見</b>。第11回の権限管理の題材として記録する。",
+        "動かないときは「分かりません」と言ってその場で調べる姿を見せる。<b>これ自体がAI時代の仕事の実演になる。</b>",
+        "<b>Lv.1〜2版</b>：到達点を「自動化フロー設計メモが埋まり、外注できる状態」に差し替え、宿題は「設計メモを持って1回相談し、見積か可否の回答を1件もらう」。<b>修了時の引き渡しリストもLv版を使う。</b>"]},
+
+ {n:8,t:"社内の知識を検索できるようにする",goal:"「あの資料どこ」がAIで解決する状態が1領域できた",out:"社内ナレッジ検索AI／不足資料リスト",
+  rows:[["0:00–0:15","宿題確認：自動化は流れ続けているか"],
+        ["0:15–0:35","テーマ：なぜ社内検索は難しいか（資料が無い・古い・形式がバラバラ）／デモ"],
+        ["0:35–1:20","演習：1領域を決め、資料を集めて載せ、<b>10問投げて精度を見る</b>"],
+        ["1:20–1:40","演習：答えられなかった質問から<b>不足資料リスト</b>を作る"],
+        ["1:40–2:00","組み込み・宿題・記録"]],
+  hw:"不足資料リストのうち、最も簡単な1件を埋める（作る・探す・聞き出す のいずれか）",
+  tips:["精度は感想で終わらせず<b>10問を3分類で数える</b>：○正しく答えた（7件以上で実用）／△「記載がありません」＝<b>正しい振る舞い。×ではない</b>／×間違い・それらしい嘘（1件でも原因を潰す）。",
+        "<b>△を×と混同させないこと。</b>「答えられない」は正常な機能だと経営者に理解させるのが隠れた目的。",
+        "「全社の資料を全部入れたい」は止める。<b>範囲を広げるほど精度は落ちることを10問テストで実証して見せる。</b>",
+        "<b>「AIを入れたら、自社に何が無いかが分かった」が本講座で最も価値のある副産物。</b>"]},
+
+ {n:9,t:"複数の工程をまとめて任せる",goal:"3工程以上の仕事をAIに渡す設計ができる",out:"多工程タスク設計書（工程図＋確認ポイント）",
+  rows:[["0:00–0:15","宿題確認：ナレッジ検索の利用状況、不足資料リストの進捗"],
+        ["0:15–0:35","テーマ：多工程の3つの壊れ方／人への仕事の任せ方との対比／デモ"],
+        ["0:35–1:30","演習：工程図を書く→実際に流す→<b>壊れる</b>→確認ポイントを入れる"],
+        ["1:30–1:45","組み込み：誰が確認役をやるか"],
+        ["1:45–2:00","宿題・記録"]],
+  hw:"設計した多工程タスクを1回だけ本番で流す。確認ポイントで必ず人が見る",
+  tips:["3つの壊れ方：①前提の引き継ぎ漏れ→各工程の出力に前提を再掲させる ②誤りの増幅→<b>最も上流に人の確認を置く（最後ではない）</b> ③勝手な範囲拡大→各工程で「やらないこと」を明示。",
+        "経営者への言い換え：<b>「新人に3つの仕事をまとめて任せたときに起きることと、まったく同じです」。</b>",
+        "一発でうまく動いたら<b>わざと壊す。</b>入力を1つ欠けさせる、条件を矛盾させる。壊れ方を見ていない設計は本番で壊れる。"]},
+
+ {n:10,t:"品質を測る・壊れたら気づく",goal:"自社AIの品質を数字で言える",out:"正解セット10件／月次チェック手順",
+  rows:[["0:00–0:15","宿題確認：多工程タスクの運用状況"],
+        ["0:15–0:35","テーマ：なぜ品質は勝手に劣化するか（モデル更新・資料の陳腐化・使い方の拡大）／デモ"],
+        ["0:35–1:20","演習：正解セット10件を作る（<b>作るのが8割の仕事</b>）。流して採点"],
+        ["1:20–1:40","演習：月次チェック手順を1枚に。表計算1枚で足りる"],
+        ["1:40–2:00","組み込み・宿題・記録"]],
+  hw:"月次チェックを1回、担当者と一緒に実施する。所要時間を実測して記録する",
+  tips:["<b>10件でよい。</b>100件作ろうとすると誰も作らない。実際に社内で出た質問から取る（作文しない）。",
+        "「絶対に言ってはいけないこと」の列が最も重要（誤った金額・断定・約束）。",
+        "点数＝○の件数。小数点以下の精度を求めない。<b>大事なのは来月も同じ10件を流すこと。</b>",
+        "<b>この回を教えられる講師は少ない。本講座の差別化点。</b>"]},
+
+ {n:11,t:"組織に載せる",goal:"講師がいなくても回る体制が紙になっている",out:"推進体制図／権限・費用管理表／効果測定シート",
+  rows:[["0:00–0:15","宿題確認：月次チェックを1回回したか"],
+        ["0:15–0:30","テーマ：定着しない3つの理由／<b>第8回の不足資料リストと第10回の「基準が無い業務」をここで回収</b>"],
+        ["0:30–1:00","演習：推進体制図"],
+        ["1:00–1:25","演習：権限・費用管理表"],
+        ["1:25–1:45","演習：効果測定シート"],
+        ["1:45–2:00","組み込み・宿題・記録"]],
+  hw:"効果測定シートの『現在』の列を、実測値で埋める",
+  tips:["役割は4つ（決める人・回す人・作る人・守る人）。人数は1〜2名でよい。<b>「作る人」は外注してよいと明示する。</b>ここを社内に抱えようとして止まる会社が多い。",
+        "<b>担当者のつかない不足項目は、永久に埋まらない。</b>",
+        "個人名義の契約が残っていないか必ず洗う。<b>法人契約への移行提案は、この回が正しい場所。</b>",
+        "回す人がいないなら<b>時間を作る話</b>にする。既存業務を1つやめる決定を経営者にさせる。「片手間でやれ」は必ず失敗する。",
+        "<b>金額だけで語らせない。</b>実際の価値は品質と範囲に出ることが多い。やり直し件数は測りやすく説得力がある。"]},
+
+ {n:12,t:"AIを前提に事業を組み直す",goal:"事業計画の中にAIが位置づけられている",out:"3年構想／改訂版12か月ロードマップ",badge:"社員同席",
+  rows:[["0:00–0:20","12回の振り返り：作ったものを全部並べる（実物を画面に）"],
+        ["0:20–0:50","3年構想の作成（4問に答える形で）"],
+        ["0:50–1:10","改訂版12か月ロードマップ"],
+        ["1:10–1:45","<b>社内お披露目</b>：成果の共有と今後の方針の表明"],
+        ["1:45–2:00","社員退席後：修了アンケート／今後の関わり方"]],
+  hw:"—（修了）",
+  tips:["3年構想の4問：①3年後AIがやっている仕事は何か（業務名で3つ） ②<b>その結果、人は何をしているか</b>（減らす話ではなく移す話） ③今ない資産は何か ④<b>やらないと決めることは何か</b>（最も重要）。",
+        "<b>AIスキル診断を修了時版で再実施（受講前と同じ設問）。</b>設問を変えると伸び幅が比較できない。",
+        "成果物一式の引き渡し（12点）。<b>動いていないものを「12点お渡しします」に含めない。</b>Lv.1〜2版の引き渡しリストを使う。",
+        "成果が乏しいまま最終回を迎えたら取り繕わない。<b>何が進まなかったかを一緒に言語化する</b>ほうが次の関係につながる。"]}
+];
+
+const SKILLS=[
+ [1,"自社のAI化候補を説明できる","上位3業務を紙に書けた","当日"],
+ [2,"指示を型で書ける／蓄積できる","プロンプト集5本・プロジェクト1つ","当日"],
+ [3,"他人が使えるテンプレを作れる","テンプレ3種（当日）・社員1名が使用","次回冒頭"],
+ [4,"数字を読ませて示唆を引き出せる","雛形の完成（当日）・1回動いた","次回冒頭"],
+ [5,"自社専用AIを作れる","専用AI1つ稼働・ルールv1完成・推進候補者が触った","次回冒頭"],
+ [6,"社内に説明できる","社員3名以上の前で発表完了","当日"],
+ [7,"手作業のつなぎ目を消せる","1本組めた（当日）・1週間動いた","次回冒頭"],
+ [8,"社内知識を検索させられる","10問中○が7件以上","当日"],
+ [9,"多工程を設計できる","設計書1本・確認ポイント記載済み","当日"],
+ [10,"品質を数字で言える","正解セット10件・初回採点完了","当日"],
+ [11,"体制に載せられる","体制図・費用表・測定シート完成","当日"],
+ [12,"事業計画に位置づけられる","3年構想1枚・改訂ロードマップ","当日"]
+];
+
+/* ============ 描画 ============ */
+const tabs=document.getElementById('tabs'), panes=document.getElementById('panes');
+LESSONS.forEach((L,i)=>{
+  const b=document.createElement('button');
+  b.type='button'; b.textContent='第'+L.n+'回'; b.setAttribute('aria-selected','false');
+  b.onclick=()=>select(i); tabs.appendChild(b);
+
+  const d=document.createElement('div'); d.hidden=true;
+  let h='<div class="card"><h3 style="margin-top:0">第'+L.n+'回　'+L.t
+    +(L.badge?'<span class="pill">'+L.badge+'</span>':'')
+    +(L.today?'<span class="pill today">今日</span>':'')+'</h3>'
+    +'<p style="margin:0 0 4px;font-size:14px"><b>到達点：</b>'+L.goal+'</p>'
+    +'<p style="margin:0;font-size:14px;color:var(--muted)"><b>持ち帰るもの：</b>'+L.out+'</p></div>';
+  if(L.say) h+='<div class="say">'+L.say+'</div>';
+  h+='<div class="card scroll"><table><thead><tr><th style="width:104px">時間</th><th>やること</th></tr></thead><tbody>'
+    +L.rows.map(r=>'<tr><td class="time">'+r[0]+'</td><td>'+r[1]+'</td></tr>').join('')
+    +'</tbody></table>';
+  h+='<p style="margin:10px 0 0;font-size:14px"><b>宿題（1つだけ）：</b>'+L.hw+'</p></div>';
+  if(L.measure) h+='<div class="note key"><b>この回で測るもの</b><ul>'+L.measure.map(m=>'<li>'+m+'</li>').join('')+'</ul></div>';
+  h+='<div class="card"><h3 style="margin-top:0">進め方とつまずき</h3><ul>'
+    +L.tips.map(t=>'<li>'+t+'</li>').join('')+'</ul>'
+    +'<div class="grid" style="margin-top:12px">'
+    +'<div class="field"><label>実施日</label><input type="text" data-k="L'+L.n+'.date"></div>'
+    +'<div class="field"><label>宿題の実行（次回冒頭で確認）</label><select data-k="L'+L.n+'.hw"><option value="">-</option><option>実行された</option><option>一部</option><option>されなかった</option></select></div>'
+    +'</div>'
+    +'<div class="field" style="margin-top:10px"><label>当日のメモ・次回の懸念</label><textarea data-k="L'+L.n+'.memo"></textarea></div></div>';
+  d.innerHTML=h; panes.appendChild(d);
+});
+function select(i){
+  [...tabs.children].forEach((b,j)=>b.setAttribute('aria-selected', j===i?'true':'false'));
+  [...panes.children].forEach((p,j)=>p.hidden = j!==i);
+}
+
+const tb=document.getElementById('skills');
+SKILLS.forEach(s=>{
+  const tr=document.createElement('tr');
+  tr.innerHTML='<td>'+s[0]+'</td><td>'+s[1]+'</td><td>'+s[2]+'</td><td>'+s[3]+'</td>'
+    +'<td style="text-align:center"><input type="checkbox" data-k="k'+s[0]+'" style="width:16px;height:16px;accent-color:var(--accent)"></td>'
+    +'<td><input type="text" data-k="k'+s[0]+'m"></td>';
+  tb.appendChild(tr);
+});
+
+/* ============ ローカル保存 ============ */
+const KEY='tutor-case-v1';
+let store={};
+try{ store=JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ store={}; }
+
+function bind(){
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    const k=el.dataset.k;
+    if(k in store){ if(el.type==='checkbox') el.checked=!!store[k]; else el.value=store[k]; }
+    const ev = (el.tagName==='SELECT'||el.type==='checkbox') ? 'change' : 'input';
+    el.addEventListener(ev,()=>{
+      store[k] = el.type==='checkbox' ? el.checked : el.value;
+      save();
+    });
+  });
+}
+let t=null;
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify(store)); }catch(e){ return; }
+  const s=document.getElementById('saved'); s.classList.add('on');
+  clearTimeout(t); t=setTimeout(()=>s.classList.remove('on'),1100);
+}
+function exportAll(){
+  const blob=new Blob([JSON.stringify(store,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='案件記録_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function importAll(inp){
+  const f=inp.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ store=JSON.parse(r.result); save(); location.reload(); }catch(e){ alert('読み込めませんでした'); } };
+  r.readAsText(f); inp.value='';
+}
+function wipeAll(){
+  if(!confirm('この端末に保存した入力をすべて消します。よろしいですか。')) return;
+  store={}; try{ localStorage.removeItem(KEY); }catch(e){}
+  location.reload();
+}
+bind();
+const todayIdx=LESSONS.findIndex(l=>l.today);
+select(todayIdx>=0?todayIdx:0);
+</script>
+</body>
+</html>

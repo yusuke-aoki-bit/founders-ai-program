@@ -16,10 +16,14 @@ PAGES = [
      "主要生成AIモデルの知能スコア・API単価・月額プラン・コスト試算と、用途別の使い分け、用語集。2026年9月版。"),
     ("student.html",      "受講のご案内", "src/student_body.html",
      "受講が決まった方へ。初回の持ち物、各回の準備、12回の流れ、用語、よくあるご質問。"),
+    ("tutor.html",        "個別案件", "src/tutor_body.html",
+     "1対1案件の進行ページ（講師用）。各回の段取り・観察8項目・習得チェック。入力はブラウザ内にのみ保存。"),
+    ("case.html",         "日程と準備", "src/case_body.html",
+     "受講者向けの日程表と毎回の準備。講師が埋めて印刷・PDFでお渡しする。入力はブラウザ内にのみ保存。"),
 ]
 
 # 受講者向けページには講師用ナビを出さない
-NO_NAV = {"student.html"}
+NO_NAV = {"student.html", "case.html"}
 
 NAV_ITEMS = [(f, label) for f, label, _, _ in PAGES if f not in NO_NAV]
 
@@ -54,7 +58,7 @@ TPL = """<!doctype html>
 </html>
 """
 
-EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘"}
+EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘","tutor.html":"🎓","case.html":"🗓️"}
 
 for out, label, src, desc in PAGES:
     raw = io.open(src, encoding="utf-8").read()
