@@ -195,14 +195,14 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--ink-
     <caption>1ドル150円換算。2026年8月時点の各社公表値。</caption>
     <thead><tr><th>提供元</th><th>入門</th><th>標準</th><th>上位</th></tr></thead>
     <tbody>
-      <tr><td>ChatGPT</td><td>Go 約$8（約1,000円）</td><td>Plus $20（約3,000円）</td><td>Pro $200</td></tr>
+      <tr><td>ChatGPT</td><td>Go 約$8（約1,000円）</td><td>Plus $20（約3,000円）</td><td>Pro $100 ／ $200（$200は9/10から新規受付停止）</td></tr>
       <tr><td>Claude</td><td>—</td><td>Pro $20（約3,000円）</td><td>Max $100 ／ $200</td></tr>
       <tr><td>Gemini（Google AI）</td><td>Plus 月725円</td><td>Pro 月2,900円</td><td>Ultra 月14,500円〜</td></tr>
     </tbody>
   </table>
   </div>
   <ul class="plain">
-    <li><b>標準プランは3社とも月3,000円前後で横並びです。</b>判断材料は「その3,000円に何が付くか」——Google AI Pro は Google One ストレージと Gmail・ドライブ連携、Claude Pro は Claude Code と Cowork、ChatGPT Plus は Deep Research・Sora・Codex。</li>
+    <li><b>標準プランは3社とも月3,000円前後で横並びです。</b>判断材料は「その3,000円に何が付くか」——Google AI Pro は Google One ストレージと Gmail・ドライブ連携、Claude Pro は Claude Code と Cowork、ChatGPT Plus は Deep Research・Sora・Codex・ChatGPT Work。</li>
     <li><b>Google だけ為替の影響を受けません。</b>ChatGPT と Claude はドル建てなので、円安が進むと請求額が上がります。Google AI は円建ての公式価格です。</li>
   </ul>
 </section>
@@ -250,7 +250,7 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--ink-
 
   <div class="warnbox"><b>推奨しないもの。</b>DeepSeek・Qwen・GLM などの中国発オープンウェイトは、性能・価格とも優秀です（Kimi K3 は60点）。それでも中小企業に薦める場面は基本ありません。<b>データの扱いを社内・取引先に説明するコストが、節約額に見合わないからです。</b>「性能が低いから」ではない、という言い方をしてください。</div>
 
-  <div class="okbox"><b>法人利用の前提。</b>業務で使うなら、<b>入力データが学習に使われないプラン</b>（Team／Business／Enterprise 相当）を選びます。無料版との決定的な違いで、社内ルール作り（第6回）の出発点になります。この一点だけは、モデルが何回入れ替わっても変わりません。</div>
+  <div class="okbox"><b>法人利用の前提。</b>業務で使うなら、<b>入力データが学習に使われないプラン</b>（Business／Enterprise 相当）を選びます。無料版との決定的な違いで、社内ルール作り（第6回）の出発点になります。この一点だけは、モデルが何回入れ替わっても変わりません。</div>
 </section>
 
 <section>
@@ -263,7 +263,7 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--ink-
       <tr><td><b>プロンプト</b></td><td>AIへの指示文。長さより、前提と条件が入っているかが効く</td></tr>
       <tr><td><b>カスタム指示</b></td><td>全部の会話に自動で効く前提設定。会社の自己紹介を毎回書かずに済む</td></tr>
       <tr><td><b>プロジェクト</b></td><td>会話と資料をまとめておく箱。案件・業務ごとに分けて使う</td></tr>
-      <tr><td><b>専用AI</b></td><td>自社の資料と指示をあらかじめ仕込んだAI。<b>本講座ではプロジェクト機能で作ります</b>（無料プランでも使えます）。社員に配れる形（GPTs）は法人プランからです</td></tr>
+      <tr><td><b>専用AI</b></td><td>自社の資料と指示をあらかじめ仕込んだAI。<b>本講座ではプロジェクト機能で作ります</b>（無料プランでも使えます）。プロジェクトは個人プランでも社員と共有できます（Free 5人／Go・Plus 10人／Pro 100人）。GPTsは提供終了が告知され、プラグインへ移行中です</td></tr>
       <tr><td><b>ハルシネーション</b></td><td>AIがもっともらしい嘘を言うこと。<b>無くならない。前提として設計する</b></td></tr>
       <tr><td><b>コンテキスト（文脈長）</b></td><td>AIが一度に読める情報量。長くなるほど前の話を取りこぼす。上限はトークン数で示される（例：100万トークン）</td></tr>
       <tr><td><b>モデル</b></td><td>AIの本体。定期的に入れ替わる。<b>入れ替わると出力の傾向も変わる</b></td></tr>
@@ -338,7 +338,7 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--ink-
   <ul class="plain">
     <li><b>MCP</b>は、AIと外部システムをつなぐときの<b>作法の共通化</b>です。「このツールにはこういう機能があって、こう呼ぶ」を統一の形で伝える規格。ツールごとに個別開発していた部分が減ります。<b>経営者に実装させる必要はありませんが、「つなぎ方に標準ができつつある」＝いま作ったものが無駄になりにくい、という話としては使えます。</b></li>
     <li><b>エージェント</b>は、AIが自分で「次に何をするか」を決めながら複数手を進める使い方です。便利ですが、<b>途中の判断が見えないので、どこで間違えたかを特定できません。</b>第9回で工程を分けて手で流させるのは、この不透明さを避けるためです。慣れてから自動化に寄せる、の順序を崩さないでください。</li>
-    <li><b>費用の注意：</b>エージェント機能は有料プラン限定で、<b>クレジット制の課金体系を取ることがあります。</b>受講者に試させる前に、当日の実行回数と費用の見当を伝えてください。</li>
+    <li><b>費用の注意：</b>エージェント機能は有料プラン限定で（ChatGPTでは旧エージェントモードが終了し「ChatGPT Work」に置き換え、Plus以上）、<b>クレジット制の課金体系を取ることがあります。</b>受講者に試させる前に、当日の実行回数と費用の見当を伝えてください。</li>
   </ul>
 
   <h3 class="sub3">8-7　この講座で「やらない」と決めた技術</h3>
