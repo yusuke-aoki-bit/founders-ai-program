@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow">
+<meta name="description" content="個別資料。オーケストレーション・ガードレール・エージェント設計を、図の上で動かして決める設計ボード。">
+<title>自分でエージェントを設計する｜AI実装講座</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🧩</text></svg>">
+<link rel="stylesheet" href="assets/nav.css">
+<style>:root{color-scheme:light dark}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<nav class="sitenav"><div class="sitenav-in"><span class="brand">AI実装講座 1対1版</span><span class="links"><a href="index.html">全体像</a><a href="deliverables.html">成果物イメージ</a><a href="roadmap.html">学習ロードマップ</a><a href="forms.html">フォーム設置手順</a><a href="slides.html">登壇資料</a><a href="models.html">モデルと用語</a><a href="plan.html">受講者向け資料</a><a href="agent.html" aria-current="page">エージェント設計</a></span></div></nav>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;700;900&family=BIZ+UDPGothic:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#F4F6F2; --card:#FFFFFF; --card-2:#EDF0E9;
+  --ink:#191C18; --ink-2:#565C52; --ink-3:#84897E;
+  --rule:#DBDFD3; --rule-2:#C3C9B9;
+  --pine:#2F5D4F; --pine-soft:#E4EDE8; --pine-line:#9CBFB2;
+  --brass:#A96B1F; --brass-soft:#F6EBDA;
+  --alert:#B5462F; --alert-soft:#F8E4DE;
+  --shadow:0 1px 2px rgba(25,28,24,.05), 0 10px 28px -16px rgba(25,28,24,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131611; --card:#1B1F19; --card-2:#232821;
+    --ink:#E9EBE3; --ink-2:#B0B5A9; --ink-3:#82877C;
+    --rule:#2B3129; --rule-2:#3B4238;
+    --pine:#84BBA6; --pine-soft:#1B2B25; --pine-line:#3C5C4F;
+    --brass:#D9A05B; --brass-soft:#2E2416;
+    --alert:#E58B73; --alert-soft:#33201B;
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131611; --card:#1B1F19; --card-2:#232821;
+  --ink:#E9EBE3; --ink-2:#B0B5A9; --ink-3:#82877C;
+  --rule:#2B3129; --rule-2:#3B4238;
+  --pine:#84BBA6; --pine-soft:#1B2B25; --pine-line:#3C5C4F;
+  --brass:#D9A05B; --brass-soft:#2E2416;
+  --alert:#E58B73; --alert-soft:#33201B;
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -16px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{background:var(--bg)!important;color:var(--ink)!important}
+.pl{font-family:"BIZ UDPGothic","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  font-size:15.5px;line-height:1.85;max-width:68rem;margin:0 auto;
+  padding-block:2.6rem 5rem;padding-left:clamp(1.1rem,4vw,2.6rem);padding-right:clamp(1.1rem,4vw,2.6rem)}
+.pl h1,.pl h2{font-family:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;font-weight:700;color:var(--brass);margin:0 0 .6rem}
+.pl h1{font-size:clamp(1.65rem,4.2vw,2.35rem);line-height:1.35;margin:0 0 .9rem;font-weight:900;letter-spacing:.01em}
+.lead{color:var(--ink-2);margin:0 0 1.6rem;max-width:46rem}
+.toc{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 2.2rem}
+.toc a{font-size:.85rem;text-decoration:none;color:var(--pine);border:1px solid var(--pine-line);padding:.35rem .85rem;border-radius:999px;background:var(--card)}
+.toc a:hover{background:var(--pine-soft)}
+.pl h2{font-size:clamp(1.3rem,3vw,1.6rem);margin:3.2rem 0 .5rem;font-weight:700;display:flex;gap:.7rem;align-items:baseline;scroll-margin-top:5rem}
+.pl h2 .no{font-family:"BIZ UDPGothic",sans-serif;font-size:.8rem;color:var(--brass);letter-spacing:.12em;font-weight:700}
+.h2sub{color:var(--ink-2);margin:0 0 1.3rem;max-width:48rem}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1.3rem 1.4rem;margin:0 0 1.1rem}
+.tbl{overflow-x:auto;margin:.6rem 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{border-bottom:1px solid var(--rule);padding:.6rem .7rem;text-align:left;vertical-align:top}
+th{font-weight:700;color:var(--ink-2);font-size:.82rem;background:var(--card-2);white-space:nowrap}
+td:first-child{font-weight:700;color:var(--pine)}
+.fine{font-size:.84rem;color:var(--ink-3);margin:.6rem 0 0}
+.foot{margin-top:3.2rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-3)}
+
+/* 3つの言葉 */
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem;margin:0 0 1.2rem}
+.lg{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1.1rem 1.2rem}
+.lg .pic{height:64px;display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem}
+.lg h4{margin:0 0 .25rem;font-size:1.02rem}
+.lg p{margin:0;font-size:.9rem;color:var(--ink-2)}
+.mini{width:54px;height:40px;border-radius:8px;border:2px solid var(--pine);background:var(--pine-soft)}
+.mini.sm{width:34px;height:30px}
+.arrow{color:var(--ink-3);font-size:.9rem}
+.gatepic{width:14px;height:44px;border-radius:4px;background:var(--brass)}
+.fence{border:2px dashed var(--brass);border-radius:10px;padding:8px 10px;display:flex;gap:.35rem;align-items:center}
+
+/* 設計ボード */
+.bar{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 .8rem}
+.bar .sp{flex:1}
+button.b{font:inherit;font-size:.86rem;border:1px solid var(--pine-line);background:var(--card);color:var(--pine);border-radius:8px;padding:.35rem .8rem;cursor:pointer}
+button.b:hover{background:var(--pine-soft)}
+button.b.solid{background:var(--pine);color:var(--bg);border-color:var(--pine)}
+button.b.warn{color:var(--alert);border-color:var(--alert)}
+.board{border:2.5px dashed var(--brass);border-radius:16px;background:var(--card);padding:1rem 1rem 1.2rem;position:relative}
+.board .cap{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:0 0 .9rem}
+.board .cap b{font-size:.78rem;letter-spacing:.1em;color:var(--brass);margin-right:.3rem}
+.chip{font-size:.74rem;border-radius:999px;padding:.08rem .6rem;border:1px solid var(--rule-2);color:var(--ink-3);background:var(--card-2)}
+.chip.on{border-color:var(--brass);color:var(--brass);background:var(--brass-soft);font-weight:700}
+.flowwrap{overflow-x:auto;padding:12px 10px .4rem 0}
+.flow{display:flex;align-items:stretch;gap:0;min-width:max-content}
+.end{flex:none;width:7rem;border-radius:12px;background:var(--card-2);border:1px solid var(--rule);padding:.6rem .7rem;font-size:.82rem;display:flex;flex-direction:column;justify-content:center;gap:.3rem}
+.end b{font-size:.72rem;letter-spacing:.08em;color:var(--ink-3)}
+.end select{font:inherit;font-size:.82rem;width:100%;border:1px solid var(--rule-2);border-radius:6px;background:var(--card);color:var(--ink);padding:.2rem}
+.conn{flex:none;width:4.2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.25rem;position:relative}
+.conn::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--rule-2)}
+.conn .gate{position:relative;z-index:1;font:inherit;font-size:.7rem;line-height:1.25;cursor:pointer;border-radius:8px;padding:.3rem .25rem;width:3.9rem;text-align:center;border:1.5px dashed var(--rule-2);background:var(--card);color:var(--ink-3)}
+.conn .gate.on{border:2px solid var(--brass);background:var(--brass);color:#fff;font-weight:700}
+.conn.plain{width:1.6rem}.conn.plain .gate{display:none}
+.node{flex:none;width:9.9rem;border-radius:12px;border:2.5px solid var(--pine-line);background:var(--card);padding:.65rem .75rem .6rem;cursor:pointer;text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;gap:.3rem;position:relative}
+.node.sel{box-shadow:0 0 0 3px var(--pine-soft),0 0 0 4.5px var(--pine)}
+.node .n{font-size:.7rem;font-weight:700;letter-spacing:.08em;color:var(--ink-3)}
+.node .nm{font-weight:700;font-size:.98rem;line-height:1.4}
+.node .lv{align-self:flex-start;font-size:.7rem;font-weight:700;border-radius:999px;padding:.02rem .55rem;color:#fff}
+.node .tl{display:flex;flex-wrap:wrap;gap:.2rem}
+.node .tl span{font-size:.66rem;border:1px solid var(--rule-2);border-radius:5px;padding:0 .3rem;color:var(--ink-2)}
+.node .tl span.risk{border-color:var(--alert);color:var(--alert);font-weight:700}
+.node .err{height:6px;border-radius:3px;background:var(--card-2);overflow:hidden;margin-top:.15rem}
+.node .err i{display:block;height:100%;background:var(--alert);border-radius:3px;transition:width .25s}
+.node .errl{font-size:.64rem;color:var(--ink-3)}
+.node.l0{border-color:var(--pine-line)} .node.l0 .lv{background:var(--pine-line);color:var(--ink)}
+.node.l1{border-color:var(--pine)}      .node.l1 .lv{background:var(--pine);color:var(--bg)}
+.node.l2{border-color:var(--brass)}     .node.l2 .lv{background:var(--brass)}
+.node.l3{border-color:var(--alert)}     .node.l3 .lv{background:var(--alert)}
+.node.flag{background:var(--alert-soft)}
+.node.flag::after{content:"!";position:absolute;right:-9px;top:-9px;width:20px;height:20px;border-radius:50%;background:var(--alert);color:#fff;font-size:.78rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.keys{display:flex;flex-wrap:wrap;gap:.9rem;font-size:.76rem;color:var(--ink-2);margin:.7rem 0 0}
+.keys span{display:inline-flex;align-items:center;gap:.3rem}
+.keys i{width:14px;height:14px;border-radius:4px;border:2.5px solid;display:inline-block}
+
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:1rem;margin:1rem 0 0}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:1.1rem 1.2rem}
+.panel h3{margin:0 0 .7rem;font-size:1rem;display:flex;align-items:center;gap:.5rem}
+.panel h3 small{font-weight:400;color:var(--ink-3);font-size:.78rem}
+label.f{display:block;font-size:.78rem;font-weight:700;color:var(--ink-2);margin:.7rem 0 .2rem}
+.panel input[type=text],.panel textarea{font:inherit;font-size:.9rem;width:100%;border:1px solid var(--rule-2);border-radius:8px;background:var(--bg);color:var(--ink);padding:.4rem .55rem}
+.panel textarea{min-height:3.6rem;resize:vertical;line-height:1.6}
+.lvl{display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem}
+.lvl button{font:inherit;font-size:.74rem;line-height:1.3;border:1.5px solid var(--rule-2);background:var(--card);color:var(--ink-2);border-radius:8px;padding:.35rem .2rem;cursor:pointer}
+.lvl button.on{color:#fff;font-weight:700}
+.lvl button.on.v0{background:var(--pine-line);border-color:var(--pine-line);color:var(--ink)}
+.lvl button.on.v1{background:var(--pine);border-color:var(--pine);color:var(--bg)}
+.lvl button.on.v2{background:var(--brass);border-color:var(--brass)}
+.lvl button.on.v3{background:var(--alert);border-color:var(--alert)}
+.tg{display:flex;flex-wrap:wrap;gap:.35rem}
+.tg button{font:inherit;font-size:.8rem;border:1.5px solid var(--rule-2);background:var(--card);color:var(--ink-3);border-radius:999px;padding:.15rem .7rem;cursor:pointer}
+.tg button.on{border-color:var(--pine);background:var(--pine-soft);color:var(--pine);font-weight:700}
+.tg button.on.risk{border-color:var(--alert);background:var(--alert-soft);color:var(--alert)}
+.sw{display:flex;align-items:center;gap:.6rem;padding:.3rem 0;cursor:pointer;font-size:.9rem;border:0;background:none;color:var(--ink);font-family:inherit;width:100%;text-align:left}
+.sw i{flex:none;width:36px;height:20px;border-radius:999px;background:var(--rule-2);position:relative;transition:background .15s}
+.sw i::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:var(--card);transition:left .15s}
+.sw.on i{background:var(--brass)}
+.sw.on i::after{left:18px}
+.grp{font-size:.74rem;font-weight:700;letter-spacing:.08em;color:var(--brass);margin:.8rem 0 .15rem}
+.grp:first-of-type{margin-top:0}
+
+.lamp{display:flex;align-items:center;gap:.8rem;border-radius:12px;padding:.8rem 1rem;margin:1rem 0 .6rem;border:2px solid;font-weight:700}
+.lamp .dot{width:18px;height:18px;border-radius:50%;flex:none}
+.lamp.g{border-color:var(--pine);background:var(--pine-soft);color:var(--pine)} .lamp.g .dot{background:var(--pine)}
+.lamp.a{border-color:var(--brass);background:var(--brass-soft);color:var(--brass)} .lamp.a .dot{background:var(--brass)}
+.lamp.r{border-color:var(--alert);background:var(--alert-soft);color:var(--alert)} .lamp.r .dot{background:var(--alert)}
+.diag{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.diag li{display:grid;grid-template-columns:1.1rem 1fr;gap:.6rem;align-items:start;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:.55rem .8rem;font-size:.9rem}
+.diag li::before{content:"";width:10px;height:10px;border-radius:50%;margin-top:.55rem}
+.diag li.r::before{background:var(--alert)} .diag li.a::before{background:var(--brass)} .diag li.g::before{background:var(--pine)}
+.diag li b{display:block}
+.diag li span{color:var(--ink-2);font-size:.86rem}
+
+pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMono-Regular,Consolas,"BIZ UDGothic",monospace;font-size:.84rem;line-height:1.7;background:var(--bg);border:1px solid var(--rule);border-radius:10px;padding:.9rem 1rem;margin:.4rem 0 0;max-height:26rem;overflow:auto}
+.outhead{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.outhead h3{margin:0;font-size:1rem;flex:1}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:.7rem;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:.7rem .9rem}
+.steps li::before{content:counter(s);font-family:"Zen Old Mincho",serif;font-weight:900;font-size:1.25rem;color:var(--pine);line-height:1.5}
+.steps b{display:block}
+.steps span{font-size:.9rem;color:var(--ink-2)}
+@media print{.toc,.bar{display:none}.pl{padding-block:0}}
+</style>
+
+<main class="pl">
+<p class="eyebrow">AI実装講座 1対1版 ／ 個別資料 ／ 2026年10月3日時点</p>
+<h1>自分でエージェントを設計する</h1>
+<p class="lead">AIに仕事を任せる仕組みを、ご自身で設計して作っていけるようにするための資料です。文章で覚えるのではなく、<strong>図で見て、図の上で動かして</strong>決めます。下の設計ボードで組んだものが、そのまま設計書と、ChatGPTに入れる指示文になります。</p>
+
+<nav class="toc">
+  <a href="#words">1｜3つの言葉を図でつかむ</a>
+  <a href="#board">2｜設計ボード</a>
+  <a href="#doc">3｜設計書と指示文</a>
+  <a href="#make">4｜ChatGPTで形にする</a>
+  <a href="#road">5｜これからの進め方</a>
+</nav>
+
+<h2 id="words"><span class="no">01</span>3つの言葉を、図でつかむ</h2>
+<p class="h2sub">設計するものは3つだけです。箱、箱のつなぎ方、外側の囲い。</p>
+<div class="legend">
+  <div class="lg">
+    <div class="pic"><div class="mini"></div></div>
+    <h4>エージェント ＝ 箱</h4>
+    <p>役割を1つ持たせたAIです。「やること」「やらないこと」「使ってよい道具」「どこまで任せるか」を、箱ごとに決めます。</p>
+  </div>
+  <div class="lg">
+    <div class="pic"><div class="mini sm"></div><span class="arrow">━</span><div class="gatepic"></div><span class="arrow">━▶</span><div class="mini sm"></div></div>
+    <h4>オーケストレーション ＝ つなぎ方</h4>
+    <p>箱を並べる順番と、箱と箱のあいだに置く「関所」（人が確認する場所）です。何をきっかけに動き、どこへ出すかも決めます。</p>
+  </div>
+  <div class="lg">
+    <div class="pic"><div class="fence"><div class="mini sm"></div><div class="mini sm"></div></div></div>
+    <h4>ガードレール ＝ 囲い</h4>
+    <p>全体にかける決まりです。入れてはいけない情報、人の承認が要る操作、止め方、点検。箱がいくつ増えても、この囲いの中で動かします。</p>
+  </div>
+</div>
+<p class="fine">設計の順番は、<strong>囲い → 箱を1つ → つなぐ</strong>です。先に囲いを決めておくと、あとから箱を足しても事故が起きにくくなります。</p>
+
+<h2 id="board"><span class="no">02</span>設計ボード</h2>
+<p class="h2sub">箱を押すと、下で中身を変えられます。箱のあいだの「関所」は、押すと置けます。変えるたびに、色と下の点検結果が変わります。内容はこのブラウザに保存されます。</p>
+
+<div class="bar">
+  <span style="font-size:.82rem;color:var(--ink-2)">ひな形から始める：</span>
+  <button class="b" data-preset="minutes">議事録 → 状況まとめ</button>
+  <button class="b" data-preset="proposal">提案書の点検</button>
+  <button class="b" data-preset="inquiry">問い合わせの一次回答</button>
+  <span class="sp"></span>
+  <button class="b" id="addBtn">＋ 箱を足す</button>
+  <button class="b warn" id="delBtn">選んだ箱を消す</button>
+</div>
+
+<div class="board">
+  <div class="cap" id="cap"></div>
+  <div class="flowwrap"><div class="flow" id="flow"></div></div>
+  <div class="keys">
+    <span><i style="border-color:var(--pine-line)"></i>読むだけ</span>
+    <span><i style="border-color:var(--pine)"></i>下書きまで</span>
+    <span><i style="border-color:var(--brass)"></i>確認してから実行</span>
+    <span><i style="border-color:var(--alert)"></i>自動で実行</span>
+    <span><i style="border-color:var(--brass);background:var(--brass)"></i>関所（人が確認）</span>
+    <span><i style="border:0;background:var(--alert);height:6px;border-radius:3px;width:22px"></i>誤りの広がり</span>
+  </div>
+</div>
+
+<div id="lamp"></div>
+<ul class="diag" id="diag"></ul>
+
+<div class="panels">
+  <div class="panel">
+    <h3 id="agTitle">箱の中身</h3>
+    <label class="f" for="fName">名前（役割が分かる名前に）</label>
+    <input type="text" id="fName">
+    <label class="f">どこまで任せるか</label>
+    <div class="lvl" id="fLevel"></div>
+    <label class="f">使ってよい道具</label>
+    <div class="tg" id="fTools"></div>
+    <label class="f" for="fDo">やること</label>
+    <textarea id="fDo"></textarea>
+    <label class="f" for="fDont">やらないこと</label>
+    <textarea id="fDont"></textarea>
+  </div>
+  <div class="panel">
+    <h3>ガードレール <small>全体にかける決まり</small></h3>
+    <div id="rails"></div>
+  </div>
+</div>
+
+<h2 id="doc"><span class="no">03</span>設計書と指示文</h2>
+<p class="h2sub">ボードの内容から自動で作っています。設計書は社内での引き継ぎ用、指示文はChatGPTのプロジェクトにそのまま貼る用です。</p>
+<div class="card">
+  <div class="outhead"><h3>設計書</h3><button class="b solid" data-copy="spec">コピーする</button></div>
+  <pre class="out" id="spec"></pre>
+</div>
+<div class="card">
+  <div class="outhead"><h3 id="promptTitle">指示文</h3><button class="b solid" data-copy="prompt">コピーする</button></div>
+  <pre class="out" id="prompt"></pre>
+  <p class="fine">選んでいる箱の指示文です。箱を1つにつき、ChatGPTのプロジェクトを1つ作り、その「指示」の欄に貼ります。</p>
+</div>
+
+<h2 id="make"><span class="no">04</span>ChatGPTで形にする</h2>
+<p class="h2sub">ボードの部品は、ChatGPTの画面ではこの場所にあたります。新しい道具は増やしません。</p>
+<div class="card tbl" style="padding:.4rem .6rem">
+<table>
+  <thead><tr><th>ボードの部品</th><th>ChatGPTでの場所</th><th>やること</th></tr></thead>
+  <tbody>
+    <tr><td>箱（エージェント）</td><td>プロジェクト</td><td>箱1つにつき1つ作る。「指示」に指示文を貼り、「ソース」に読ませる資料を入れ、メモリは「プロジェクト専用」にする</td></tr>
+    <tr><td>使ってよい道具</td><td>プラグインディレクトリ／設定 → アプリ</td><td>使う道具だけをつなぐ。つないでいない道具は、そもそも使えない</td></tr>
+    <tr><td>どこまで任せるか</td><td>設定 → アプリ →「許可を求める」</td><td>最初は「常に確認」。確認が出たら「今回のみ許可」だけを使う</td></tr>
+    <tr><td>つなぎ方</td><td>Work（Plus以上）／会話を分けて順に流す</td><td>Workに設計書の工程を貼る。使えないときは、箱ごとに会話を分け、前の出力を次の冒頭に貼る</td></tr>
+    <tr><td>関所</td><td>確認の画面／人が読む</td><td>止まった所で内容を読む。設計書の関所の位置と合っているかを見る</td></tr>
+    <tr><td>きっかけ</td><td>スケジュール済み</td><td>時刻で動かす、変化を見張る、メールやSlackの新着で動かす（新着はPlus以上）</td></tr>
+    <tr><td>囲い（ガードレール）</td><td>設定 → データコントロール／共有の権限</td><td>学習に使わせない設定にする。社員に渡すときの権限は「チャット」にする</td></tr>
+  </tbody>
+</table>
+</div>
+<ol class="steps">
+  <li><div><b>囲いを先に決める</b><span>ボードの右側のスイッチを決め、設定の「許可を求める」を「常に確認」にします。</span></div></li>
+  <li><div><b>箱を1つだけ作る</b><span>プロジェクトを1つ作り、指示文を貼り、資料を3本だけ入れます。</span></div></li>
+  <li><div><b>ある質問・ない質問で確かめる</b><span>資料にある質問と、ない質問を1つずつ投げます。ない質問に「記載がありません」と答えれば合格です。</span></div></li>
+  <li><div><b>2つ目の箱をつなぐ</b><span>最初の箱の直後に関所を置いてから、次の箱へ渡します。</span></div></li>
+  <li><div><b>わざと壊す</b><span>入力を1つ欠けさせて流し、どこで止まるか、どこで気づけるかを見ます。</span></div></li>
+  <li><div><b>きっかけと点検を入れる</b><span>動いてから、時刻や新着で動かします。毎月、同じ質問で点検します。</span></div></li>
+</ol>
+
+<h2 id="road"><span class="no">05</span>これからの進め方（案）</h2>
+<p class="h2sub">ご自身で作っていけることを目標に、残りの回をこの順に組み替える案です。その場のお話に合わせて入れ替えます。</p>
+<div class="card tbl" style="padding:.4rem .6rem">
+<table>
+  <thead><tr><th>段階</th><th>やること</th><th>持ち帰るもの</th><th>もとの回</th></tr></thead>
+  <tbody>
+    <tr><td>1 囲いを決める</td><td>ガードレールのスイッチを決める。設定を「常に確認」にする</td><td>ガードレールの一覧</td><td>第5回・第11回</td></tr>
+    <tr><td>2 箱を1つ作る</td><td>1つ目のエージェントを設計し、プロジェクトで動かす</td><td>エージェント1体と設計書</td><td>第5回</td></tr>
+    <tr><td>3 数字を扱う箱</td><td>表を読ませる箱を作る。検算を関所として置く</td><td>月次レポートの箱</td><td>第4回</td></tr>
+    <tr><td>4 つなぐ</td><td>2つ以上の箱を並べ、関所の位置を決める。わざと壊す</td><td>つなぎ方の設計書</td><td>第9回</td></tr>
+    <tr><td>5 きっかけで動かす</td><td>時刻・新着で動かす。止め方を決める</td><td>自動で流れる仕組み1本</td><td>第7回</td></tr>
+    <tr><td>6 点検する</td><td>毎月、同じ質問で採点する</td><td>点検の質問と記録</td><td>第8回・第10回</td></tr>
+    <tr><td>7 社内に渡す</td><td>社員の方に見せ、権限「チャット」で渡す。ルールを1枚にする</td><td>社内説明とルール</td><td>第6回・第11回・第12回</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="foot">本資料の機能名・プラン名は2026年9月時点のものです。AIのサービスは短い期間で変わるため、実際の画面で確認しながら進めます。</p>
+</main>
+
+<script>
+(function(){
+  var KEY='agentBoardV1';
+  var LV=['読むだけ','下書きまで','確認してから実行','自動で実行'];
+  var TOOLS=[['src','資料を読む'],['web','Webで調べる'],['mailr','メールを読む'],['cal','予定を見る'],['draft','下書きを作る'],['file','ファイルを書き換える',1],['send','メールを送る',1]];
+  var TRIG=['話しかけたとき','決まった時刻','メールやSlackが届いたとき'];
+  var OUT=['自分だけが見る','社内に出す','社外に出す'];
+  var RAILS=[
+    ['入れない情報',[['in1','個人名・給与は入れない'],['in2','取引先名・金額は伏せて入れる']]],
+    ['人の承認が要る所',[['ap1','金額が決まる前に、人が見る'],['ap2','社外に出る前に、人が見る'],['ap3','取り消せない操作の前に、人が見る']]],
+    ['設定',[['set1','設定は「常に確認」にしてある']]],
+    ['運用',[['op1','止め方を決めてある'],['op2','手作業に戻す手順を書いてある'],['op3','毎月、同じ質問で点検する']]]
+  ];
+  function ag(name,level,tools,doo,dont){var t={};tools.forEach(function(k){t[k]=1});return {name:name,level:level,tools:t,doo:doo,dont:dont}}
+  var PRESETS={
+    minutes:{name:'議事録から状況まとめへ',trig:0,out:1,
+      agents:[ag('議事録係',1,['src','draft'],'会議のメモから、決まったこと・宿題・期限の3つに分けた議事録を作る','メモにないことを補わない／発言者の評価を書かない'),
+              ag('状況まとめ係',1,['src','draft'],'議事録から、今週の進み具合と止まっている所をA4一枚にまとめる','数字を作らない／人の評価を書かない')],
+      gates:[true,true],rails:{in1:1,ap2:1,set1:1}},
+    proposal:{name:'提案書の点検',trig:0,out:0,
+      agents:[ag('形をそろえる係',1,['src','draft'],'出てきた提案を、費用・期間・担当・やめる基準の4項目に並べ直す','書かれていない数字を埋めない'),
+              ag('抜けを指摘する係',0,['src'],'4項目のうち抜けている所と、提案者に返す質問の候補を挙げる','採用するかどうかを判断しない／人の評価をしない')],
+      gates:[false,true],rails:{in1:1,set1:1}},
+    inquiry:{name:'問い合わせの一次回答',trig:2,out:2,
+      agents:[ag('分類する係',0,['mailr'],'届いた問い合わせを、種類と急ぎ度で分ける','返信しない'),
+              ag('調べる係',0,['src'],'社内の資料から、答えの根拠になる所を探す','資料にないことを推測しない'),
+              ag('下書き係',1,['draft'],'根拠つきの返信の下書きを作る','送信しない／金額を約束しない')],
+      gates:[true,false,true],rails:{in1:1,in2:1,ap1:1,ap2:1,set1:1,op1:1}}
+  };
+  var S, sel=0;
+  function clone(o){return JSON.parse(JSON.stringify(o))}
+  function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(v&&v.agents&&v.agents.length)return v}catch(e){}return clone(PRESETS.minutes)}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+  function $(id){return document.getElementById(id)}
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  function checks(){
+    var r=[], n=S.agents.length, R=S.rails||{}, flag={};
+    S.agents.forEach(function(a,i){
+      var gateBefore = i>0 ? S.gates[i-1] : false, gateAfter=S.gates[i];
+      if(a.level===3 && (a.tools.send || (i===n-1 && S.out===2)) && !gateAfter){r.push(['r','「'+a.name+'」が、自動で社外に出します','「確認してから実行」に下げるか、直後に関所を置きます。社外に出るものは、人が出します。']);flag[i]=1}
+      if(a.tools.send && a.level>=2 && !R.ap2){r.push(['r','「'+a.name+'」はメールを送れますが、社外に出る前の承認が決まっていません','ガードレールの「社外に出る前に、人が見る」を入れます。']);flag[i]=1}
+      if(a.tools.file && a.level>=2 && !R.ap3){r.push(['r','「'+a.name+'」はファイルを書き換えられますが、取り消せない操作の承認が決まっていません','ガードレールの「取り消せない操作の前に、人が見る」を入れます。']);flag[i]=1}
+      if(!String(a.dont||'').trim()){r.push(['a','「'+a.name+'」に「やらないこと」が書かれていません','頼んでいないことまでやります。範囲を1行で区切ります。']);flag[i]=1}
+      if(a.tools.mailr && !R.in1){r.push(['a','「'+a.name+'」はメールを読みますが、個人情報の扱いが決まっていません','ガードレールの「個人名・給与は入れない」を入れるか、読ませる範囲を絞ります。'])}
+    });
+    if(n>=2 && !S.gates[0]) r.push(['a','最初の箱の直後に、関所がありません','最初の取り違えが、最後まで残って広がります。確認は、いちばん上流に1つ置きます。']);
+    if(S.out>=1 && !S.gates[n-1]) r.push([S.out===2?'r':'a','出す直前に、関所がありません',OUT[S.out]+'前に、人が1回読む場所を置きます。']);
+    if(S.out===2 && !R.ap2) r.push(['a','出力先が社外ですが、社外に出る前の承認が決まっていません','ガードレールの「社外に出る前に、人が見る」を入れます。']);
+    if(S.trig>0 && !R.op1) r.push(['a','自動で動き出しますが、止め方が決まっていません','「スケジュール済み」から一時停止できることを確かめ、スイッチを入れます。']);
+    if(S.trig>0 && !R.op2) r.push(['a','止まったときに、手作業に戻す手順がありません','自動が止まった日に、誰が何をするかを1行で書きます。']);
+    if(S.agents.some(function(a){return a.level>=2}) && !R.set1) r.push(['a','実行まで任せる箱がありますが、設定が「常に確認」になっていません','設定 → アプリ →「許可を求める」を確かめます。']);
+    if(!R.op3) r.push(['a','点検の仕組みが、まだありません','動き出してからで構いません。毎月、同じ質問で採点します。']);
+    return {list:r,flag:flag};
+  }
+  function spread(){ // 誤りの広がり：箱を通るたびに増え、関所で0に戻る
+    var e=0,out=[];S.agents.forEach(function(a,i){e+=1;out.push(e);if(S.gates[i])e=0});return out;
+  }
+  function render(){
+    var n=S.agents.length; if(sel>=n) sel=n-1;
+    while(S.gates.length<n) S.gates.push(false); S.gates.length=n;
+    var R=S.rails||(S.rails={});
+    var C=checks(), sp=spread();
+    // 囲い
+    var cap='<b>ガードレール</b>';
+    RAILS.forEach(function(g){g[1].forEach(function(x){cap+='<span class="chip'+(R[x[0]]?' on':'')+'">'+esc(x[1])+'</span>'})});
+    $('cap').innerHTML=cap;
+    // 流れ
+    var h='<div class="end"><b>きっかけ</b><select id="selTrig">'+TRIG.map(function(t,i){return '<option value="'+i+'"'+(S.trig===i?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div><div class="conn plain"><button class="gate">－</button></div>';
+    S.agents.forEach(function(a,i){
+      var tl=TOOLS.filter(function(t){return a.tools[t[0]]}).map(function(t){return '<span'+(t[2]?' class="risk"':'')+'>'+t[1]+'</span>'}).join('');
+      h+='<button class="node l'+a.level+(i===sel?' sel':'')+(C.flag[i]?' flag':'')+'" data-i="'+i+'"><span class="n">箱 '+(i+1)+'</span><span class="nm">'+esc(a.name||'（名前なし）')+'</span><span class="lv">'+LV[a.level]+'</span><span class="tl">'+tl+'</span><span class="err"><i style="width:'+Math.min(100,sp[i]*100/Math.max(3,n))+'%"></i></span><span class="errl">誤りの広がり</span></button>';
+      h+='<div class="conn"><button class="gate'+(S.gates[i]?' on':'')+'" data-g="'+i+'">'+(S.gates[i]?'関所<br>人が確認':'関所を<br>置く')+'</button></div>';
+    });
+    h+='<div class="end"><b>出す先</b><select id="selOut">'+OUT.map(function(t,i){return '<option value="'+i+'"'+(S.out===i?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div>';
+    $('flow').innerHTML=h;
+    // 点検
+    var red=C.list.filter(function(x){return x[0]==='r'}).length, amb=C.list.length-red;
+    var cls=red?'r':(amb?'a':'g');
+    var msg=red?'このまま動かすと事故になりうる所が '+red+' つあります':(amb?'動かす前に決めておきたい所が '+amb+' つあります':'大きな穴は見当たりません。本番の題材で、1回流してみます');
+    $('lamp').innerHTML='<div class="lamp '+cls+'"><span class="dot"></span><span>'+msg+'</span></div>';
+    $('diag').innerHTML=C.list.map(function(x){return '<li class="'+x[0]+'"><div><b>'+esc(x[1])+'</b><span>'+esc(x[2])+'</span></div></li>'}).join('');
+    // 箱の中身
+    var a=S.agents[sel];
+    $('agTitle').innerHTML='箱 '+(sel+1)+' の中身 <small>'+esc(a.name)+'</small>';
+    if(document.activeElement!==$('fName')) $('fName').value=a.name;
+    if(document.activeElement!==$('fDo')) $('fDo').value=a.doo||'';
+    if(document.activeElement!==$('fDont')) $('fDont').value=a.dont||'';
+    $('fLevel').innerHTML=LV.map(function(t,i){return '<button class="v'+i+(a.level===i?' on':'')+'" data-lv="'+i+'">'+t+'</button>'}).join('');
+    $('fTools').innerHTML=TOOLS.map(function(t){return '<button class="'+(a.tools[t[0]]?'on':'')+(t[2]?' risk':'')+'" data-tool="'+t[0]+'">'+t[1]+'</button>'}).join('');
+    // ガードレール
+    $('rails').innerHTML=RAILS.map(function(g){return '<div class="grp">'+g[0]+'</div>'+g[1].map(function(x){return '<button class="sw'+(R[x[0]]?' on':'')+'" data-rail="'+x[0]+'"><i></i><span>'+x[1]+'</span></button>'}).join('')}).join('');
+    // 出力
+    $('spec').textContent=spec(); $('prompt').textContent=prompt(a); $('promptTitle').textContent='指示文（箱 '+(sel+1)+'：'+a.name+'）';
+    save();
+  }
+  function toolNames(a){var t=TOOLS.filter(function(x){return a.tools[x[0]]}).map(function(x){return x[1]});return t.length?t.join('、'):'なし'}
+  function railList(){var R=S.rails||{},o=[];RAILS.forEach(function(g){g[1].forEach(function(x){if(R[x[0]])o.push(x[1])})});return o}
+  function spec(){
+    var L=['■ 仕組みの名前：'+(S.name||'（未定）'),'■ きっかけ：'+TRIG[S.trig],'■ 出す先：'+OUT[S.out],''];
+    S.agents.forEach(function(a,i){
+      L.push('【箱 '+(i+1)+'】'+a.name);
+      L.push('　任せる深さ：'+LV[a.level]);
+      L.push('　使ってよい道具：'+toolNames(a));
+      L.push('　やること：'+(a.doo||'（未記入）'));
+      L.push('　やらないこと：'+(a.dont||'（未記入）'));
+      L.push('　└ 直後の関所：'+(S.gates[i]?'あり（人が確認してから次へ）':'なし'));
+      L.push('');
+    });
+    var rl=railList();
+    L.push('【ガードレール】'); if(rl.length) rl.forEach(function(x){L.push('　・'+x)}); else L.push('　（まだ決めていません）');
+    var C=checks().list; L.push(''); L.push('【まだ決まっていない所】');
+    if(C.length) C.forEach(function(x){L.push('　・'+x[1])}); else L.push('　なし');
+    return L.join('\n');
+  }
+  function prompt(a){
+    var R=S.rails||{}, L=[];
+    L.push('あなたは「'+a.name+'」です。');
+    L.push('');
+    L.push('【やること】'); L.push(a.doo||'（未記入）');
+    L.push('');
+    L.push('【やらないこと】'); L.push(a.dont||'（未記入）');
+    L.push('頼まれていない作業には進まないでください。');
+    L.push('');
+    L.push('【守ること】');
+    L.push('・回答は、渡された資料と入力に書かれている内容だけから作ってください。');
+    L.push('・記載がない場合は「記載がありません」と答え、推測しないでください。');
+    L.push('・根拠にした資料名や箇所を、末尾に書いてください。');
+    if(R.in1) L.push('・個人名や給与が含まれていたら、その旨を指摘し、出力には書かないでください。');
+    if(R.in2) L.push('・取引先名と金額は【　】のまま残してください。');
+    if(a.level<=1) L.push('・送信・登録・書き換えなどの実行はしないでください。'+(a.level===1?'下書きまでです。':'読んでまとめるだけです。'));
+    if(a.level===2) L.push('・実行の前に、必ず内容を示して確認を求めてください。');
+    if(R.ap1) L.push('・金額が確定する内容は、確定させずに「要確認」と書いてください。');
+    L.push('');
+    L.push('【出力の最後に書くこと】');
+    L.push('・前提にしたこと（次の工程への引き継ぎ）');
+    L.push('・人に確認してほしい所');
+    return L.join('\n');
+  }
+  // 操作
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('button'); if(!t) return;
+    var a=S.agents[sel];
+    if(t.dataset.i!==undefined){sel=+t.dataset.i;render()}
+    else if(t.dataset.g!==undefined){S.gates[+t.dataset.g]=!S.gates[+t.dataset.g];render()}
+    else if(t.dataset.lv!==undefined){a.level=+t.dataset.lv;render()}
+    else if(t.dataset.tool){a.tools[t.dataset.tool]=a.tools[t.dataset.tool]?0:1;render()}
+    else if(t.dataset.rail){S.rails[t.dataset.rail]=S.rails[t.dataset.rail]?0:1;render()}
+    else if(t.dataset.preset){S=clone(PRESETS[t.dataset.preset]);sel=0;render()}
+    else if(t.id==='addBtn'){if(S.agents.length<6){S.agents.push(ag('新しい箱',0,['src'],'',''));S.gates.push(false);sel=S.agents.length-1;render()}}
+    else if(t.id==='delBtn'){if(S.agents.length>1){S.agents.splice(sel,1);S.gates.splice(sel,1);sel=Math.max(0,sel-1);render()}}
+    else if(t.dataset.copy){var tx=$(t.dataset.copy).textContent;var done=function(){var o=t.textContent;t.textContent='コピーしました';setTimeout(function(){t.textContent=o},1400)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tx).then(done,function(){})}else{var ta=document.createElement('textarea');ta.value=tx;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(_){ }document.body.removeChild(ta)}}
+  });
+  document.addEventListener('change',function(e){
+    if(e.target.id==='selTrig'){S.trig=+e.target.value;render()}
+    if(e.target.id==='selOut'){S.out=+e.target.value;render()}
+  });
+  [['fName','name'],['fDo','doo'],['fDont','dont']].forEach(function(p){
+    $(p[0]).addEventListener('input',function(e){S.agents[sel][p[1]]=e.target.value;render()});
+  });
+  S=load(); render();
+})();
+</script>
+</body>
+</html>

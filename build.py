@@ -18,6 +18,8 @@ PAGES = [
      "受講が決まった方へ。初回の持ち物、各回の準備、12回の流れ、用語、よくあるご質問。"),
     ("plan.html",         "受講者向け資料", "src/plan_body.html",
      "前回のおさらい、今日やること、12回の進め方、第1回のご質問への回答。受講者に画面共有でお見せする資料。"),
+    ("agent.html",        "エージェント設計", "src/agent_body.html",
+     "個別資料。オーケストレーション・ガードレール・エージェント設計を、図の上で動かして決める設計ボード。"),
 ]
 
 # 受講者向けページには講師用ナビを出さない
@@ -56,7 +58,7 @@ TPL = """<!doctype html>
 </html>
 """
 
-EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘","plan.html":"💬"}
+EMOJI = {"index.html":"🗂️","deliverables.html":"📐","roadmap.html":"🧭","forms.html":"📋","slides.html":"🖥️","models.html":"🧮","student.html":"📘","plan.html":"💬","agent.html":"🧩"}
 
 for out, label, src, desc in PAGES:
     raw = io.open(src, encoding="utf-8").read()
