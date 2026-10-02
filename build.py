@@ -11,7 +11,7 @@ PAGES = [
     ("forms.html",        "フォーム設置手順", "src/forms_body.html",
      "Apps Scriptで診断フォーム3つと自動採点シートを10分で立ち上げる手順。"),
     ("slides.html",       "登壇資料", "src/slides_body.html",
-     "全12回の画面共有用スライド（各回15枚・PPTX）と、読むだけで分かる各回の資料（PDF）。"),
+     "全12回の画面共有用スライド（各回12〜20枚・PPTX）と、読むだけで分かる各回の資料（PDF）。"),
     ("models.html",       "モデルと用語", "src/models_body.html",
      "主要生成AIモデルの知能スコア・API単価・月額プラン・コスト試算と、用途別の使い分け、用語集。2026年9月版。"),
     ("student.html",      "受講のご案内", "src/student_body.html",
