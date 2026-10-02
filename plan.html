@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="googlebot" content="noindex,nofollow">
-<meta name="description" content="第1回のご質問への回答、現在地に合わせた12回の進め方、日程と毎回の準備。受講者に画面共有でお見せする資料。">
+<meta name="description" content="前回のおさらい、今日やること、12回の進め方、第1回のご質問への回答。受講者に画面共有でお見せする資料。">
 <title>第1回のご質問への回答と、これからの進め方｜AI実装講座</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>💬</text></svg>">
 <link rel="stylesheet" href="assets/nav.css">
@@ -121,22 +121,169 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
 .foot{margin-top:3.2rem;padding-top:1rem;border-top:1px solid var(--rule);font-size:.8rem;color:var(--ink-3)}
 @media print{.toc{display:none}.card,.promise .p,.step{box-shadow:none;break-inside:avoid}.pl{padding-block:0}}
 
+.say{background:var(--card);border-left:3px solid var(--pine);border-radius:0 6px 6px 0;padding:.5rem .75rem;margin:.6rem 0 0;font-size:.88rem;color:var(--ink-2)}
+.say b{display:block;font-size:.74rem;letter-spacing:.08em;color:var(--pine);margin-bottom:.15rem}
 </style>
 
 <main class="pl">
-<p class="eyebrow">AI実装講座 1対1版 ／ 2026年9月時点</p>
-<h1>第1回のご質問への回答と、<br>これからの進め方</h1>
-<p class="lead">第1回でいただいたご質問に、ひとつずつお答えします。あわせて、第1回で拝見した今の使い方をもとに、この先12回をどう進めるかをまとめました。</p>
+<p class="eyebrow">AI実装講座 1対1版 ／ 2026年10月3日時点</p>
+<h1>前回のおさらいと、<br>今日やること</h1>
+<p class="lead">前回（9月27日）にお話しした内容をまとめ、今日やることを並べました。後半には、12回の進め方と、第1回でいただいたご質問への回答を残してあります。</p>
 
 <nav class="toc">
-  <a href="#answers">1｜ご質問への回答</a>
-  <a href="#now">2｜いまの現在地</a>
+  <a href="#recap">1｜前回のおさらい</a>
+  <a href="#today">2｜今日やること</a>
   <a href="#plan">3｜12回の進め方</a>
-  <a href="#today">4｜今日やること</a>
+  <a href="#now">4｜いまの現在地</a>
+  <a href="#answers">5｜第1回のご質問への回答</a>
 </nav>
 
-<!-- ============ 1 ============ -->
-<h2 id="answers"><span class="no">01</span>第1回のご質問への回答</h2>
+<!-- ============ recap ============ -->
+<h2 id="recap"><span class="no">01</span>前回（9月27日）のおさらい</h2>
+<p class="h2sub">前回お話しした中から、これからも使うものを5つにまとめました。</p>
+
+<div class="two">
+  <div class="col">
+    <h4>① ChatGPTの新しい機能</h4>
+    <ul>
+      <li>Gmail・Googleカレンダーとつなぎ、<strong>予定の整理やメールのまとめ</strong>を任せられます（2026年8月から）</li>
+      <li>「スケジュール」で、<strong>決まった時間に自動で</strong>動かせます</li>
+      <li>外出先から頼んでおき、戻ってから結果を見る、という使い方もできます</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>② 安全な使い方</h4>
+    <ul>
+      <li>会社の環境では、AIに<strong>「何でも実行してよい」という権限は渡しません</strong></li>
+      <li>ファイルの操作や送信の前には、<strong>必ず確認が入る設定</strong>にします（設定 → アプリ →「許可を求める」→「常に確認」）</li>
+      <li>確認が出たら「今回のみ許可」だけを使います</li>
+    </ul>
+    <p class="fine">AIにファイル操作や通信の権限を渡すと事故が起きうる、というご指摘のとおりです。この線は、社員の方に渡すときのルールにもそのまま使います。</p>
+  </div>
+  <div class="col">
+    <h4>③ プロジェクト機能</h4>
+    <ul>
+      <li>業務ごとに、<strong>会話・資料・決まりごとを1つの箱にまとめます</strong></li>
+      <li>これまでのチャットは、まとめては移せません。1つずつ移します</li>
+      <li>「最近のチャットを探しにくい」は、箱に入れておくと解消しやすくなります</li>
+    </ul>
+    <p class="fine"><strong>決めたこと：</strong>社内で使う文章のひな形と基本の設定を整理して、共有します。</p>
+  </div>
+  <div class="col">
+    <h4>④ 会話の引き継ぎ</h4>
+    <ul>
+      <li>会話が長くなると、前の話を取りこぼしやすくなります</li>
+      <li>長くなったら、<strong>引き継ぎ用のメモを作らせて、新しい会話に移ります</strong></li>
+      <li>メモはプロジェクトの中に置いておきます（前回のご提案のとおりです）</li>
+    </ul>
+    <p class="say"><b>頼み方の例</b>ここまでの内容を、新しい会話に引き継ぐためのメモにまとめてください。決まったこと・まだ決まっていないこと・次にやることを分けて書いてください。</p>
+  </div>
+  <div class="col">
+    <h4>⑤ 見直しを重ねさせる（ディープレビュー）</h4>
+    <ul>
+      <li>込み入った内容は、<strong>AIに何巡か見直させてから</strong>使います</li>
+      <li>巡回の数を決めておきます。決めないと、時間がかかりすぎます</li>
+      <li>ご自身が詳しい分野で試すと、AIの調べた内容が合っているかを確かめやすくなります</li>
+    </ul>
+    <p class="say"><b>頼み方の例</b>いまの内容に、誤り・抜け・根拠の弱い所がないか、3巡見直してください。巡ごとに、見つけた点と直した点を書いてください。</p>
+  </div>
+</div>
+
+<!-- ============ today ============ -->
+<h2 id="today"><span class="no">02</span>今日（10月3日）やること</h2>
+<p class="h2sub">内容は「数字と判断のAI化」からです。その場のお話に合わせて、順番や中身は入れ替えます。</p>
+<div class="today-box">
+  <ol>
+    <li><strong>前回からの続きをうかがう。</strong>AIを使った社員教育や助成金について、お調べいただいた内容があればお聞かせください</li>
+    <li><strong>ChatGPTのご契約プランを画面で確認する。</strong>このあとの回で、どの機能が使えるかがここで決まります</li>
+    <li><strong>数字を読ませる。</strong>表を整える → ChatGPTに渡す → グラフと「反論を3つ」を頼む、の順に画面でお見せします</li>
+    <li><strong>検算する。</strong>ChatGPTが出した合計と、Excelの合計を並べて確かめます。合っていても、毎回やります</li>
+    <li><strong>時間があれば、自社専用のAIに進む。</strong>プロジェクトを1つ作り、「資料にないことは答えない」設定を入れるところまでです</li>
+    <li><strong>持ち帰ることを1つ決める。</strong>今日作ったものを、1回使ってみるだけです</li>
+  </ol>
+</div>
+
+<!-- ============ plan ============ -->
+<h2 id="plan"><span class="no">03</span>12回の進め方</h2>
+<p class="h2sub">1回の打ち合わせで2回分の時間を取り、その場のお話に合わせて進めています。ここまでで、第3回の内容まで進みました。全12回の順番は変えません。</p>
+
+<div class="promise">
+  <div class="p"><div class="n">1</div><h4>毎回、その場で完成させる</h4><p>作るものは講座の時間内に、講師が画面でお見せしながら一緒に仕上げます。宿題で作っていただく前提にはしません。</p></div>
+  <div class="p"><div class="n">2</div><h4>宿題は1つ、使うだけ</h4><p>宿題は「作ったものを1回使ってみる」が基本です。調べものの宿題は、こちらからは出しません。</p></div>
+  <div class="p"><div class="n">3</div><h4>道具はChatGPTとGoogleだけ</h4><p>新しいサービスは増やしません。操作は講師が手順を追ってお見せします。ご自身でも触りたいときは、同じ画面を開いて真似していただけます。</p></div>
+</div>
+
+<p class="phase">基礎編（第1回〜第6回）<small>自分の使い方を作り直し、社内にお披露目する</small></p>
+<div class="card tbl" style="padding:.4rem .6rem">
+<table class="plan">
+  <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>現状把握と地図づくり</td><td>AI化の候補</td><td class="adj">済。候補は2つ挙がっています（議事録づくり、ノベルティ選定などの判断）</td></tr>
+    <tr><td>2</td><td>今のChatGPTの使い方を作り直す</td><td>頼み方の型／保存した頼み方</td><td class="adj">済。頼み方の工夫、プロジェクト機能、Gmail・カレンダーとの連携を扱いました</td></tr>
+    <tr><td>3</td><td>文書とコミュニケーションのAI化</td><td>社内文書のひな形</td><td class="adj">社内で使う文章のひな形と基本の設定を整理して共有する、と決めました。<strong>ひな形づくりは、このあとの回でも続けます</strong>（提案書の型もここに）</td></tr>
+    <tr class="today"><td>4<span class="tdb">今日</span></td><td>数字と判断のAI化</td><td>月次レポートのひな形</td><td class="adj">計算は表計算に任せ、AIには「なぜこうなったか」を聞きます。<strong>検算まで画面でお見せします。</strong>会長向けの型もここで</td></tr>
+    <tr><td>5</td><td>自社専用のAIをつくる</td><td>自社専用AI／AI利用ルール</td><td class="adj">時間があれば今日から入ります。作る操作は講師が画面で先導します。何を載せるかと、指示の中身を決めることに集中していただきます</td></tr>
+    <tr class="stage"><td>6<span class="badge">社員同席</span></td><td>社内へのお披露目と12か月計画</td><td>12か月の計画／社内説明</td><td class="adj">日程は、社員の方のご予定と合わせて先に決めます。事前に30分、発表を一緒に準備します。発表資料は5枚まで</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="phase">上級編（第7回〜第12回）<small>つなぐ・任せる・測る・組織に載せる</small></p>
+<div class="card tbl" style="padding:.4rem .6rem">
+<table class="plan">
+  <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
+  <tbody>
+    <tr><td>7</td><td>手作業のつなぎ目をなくす</td><td>自動化の設計メモ</td><td class="adj">まず<strong>ChatGPTの「スケジュール」</strong>で組みます。それで足りない部分（カレンダーをきっかけにした処理や、表への書き込みなど）だけ、講師がGoogleの機能で組んで見せます。<strong>外部に頼める設計図</strong>も持ち帰ります</td></tr>
+    <tr><td>8</td><td>社内の知識を検索できるようにする</td><td>社内検索AI／足りない資料の一覧</td><td class="adj">題材は<strong>会長への情報共有</strong>（Q2）を第一候補にします</td></tr>
+    <tr><td>9</td><td>複数の工程をまとめて任せる</td><td>仕事の任せ方の設計書</td><td class="adj">工程を図に書くところまで。実際に流すのは講師が見せます（提案書の点検を題材に）</td></tr>
+    <tr><td>10</td><td>品質を測る・壊れたら気づく</td><td>確認用の質問10問／毎月の点検手順</td><td class="adj">10問のうち5問は講師が下書きし、残り5問を一緒に埋めます</td></tr>
+    <tr><td>11</td><td>組織に載せる</td><td>推進体制・費用の一覧・効果の測り方</td><td class="adj">役割は「決める人」と「回す人」の2つに絞ります</td></tr>
+    <tr class="stage"><td>12<span class="badge">社員同席</span></td><td>AIを前提に事業を組み直す</td><td>3年後の構想</td><td class="adj">AIの将来像のお話はここでじっくり扱います。社員の方には「空いた時間を何に使うか」をお伝えします</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============ now ============ -->
+<h2 id="now"><span class="no">04</span>いまの現在地</h2>
+<p class="h2sub">これまでのお話から見た、現時点の位置です。今日の内容のあとで、あらためて確かめます。</p>
+
+<div class="card">
+  <div class="ladder">
+    <div class="step now"><div class="k">A</div><div><div class="t">調べものの代わりに使う<span class="tag now">いまここ</span></div><div class="d">短く質問して、答えを読む。会話は1〜2往復で終わる</div></div></div>
+    <div class="step now"><div class="k">B</div><div><div class="t">文章の下書きに使う<span class="tag now">いまここ</span></div><div class="d">メールや案内文を書かせる。毎回ゼロから頼んでいる</div></div></div>
+    <div class="step"><div class="k">C</div><div><div class="t">資料を読ませて考えさせる</div><div class="d">ファイルを渡して、要約や分析をさせる</div></div></div>
+    <div class="step"><div class="k">D</div><div><div class="t">仕組みにする</div><div class="d">会社専用のAIを作り、仕事の流れに組み込む</div></div></div>
+    <div class="step goal"><div class="k">E</div><div><div class="t">会社全体で使う<span class="tag goal">12回後の目標</span></div><div class="d">社員が使い、ルールと担当者があり、社長がいなくても回る</div></div></div>
+  </div>
+  <p class="fine">「いまここ」は目安です。プロジェクト機能を使い始めておられるので、Cに入りかけています。</p>
+</div>
+
+<div class="two">
+  <div class="col">
+    <h4>すでにできていること</h4>
+    <ul>
+      <li>ChatGPTに質問して、答えを読む</li>
+      <li>Googleカレンダー・Slackで日々の仕事を回す</li>
+      <li><strong>自社のどこにAIが効きそうかを、ご自身の言葉で言える</strong>（議事録づくり、ノベルティ選定など）</li>
+      <li>AIに向く仕事の見分け方（回数が多い・型がある・やり直しがきく）を理解している</li>
+      <li><strong>プロジェクト機能で、会話と資料をまとめる</strong>使い方を始めている</li>
+      <li>AIに権限を渡すときの危うさを、ご自身で指摘できる</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>これから身につけること</h4>
+    <ul>
+      <li>うまくいった頼み方を保存して使い回す</li>
+      <li>決まった時間に、AIに自動で動いてもらう（第7回）</li>
+      <li>資料や数字を読ませて考えさせる（第4回）</li>
+      <li>AIの答えを確かめる習慣（第4回・第10回）</li>
+      <li>社員の方に渡せる形にする（第3回・第5回）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ answers ============ -->
+<h2 id="answers"><span class="no">05</span>第1回のご質問への回答</h2>
 <p class="h2sub">6つのご質問をいただきました。講座のどの回で扱うかも添えています。</p>
 
 <article class="card qa">
@@ -151,12 +298,12 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
         <tr><td><strong>毎朝決まった時間に</strong>、今日の予定と届いたメールをまとめて届けてもらう</td><td class="ok">できる</td><td>どのプランでも使えます。無料プランと低価格のGoプランは1日1回で、「朝」など大まかな時間の指定です。Plus以上は時刻まで指定でき、1時間おきにも動かせます。結果はスマホの通知かメールで届きます</td></tr>
         <tr><td><strong>特定の人からメールが届いたら</strong>、要約して知らせてもらう</td><td class="ok">できる</td><td>Plus以上のプラン。Gmailのほか、Slackの新着メッセージもきっかけにできます</td></tr>
         <tr><td>返信メールを送る</td><td class="ok">できる（確認つき）</td><td>Plus以上のプラン・Web版。ChatGPTが下書きを作り、<strong>送るかどうかはご本人が決めます</strong></td></tr>
-        <tr><td>カレンダーに予定を入れる</td><td class="ok">確認と提案まで</td><td>予定の確認と候補の提案はできます。登録まで任せられるかは、今日画面で確かめます</td></tr>
+        <tr><td>カレンダーに予定を入れる</td><td class="ok">確認と提案まで</td><td>予定の確認と候補の提案はできます。登録まで任せられるかは、実際の画面で確かめます</td></tr>
         <tr><td>カレンダーに予定が入ったら、何かさせる</td><td class="no">できない</td><td>カレンダーは「きっかけ」には使えません。必要なら<strong>第7回</strong>で補います</td></tr>
       </tbody>
     </table></div>
-    <p>どこまで使えるかは、<strong>ChatGPTのご契約プラン</strong>と、<strong>会社のGoogleアカウントの設定</strong>（管理者がChatGPTとの接続を許可しているか）で変わります。<strong>今日、講師が実際の画面で確認し、設定できれば毎朝のまとめを1つ予約してお見せします。</strong></p>
-    <p class="where">扱う回：<b>第2回（今日）</b>、設定できれば「毎朝のまとめ」を1つ予約する／<b>第7回</b>で、ChatGPTだけでは足りない部分をGoogleの機能で補う</p>
+    <p>どこまで使えるかは、<strong>ChatGPTのご契約プラン</strong>と、<strong>会社のGoogleアカウントの設定</strong>（管理者がChatGPTとの接続を許可しているか）で変わります。<strong>講師が実際の画面で確認しながら進めます。</strong></p>
+    <p class="where">扱う回：<b>第2回</b>で連携を扱いました／<b>第7回</b>で、ChatGPTだけでは足りない部分をGoogleの機能で補う</p>
   </div>
 </article>
 
@@ -203,15 +350,15 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
   <div class="qhead"><span class="qmark">Q4</span><span>家電の操作など、「自分を楽にする」ことにも使えますか？</span></div>
   <div class="abody">
     <p class="ans"><span class="amark">A</span><span>この講座では、会社のお仕事を先に扱います。「楽にする」という考え方はそのまま使います。</span></p>
-    <p>家電の操作には別の道具が必要になり、この講座の「道具は増やさない」方針から外れます。一方で、<strong>「これが無くなったら楽になる」は、仕事の棚卸しで一番よく効く問い</strong>です。今日の冒頭で、この問いを使ってお仕事を3つ挙げていただきます。</p>
-    <p class="where">扱う回：<b>第2回（今日）</b>の業務の棚卸しで使う</p>
+    <p>家電の操作には別の道具が必要になり、この講座の「道具は増やさない」方針から外れます。一方で、<strong>「これが無くなったら楽になる」は、仕事の棚卸しで一番よく効く問い</strong>です。業務の棚卸しで、この問いを使います。</p>
+    <p class="where">扱う回：業務の棚卸しで使う</p>
   </div>
 </article>
 
 <article class="card qa">
   <div class="qhead"><span class="qmark">Q5</span><span>AIとの相性が良くない気がします。</span></div>
   <div class="abody">
-    <p class="ans"><span class="amark">A</span><span>相性よりも、「渡し方」で大きく変わります。これが今日の本題です。</span></p>
+    <p class="ans"><span class="amark">A</span><span>相性よりも、「渡し方」で大きく変わります。これが第2回の本題でした。</span></p>
     <p>社員の方に仕事を頼むとき、いきなり「やっといて」とは言わないはずです。何のためか、誰に出すものか、どこまでやるか。AIも同じで、それを伝えないと当たり障りのない答えしか返ってきません。</p>
     <div class="tbl"><table>
       <thead><tr><th>伝えること</th><th>中身</th><th>抜けるとどうなるか</th></tr></thead>
@@ -223,7 +370,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
         <tr><td>⑤ 形</td><td>箇条書き・表・メール本文など</td><td>そのまま使えない</td></tr>
       </tbody>
     </table></div>
-    <p class="where">扱う回：<b>第2回（今日）</b>。一度作れば、次からはコピーして直すだけになります</p>
+    <p class="where">扱う回：<b>第2回</b>。一度作れば、次からはコピーして直すだけになります</p>
   </div>
 </article>
 
@@ -236,98 +383,7 @@ td.no{color:var(--brass);font-weight:700;white-space:nowrap}
   </div>
 </article>
 
-<!-- ============ 2 ============ -->
-<h2 id="now"><span class="no">02</span>いまの現在地</h2>
-<p class="h2sub">第1回のお話から見た、現時点の位置です。第3回の終わりにもう一度確かめて、確定させます。</p>
-
-<div class="card">
-  <div class="ladder">
-    <div class="step now"><div class="k">A</div><div><div class="t">調べものの代わりに使う<span class="tag now">いまここ</span></div><div class="d">短く質問して、答えを読む。会話は1〜2往復で終わる</div></div></div>
-    <div class="step now"><div class="k">B</div><div><div class="t">文章の下書きに使う<span class="tag now">いまここ</span></div><div class="d">メールや案内文を書かせる。毎回ゼロから頼んでいる</div></div></div>
-    <div class="step"><div class="k">C</div><div><div class="t">資料を読ませて考えさせる</div><div class="d">ファイルを渡して、要約や分析をさせる</div></div></div>
-    <div class="step"><div class="k">D</div><div><div class="t">仕組みにする</div><div class="d">会社専用のAIを作り、仕事の流れに組み込む</div></div></div>
-    <div class="step goal"><div class="k">E</div><div><div class="t">会社全体で使う<span class="tag goal">12回後の目標</span></div><div class="d">社員が使い、ルールと担当者があり、社長がいなくても回る</div></div></div>
-  </div>
-  <p class="fine">「いまここ」は第1回のお話から見た目安です。第3回の終わりに、あらためて確認します。</p>
-</div>
-
-<div class="two">
-  <div class="col">
-    <h4>すでにできていること</h4>
-    <ul>
-      <li>ChatGPTに質問して、答えを読む</li>
-      <li>Googleカレンダー・Slackで日々の仕事を回す</li>
-      <li><strong>自社のどこにAIが効きそうかを、ご自身の言葉で言える</strong>（議事録づくり、ノベルティ選定など）</li>
-      <li>AIに向く仕事の見分け方（回数が多い・型がある・やり直しがきく）を理解している</li>
-    </ul>
-  </div>
-  <div class="col">
-    <h4>これから身につけること</h4>
-    <ul>
-      <li>頼み方に前提と条件を入れる（第2回）</li>
-      <li>うまくいった頼み方を保存して使い回す（第2回）</li>
-      <li>決まった時間に、AIに自動で動いてもらう（第2回・第7回）</li>
-      <li>資料や数字を読ませて考えさせる（第4回）</li>
-      <li>AIの答えを確かめる習慣（第4回・第10回）</li>
-      <li>社員の方に渡せる形にする（第3回・第5回）</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ============ 3 ============ -->
-<h2 id="plan"><span class="no">03</span>この現在地に合わせた、12回の進め方</h2>
-<p class="h2sub">全12回の順番は変えません。変えるのは、各回の中でどこまで深く入るかです。</p>
-
-<div class="promise">
-  <div class="p"><div class="n">1</div><h4>毎回、その場で完成させる</h4><p>作るものは講座の時間内に、講師が画面でお見せしながら一緒に仕上げます。宿題で作っていただく前提にはしません。</p></div>
-  <div class="p"><div class="n">2</div><h4>宿題は1つ、使うだけ</h4><p>宿題は「作ったものを1回使ってみる」だけにします。調べもの・検討の宿題は出しません。</p></div>
-  <div class="p"><div class="n">3</div><h4>道具はChatGPTとGoogleだけ</h4><p>新しいサービスは増やしません。操作は講師が手順を追ってお見せします。ご自身でも触りたいときは、同じ画面を開いて真似していただけます。</p></div>
-</div>
-
-<p class="phase">基礎編（第1回〜第6回）<small>自分の使い方を作り直し、社内にお披露目する</small></p>
-<div class="card tbl" style="padding:.4rem .6rem">
-<table class="plan">
-  <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
-  <tbody>
-    <tr><td>1</td><td>現状把握と地図づくり</td><td>AI化の候補</td><td class="adj">済。候補は2つ挙がっています。今日の棚卸しで、ほかにないかも確かめます</td></tr>
-    <tr class="today"><td>2<span class="tdb">今日</span></td><td>今のChatGPTの使い方を作り直す</td><td>業務の棚卸し表／頼み方の型／保存した頼み方</td><td class="adj">冒頭で棚卸しを一緒に仕上げます。頼み方の型と、できた1本の保存に絞り、設定できれば、最後に<strong>毎朝のまとめを1つ予約</strong>します</td></tr>
-    <tr><td>3</td><td>文書とコミュニケーションのAI化</td><td>社内文書のひな形</td><td class="adj">ひな形は2種に絞り、講師が画面でお見せしながら仕上げます。<strong>社員の方に渡す1本は必ず作ります</strong>（提案書の型をここに）</td></tr>
-    <tr><td>4</td><td>数字と判断のAI化</td><td>月次レポートのひな形</td><td class="adj">計算は表計算に任せ、AIには「なぜこうなったか」を聞くところまで。会長向けの型もここで</td></tr>
-    <tr><td>5</td><td>自社専用のAIをつくる</td><td>自社専用AI／AI利用ルール</td><td class="adj">作る操作は講師が画面で先導します。何を載せるかと、指示の中身を決めることに集中していただきます</td></tr>
-    <tr class="stage"><td>6<span class="badge">社員同席</span></td><td>社内へのお披露目と12か月計画</td><td>12か月の計画／社内説明</td><td class="adj">1週間前に30分の打ち合わせで発表を一緒に準備します。発表資料は5枚まで</td></tr>
-  </tbody>
-</table>
-</div>
-
-<p class="phase">上級編（第7回〜第12回）<small>つなぐ・任せる・測る・組織に載せる</small></p>
-<div class="card tbl" style="padding:.4rem .6rem">
-<table class="plan">
-  <thead><tr><th>回</th><th>テーマ</th><th>持ち帰るもの</th><th>いまの現在地に合わせた進め方</th></tr></thead>
-  <tbody>
-    <tr><td>7</td><td>手作業のつなぎ目をなくす</td><td>自動化の設計メモ</td><td class="adj">まず<strong>ChatGPTの「スケジュール」</strong>で組みます。それで足りない部分（カレンダーをきっかけにした処理や、表への書き込みなど）だけ、講師がGoogleの機能で組んで見せます。<strong>外部に頼める設計図</strong>も持ち帰ります</td></tr>
-    <tr><td>8</td><td>社内の知識を検索できるようにする</td><td>社内検索AI／足りない資料の一覧</td><td class="adj">題材は<strong>会長への情報共有</strong>（Q2）を第一候補にします</td></tr>
-    <tr><td>9</td><td>複数の工程をまとめて任せる</td><td>仕事の任せ方の設計書</td><td class="adj">工程を図に書くところまで。実際に流すのは講師が見せます（提案書の点検を題材に）</td></tr>
-    <tr><td>10</td><td>品質を測る・壊れたら気づく</td><td>確認用の質問10問／毎月の点検手順</td><td class="adj">10問のうち5問は講師が下書きし、残り5問を一緒に埋めます</td></tr>
-    <tr><td>11</td><td>組織に載せる</td><td>推進体制・費用の一覧・効果の測り方</td><td class="adj">役割は「決める人」と「回す人」の2つに絞ります</td></tr>
-    <tr class="stage"><td>12<span class="badge">社員同席</span></td><td>AIを前提に事業を組み直す</td><td>3年後の構想</td><td class="adj">AIの将来像のお話はここでじっくり扱います。社員の方には「空いた時間を何に使うか」をお伝えします</td></tr>
-  </tbody>
-</table>
-</div>
-
-<!-- ============ 4 ============ -->
-<h2 id="today"><span class="no">04</span>今日（第2回）やること</h2>
-<div class="today-box">
-  <ol>
-    <li><strong>お仕事の棚卸しを仕上げる。</strong>「これが無くなったら楽になる」を3つ挙げ、月にどれくらい時間を取られているかを一緒に書きます</li>
-    <li><strong>ChatGPTのご契約プランを画面で確認する。</strong>Q1の連携がどこまで使えるかも、ここで分かります</li>
-    <li><strong>頼み方の型をお見せする。</strong>議事録を題材に、いつもの頼み方と型を入れた頼み方を、画面で並べて比べます</li>
-    <li><strong>できた頼み方を1本、保存しておく。</strong>次からはコピーして直すだけになります</li>
-    <li><strong>毎朝のまとめを1つ予約する（設定できれば）。</strong>Gmail・カレンダーをつなぎ、「毎朝、今日の予定と届いたメールをまとめて届ける」を設定します。<strong>設定できれば、明日の朝から自動で届きます</strong></li>
-    <li><strong>宿題を1つ決める。</strong>今日作った頼み方を、今週1回使ってみるだけです。毎朝のまとめを設定できた場合は、届いた内容にも目を通してください。気づいたこと（足りない・多すぎる）があれば、次回お聞かせください</li>
-  </ol>
-</div>
-
-<p class="foot">本資料の機能名・プラン名は2026年9月時点のものです。AIのサービスは短い期間で変わるため、講座の中でその都度、実際の画面で確認しながら進めます。</p>
+<p class="foot">本資料の機能名・プラン名は2026年10月時点のものです。AIのサービスは短い期間で変わるため、講座の中でその都度、実際の画面で確認しながら進めます。</p>
 </main>
 </body>
 </html>
