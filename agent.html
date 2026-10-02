@@ -217,7 +217,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">95〜110分</span><div><b>2つ目の箱を足して、関所を置く<span class="wh">この資料</span><span class="wh gpt">ChatGPT</span></b><span class="d">ボードで「箱を足す」を押し、1つ目の直後に関所を置きます。ChatGPTでは会話を分け、1つ目の出力を読んでから、2つ目の冒頭に貼ります。</span><span class="okk">できたら：1つ目の出力を、ご自身の目で読んでから渡した</span></div></li>
     <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">110〜120分</span><div><b>設計書を残す<span class="wh">この資料</span><span class="wh gpt">ChatGPT</span></b><span class="d">「03」の設計書をコピーし、プロジェクトのソースに貼って残します。次回までに1回、今日の箱を実際の仕事で使ってみます。</span><span class="okk">できたら：設計書がプロジェクトに入っている</span></div></li>
   </ol>
-  <p class="fine">時間が足りなければ、6つ目は次回に回します。4つ目と5つ目（作って、確かめる）までは今日やりきります。読ませる資料が手元になければ、講師が用意した見本の資料で進めます。</p>
+  <p class="fine">時間が余ったら、「03」のいちばん下の頼み方を使って、ChatGPTに操作できる画面を作らせてみます。時間が足りなければ、6つ目は次回に回します。4つ目と5つ目（作って、確かめる）までは今日やりきります。読ませる資料が手元になければ、講師が用意した見本の資料で進めます。</p>
 </div>
 
 <h2 id="words"><span class="no">01</span>3つの言葉を、図でつかむ</h2>
@@ -301,6 +301,11 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   <pre class="out" id="prompt"></pre>
   <p class="fine">選んでいる箱の指示文です。箱を1つにつき、ChatGPTのプロジェクトを1つ作り、その「指示」の欄に貼ります。</p>
 </div>
+<div class="card">
+  <div class="outhead"><h3>ChatGPTに、操作できる画面を作らせる頼み方</h3><button class="b solid" data-copy="view">コピーする</button></div>
+  <pre class="out" id="view"></pre>
+  <p class="fine">ふつうのチャットに貼って送ります。ChatGPTがHTMLのコードを書くので、コードの枠の「プレビュー」を押すと、ChatGPTの中で画面が開きます。上の指示文は「箱として働かせる」ためのもの、こちらは「設計の画面そのものを作らせる」ためのものです。</p>
+</div>
 
 <h2 id="make"><span class="no">04</span>ChatGPTで形にする</h2>
 <p class="h2sub">ボードの部品は、ChatGPTの画面ではこの場所にあたります。新しい道具は増やしません。</p>
@@ -326,6 +331,22 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   <li><div><b>わざと壊す</b><span>入力を1つ欠けさせて流し、どこで止まるか、どこで気づけるかを見ます。</span></div></li>
   <li><div><b>きっかけと点検を入れる</b><span>動いてから、時刻や新着で動かします。毎月、同じ質問で点検します。</span></div></li>
 </ol>
+
+<div class="card">
+  <h3 style="margin:0 0 .5rem;font-size:1rem">ChatGPTの中で、画面を作って動かす</h3>
+  <p style="margin:0 0 .6rem">ChatGPTは、書いたコードをその場で画面として開けます。設計した内容を、ご自身用の操作画面にできます。</p>
+  <div class="tbl"><table>
+    <thead><tr><th>手順</th><th>やること</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>「03」のいちばん下の頼み方をコピーして、ふつうのチャットに貼って送る</td></tr>
+      <tr><td>2</td><td>回答の中にコードの枠が出る。枠の「<strong>プレビュー</strong>」を押す</td></tr>
+      <tr><td>3</td><td>画面が開いたら、箱や関所を押して動くかを確かめる</td></tr>
+      <tr><td>4</td><td>直したい所は、言葉で頼む（例：「箱の文字を大きく」「関所をもっと目立つ色に」）</td></tr>
+      <tr><td>5</td><td>残したいときは、コードをコピーして保存するか、共有のリンクを作る</td></tr>
+    </tbody>
+  </table></div>
+  <p class="fine">プレビューできるのは、HTMLのページ、図（Mermaid・SVG）、グラフなどです。使えるかどうかは、プラン・端末・アカウントの設定で変わります。「プレビュー」が出ないときは、コードをファイルに保存して、ブラウザで開きます。</p>
+</div>
 
 <h2 id="road"><span class="no">05</span>これからの進め方（案）</h2>
 <p class="h2sub">ご自身で作っていけることを目標に、残りの回をこの順に組み替える案です。その場のお話に合わせて入れ替えます。</p>
@@ -440,7 +461,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     // ガードレール
     $('rails').innerHTML=RAILS.map(function(g){return '<div class="grp">'+g[0]+'</div>'+g[1].map(function(x){return '<button class="sw'+(R[x[0]]?' on':'')+'" data-rail="'+x[0]+'"><i></i><span>'+x[1]+'</span></button>'}).join('')}).join('');
     // 出力
-    $('spec').textContent=spec(); $('prompt').textContent=prompt(a); $('promptTitle').textContent='指示文（箱 '+(sel+1)+'：'+a.name+'）';
+    $('spec').textContent=spec(); $('prompt').textContent=prompt(a); $('view').textContent=viewPrompt(); $('promptTitle').textContent='指示文（箱 '+(sel+1)+'：'+a.name+'）';
     save();
   }
   function toolNames(a){var t=TOOLS.filter(function(x){return a.tools[x[0]]}).map(function(x){return x[1]});return t.length?t.join('、'):'なし'}
@@ -460,6 +481,41 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     L.push('【ガードレール】'); if(rl.length) rl.forEach(function(x){L.push('　・'+x)}); else L.push('　（まだ決めていません）');
     var C=checks().list; L.push(''); L.push('【まだ決まっていない所】');
     if(C.length) C.forEach(function(x){L.push('　・'+x[1])}); else L.push('　なし');
+    return L.join('\n');
+  }
+  function viewPrompt(){
+    var L=[];
+    L.push('下の設計書をもとに、私が自分で操作できる「設計の画面」を作ってください。');
+    L.push('');
+    L.push('【作るもの】');
+    L.push('・HTMLのファイルを1つ。CSSとJavaScriptは、その中に書いてください。');
+    L.push('・外部のライブラリやサービスは使わないでください。入力した内容を外に送らないでください。');
+    L.push('・表示はすべて日本語にしてください。スマホの幅でも崩れないようにしてください。');
+    L.push('');
+    L.push('【画面に出すもの】');
+    L.push('・箱（エージェント）を、左から右へ順番に並べる。箱には、名前・任せる深さ・使ってよい道具を表示する。');
+    L.push('・任せる深さは4段階（読むだけ／下書きまで／確認してから実行／自動で実行）。深いほど、箱の枠を緑 → 黄土 → 赤に変える。');
+    L.push('・箱と箱のあいだに「関所（人が確認）」を置けるようにする。押すたびに、置く／外すが切り替わる。');
+    L.push('・左端に「きっかけ」、右端に「出す先」を置き、選べるようにする。');
+    L.push('・全体を点線の枠で囲み、枠の上にガードレール（決まり）を並べる。入っている決まりは色を付ける。');
+    L.push('');
+    L.push('【操作できること】');
+    L.push('・箱を押すと、その箱の名前・任せる深さ・使ってよい道具・やること・やらないことを変えられる。');
+    L.push('・箱を足す、消す。');
+    L.push('・ガードレールを、スイッチで入れる／外す。');
+    L.push('');
+    L.push('【変えるたびに点検して、色で知らせること】');
+    L.push('・自動で実行する箱が、関所を通らずに社外へ出すとき：赤。');
+    L.push('・最初の箱の直後に関所がないとき：黄。');
+    L.push('・「やらないこと」が空の箱があるとき：黄。');
+    L.push('・自動で動き出すのに、止め方が決まっていないとき：黄。');
+    L.push('・点検の結果は、信号（緑・黄・赤）と、理由の一覧で出す。');
+    L.push('');
+    L.push('【画面の下に出すもの】');
+    L.push('・いまの内容をまとめた設計書（文章）。変えるたびに書き直し、コピーするボタンを付ける。');
+    L.push('');
+    L.push('【最初に入れておく内容（設計書）】');
+    L.push(spec());
     return L.join('\n');
   }
   function prompt(a){
