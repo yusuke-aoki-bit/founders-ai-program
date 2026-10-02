@@ -157,6 +157,22 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
 .steps li::before{content:counter(s);font-family:"Zen Old Mincho",serif;font-weight:900;font-size:1.25rem;color:var(--pine);line-height:1.5}
 .steps b{display:block}
 .steps span{font-size:.9rem;color:var(--ink-2)}
+.today{border:2px solid var(--pine);border-radius:14px;background:var(--card);padding:1.1rem 1.2rem 1.2rem}
+.prog{display:flex;align-items:center;gap:.8rem;margin:0 0 .9rem;font-size:.84rem;color:var(--ink-2)}
+.prog .track{flex:1;height:10px;border-radius:5px;background:var(--card-2);overflow:hidden}
+.prog .track i{display:block;height:100%;width:0;background:var(--pine);border-radius:5px;transition:width .25s}
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.tl li{display:grid;grid-template-columns:2.2rem 5.2rem 1fr;gap:.8rem;align-items:start;border:1px solid var(--rule);border-radius:10px;padding:.7rem .85rem;background:var(--bg)}
+.tl li.done{background:var(--pine-soft);border-color:var(--pine-line)}
+.tl .ck{width:1.9rem;height:1.9rem;border-radius:8px;border:2px solid var(--rule-2);background:var(--card);cursor:pointer;font-size:1.05rem;line-height:1;color:transparent;font-family:inherit}
+.tl li.done .ck{background:var(--pine);border-color:var(--pine);color:var(--bg)}
+.tl .tm{font-size:.78rem;font-weight:700;color:var(--brass);padding-top:.25rem;white-space:nowrap}
+.tl b{display:block}
+.tl .wh{display:inline-block;font-size:.7rem;font-weight:700;border-radius:999px;padding:0 .55rem;margin-left:.4rem;vertical-align:.1em;border:1px solid var(--pine-line);color:var(--pine)}
+.tl .wh.gpt{border-color:var(--brass);color:var(--brass)}
+.tl span.d{font-size:.9rem;color:var(--ink-2);display:block}
+.tl span.okk{font-size:.82rem;color:var(--pine);display:block;margin-top:.15rem}
+@media (max-width:560px){.tl li{grid-template-columns:2.2rem 1fr}.tl .tm{grid-column:2;padding:0}.tl li>div{grid-column:2}}
 @media print{.toc,.bar{display:none}.pl{padding-block:0}}
 </style>
 
@@ -166,12 +182,29 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
 <p class="lead">AIに仕事を任せる仕組みを、ご自身で設計して作っていけるようにするための資料です。文章で覚えるのではなく、<strong>図で見て、図の上で動かして</strong>決めます。下の設計ボードで組んだものが、そのまま設計書と、ChatGPTに入れる指示文になります。</p>
 
 <nav class="toc">
+  <a href="#today2h">今日の2時間</a>
   <a href="#words">1｜3つの言葉を図でつかむ</a>
   <a href="#board">2｜設計ボード</a>
   <a href="#doc">3｜設計書と指示文</a>
   <a href="#make">4｜ChatGPTで形にする</a>
   <a href="#road">5｜これからの進め方</a>
 </nav>
+
+<h2 id="today2h"><span class="no">今日</span>今日の2時間（10月3日）</h2>
+<p class="h2sub">今日は、ご自身で手を動かしていただきます。講師は隣で手順をお伝えします。終わったら左の四角を押してください。2時間で、<strong>ご自身で設計したエージェントが1体、ChatGPTの中で動いている</strong>ところまで進めます。</p>
+<div class="today">
+  <div class="prog"><span id="progTxt">0 / 7</span><span class="track"><i id="progBar"></i></span></div>
+  <ol class="tl" id="tl">
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">0〜10分</span><div><b>3つの言葉を図で見る<span class="wh">この資料</span></b><span class="d">下の「01」で、箱・つなぎ方・囲いを確かめます。ひな形を1つ押して、ボードを触ってみます。</span><span class="okk">できたら：箱を押すと中身が変わるのを確かめた</span></div></li>
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">10〜30分</span><div><b>囲いを決める<span class="wh">この資料</span><span class="wh gpt">ChatGPT</span></b><span class="d">ボード右下のガードレールのスイッチを、ご自身で入れます。続けてChatGPTで、プランの確認、「データコントロール」、設定 → アプリ →「許可を求める」→「常に確認」の3つを見ます。</span><span class="okk">できたら：設定が「常に確認」になっている</span></div></li>
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">30〜55分</span><div><b>箱を1つ設計する<span class="wh">この資料</span></b><span class="d">ご自身の仕事から題材を1つ選びます。箱の名前、どこまで任せるか、使ってよい道具、やること、やらないことを入れます。信号が黄や赤なら、理由を読んで直します。</span><span class="okk">できたら：「やらないこと」が1行書けていて、赤が出ていない</span></div></li>
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">55〜80分</span><div><b>ChatGPTで箱を作る<span class="wh gpt">ChatGPT</span></b><span class="d">新規プロジェクトを作り、「03」の指示文をコピーして「指示」の欄に貼ります。資料を3本だけ入れ、メモリを「プロジェクト専用」にします。</span><span class="okk">できたら：サイドバーにプロジェクトが増え、資料の名前が並んでいる</span></div></li>
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">80〜95分</span><div><b>ある質問・ない質問で確かめる<span class="wh gpt">ChatGPT</span></b><span class="d">資料にある質問と、ない質問を1つずつ投げます。答えがおかしければ、ボードに戻って「やらないこと」を直し、指示文を貼り直します。</span><span class="okk">できたら：ない質問に「記載がありません」と答えた</span></div></li>
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">95〜110分</span><div><b>2つ目の箱を足して、関所を置く<span class="wh">この資料</span><span class="wh gpt">ChatGPT</span></b><span class="d">ボードで「箱を足す」を押し、1つ目の直後に関所を置きます。ChatGPTでは会話を分け、1つ目の出力を読んでから、2つ目の冒頭に貼ります。</span><span class="okk">できたら：1つ目の出力を、ご自身の目で読んでから渡した</span></div></li>
+    <li><button class="ck" aria-label="済みにする">✓</button><span class="tm">110〜120分</span><div><b>設計書を残す<span class="wh">この資料</span><span class="wh gpt">ChatGPT</span></b><span class="d">「03」の設計書をコピーし、プロジェクトのソースに貼って残します。次回までに1回、今日の箱を実際の仕事で使ってみます。</span><span class="okk">できたら：設計書がプロジェクトに入っている</span></div></li>
+  </ol>
+  <p class="fine">時間が足りなければ、6つ目は次回に回します。4つ目と5つ目（作って、確かめる）までは今日やりきります。読ませる資料が手元になければ、講師が用意した見本の資料で進めます。</p>
+</div>
 
 <h2 id="words"><span class="no">01</span>3つの言葉を、図でつかむ</h2>
 <p class="h2sub">設計するものは3つだけです。箱、箱のつなぎ方、外側の囲い。</p>
@@ -461,6 +494,16 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   [['fName','name'],['fDo','doo'],['fDont','dont']].forEach(function(p){
     $(p[0]).addEventListener('input',function(e){S.agents[sel][p[1]]=e.target.value;render()});
   });
+  // 今日の2時間：済みの印
+  (function(){
+    var K='agentTodayV1', st=[]; try{st=JSON.parse(localStorage.getItem(K))||[]}catch(e){}
+    var items=[].slice.call(document.querySelectorAll('#tl li'));
+    function paint(){var n=0;items.forEach(function(li,i){li.classList.toggle('done',!!st[i]);if(st[i])n++});
+      $('progTxt').textContent=n+' / '+items.length; $('progBar').style.width=(n*100/items.length)+'%';
+      try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}}
+    items.forEach(function(li,i){li.querySelector('.ck').addEventListener('click',function(e){e.stopPropagation();st[i]=st[i]?0:1;paint()})});
+    paint();
+  })();
   S=load(); render();
 })();
 </script>
