@@ -299,7 +299,17 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
 <div class="card">
   <div class="outhead"><h3 id="promptTitle">指示文</h3><button class="b solid" data-copy="prompt">コピーする</button></div>
   <pre class="out" id="prompt"></pre>
-  <p class="fine">選んでいる箱の指示文です。箱を1つにつき、ChatGPTのプロジェクトを1つ作り、その「指示」の欄に貼ります。</p>
+  <p class="fine">選んでいる箱の指示文です。箱を1つにつき、ChatGPTのプロジェクトを1つ作り、その「指示」の欄に貼ります。最後の「動きの記録」が、下の「動きを図にする」の材料になります。</p>
+</div>
+<div class="card">
+  <div class="outhead"><h3>動きを図にする頼み方</h3><button class="b solid" data-copy="flowp">コピーする</button></div>
+  <pre class="out" id="flowp"></pre>
+  <p class="fine">箱を流したあと、ふつうのチャットに貼って送ります。最後の「（ここに…）」の所に、各箱が出した「動きの記録」を貼ります。図はコードの枠の「プレビュー」で開きます。</p>
+</div>
+<div class="card">
+  <div class="outhead"><h3>動きを再生できる画面を作らせる頼み方</h3><button class="b solid" data-copy="replay">コピーする</button></div>
+  <pre class="out" id="replay"></pre>
+  <p class="fine">図の箱が順番に光り、押すとその箱の記録が出る画面を作らせます。正常に流したときと、わざと壊したときの記録を両方貼ると、2つを切り替えて見比べられます。</p>
 </div>
 <div class="card">
   <div class="outhead"><h3>ChatGPTに、操作できる画面を作らせる頼み方</h3><button class="b solid" data-copy="view">コピーする</button></div>
@@ -317,6 +327,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     <tr><td>使ってよい道具</td><td>プラグインディレクトリ／設定 → アプリ</td><td>使う道具だけをつなぐ。つないでいない道具は、そもそも使えない</td></tr>
     <tr><td>どこまで任せるか</td><td>設定 → アプリ →「許可を求める」</td><td>最初は「常に確認」。確認が出たら「今回のみ許可」だけを使う</td></tr>
     <tr><td>つなぎ方</td><td>Work（Plus以上）／会話を分けて順に流す</td><td>Workに設計書の工程を貼る。使えないときは、箱ごとに会話を分け、前の出力を次の冒頭に貼る</td></tr>
+    <tr><td>動きを見る</td><td>動きの記録 → 図 → 再生画面</td><td>指示文の最後の「動きの記録」を集め、「03」の頼み方で図や再生画面にする。コードの枠の「プレビュー」で開く</td></tr>
     <tr><td>関所</td><td>確認の画面／人が読む</td><td>止まった所で内容を読む。設計書の関所の位置と合っているかを見る</td></tr>
     <tr><td>きっかけ</td><td>スケジュール済み</td><td>時刻で動かす、変化を見張る、メールやSlackの新着で動かす（新着はPlus以上）</td></tr>
     <tr><td>囲い（ガードレール）</td><td>設定 → データコントロール／共有の権限</td><td>学習に使わせない設定にする。社員に渡すときの権限は「チャット」にする</td></tr>
@@ -461,7 +472,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     // ガードレール
     $('rails').innerHTML=RAILS.map(function(g){return '<div class="grp">'+g[0]+'</div>'+g[1].map(function(x){return '<button class="sw'+(R[x[0]]?' on':'')+'" data-rail="'+x[0]+'"><i></i><span>'+x[1]+'</span></button>'}).join('')}).join('');
     // 出力
-    $('spec').textContent=spec(); $('prompt').textContent=prompt(a); $('view').textContent=viewPrompt(); $('promptTitle').textContent='指示文（箱 '+(sel+1)+'：'+a.name+'）';
+    $('spec').textContent=spec(); $('prompt').textContent=prompt(a); $('view').textContent=viewPrompt(); $('flowp').textContent=flowPrompt(); $('replay').textContent=replayPrompt(); $('promptTitle').textContent='指示文（箱 '+(sel+1)+'：'+a.name+'）';
     save();
   }
   function toolNames(a){var t=TOOLS.filter(function(x){return a.tools[x[0]]}).map(function(x){return x[1]});return t.length?t.join('、'):'なし'}
@@ -481,6 +492,52 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     L.push('【ガードレール】'); if(rl.length) rl.forEach(function(x){L.push('　・'+x)}); else L.push('　（まだ決めていません）');
     var C=checks().list; L.push(''); L.push('【まだ決まっていない所】');
     if(C.length) C.forEach(function(x){L.push('　・'+x[1])}); else L.push('　なし');
+    return L.join('\n');
+  }
+  function chain(){
+    var L=['きっかけ：'+TRIG[S.trig]];
+    S.agents.forEach(function(a,i){L.push('箱'+(i+1)+'：'+a.name+'（'+LV[a.level]+'）');if(S.gates[i])L.push('関所：人が確認'+(i===S.agents.length-1?'（出す前）':'（箱'+(i+2)+'へ渡す前）'))});
+    L.push('出す先：'+OUT[S.out]);
+    return L;
+  }
+  function flowPrompt(){
+    var L=['下の「動きの記録」を、流れ図にしてください。',''];
+    L.push('【図の作り方】');
+    L.push('・Mermaidで書いてください。');
+    L.push('・箱ごとに「受け取ったもの → やったこと → 渡すもの」を矢印でつなぐ。');
+    L.push('・「やらなかったこと」は、その箱の横に点線で添える。');
+    L.push('・「自信がない所」は赤で目立たせる。');
+    L.push('・人が確認する場所（関所）は、別の色の四角で入れる。');
+    L.push('・図のあとに、どこで判断が入ったかを3行で説明する。');
+    L.push('');
+    L.push('【流れの順番】');
+    chain().forEach(function(x){L.push('・'+x)});
+    L.push('');
+    L.push('【動きの記録】');
+    S.agents.forEach(function(a,i){L.push('（ここに、箱'+(i+1)+'「'+a.name+'」の動きの記録を貼る）')});
+    return L.join('\n');
+  }
+  function replayPrompt(){
+    var L=['下の「動きの記録」をもとに、エージェントの動きを再生できる画面を作ってください。',''];
+    L.push('【作るもの】');
+    L.push('・HTMLのファイルを1つ。CSSとJavaScriptは、その中に書いてください。外部のライブラリやサービスは使わないでください。');
+    L.push('・表示はすべて日本語にしてください。スマホの幅でも崩れないようにしてください。');
+    L.push('');
+    L.push('【画面に出すもの】');
+    L.push('・左から右へ、きっかけ → 箱 → 関所 → 箱 … → 出す先 の順に並べる。');
+    L.push('・「再生」を押すと、箱と関所が順番に光る。今どこを流れているかが分かるようにする。');
+    L.push('・箱を押すと、その箱の「受け取ったもの・やったこと・やらなかったこと・渡すもの・自信がない所」を下に出す。');
+    L.push('・「自信がない所」がある箱には、赤い印を付ける。');
+    L.push('・記録が2組あるときは、「正常」「わざと壊した」を切り替えて見比べられるようにする。違いが出た箱は色を変える。');
+    L.push('');
+    L.push('【流れの順番】');
+    chain().forEach(function(x){L.push('・'+x)});
+    L.push('');
+    L.push('【動きの記録（正常に流したとき）】');
+    S.agents.forEach(function(a,i){L.push('（ここに、箱'+(i+1)+'「'+a.name+'」の動きの記録を貼る）')});
+    L.push('');
+    L.push('【動きの記録（わざと壊したとき）※あれば】');
+    L.push('（ここに貼る。なければこの項目は消す）');
     return L.join('\n');
   }
   function viewPrompt(){
@@ -537,9 +594,12 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     if(a.level===2) L.push('・実行の前に、必ず内容を示して確認を求めてください。');
     if(R.ap1) L.push('・金額が確定する内容は、確定させずに「要確認」と書いてください。');
     L.push('');
-    L.push('【出力の最後に書くこと】');
-    L.push('・前提にしたこと（次の工程への引き継ぎ）');
-    L.push('・人に確認してほしい所');
+    L.push('【回答の最後に、「動きの記録」として次の5つを書くこと】');
+    L.push('1. 受け取ったもの（何を読んだか）');
+    L.push('2. やったこと（どう判断したか）');
+    L.push('3. やらなかったこと（指示で止めたこと）');
+    L.push('4. 次に渡すもの');
+    L.push('5. 自信がない所（人に確かめてほしい所）');
     return L.join('\n');
   }
   // 操作
