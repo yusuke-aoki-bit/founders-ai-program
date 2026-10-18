@@ -187,6 +187,18 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
 .tl span.d{font-size:.9rem;color:var(--ink-2);display:block}
 .tl span.okk{font-size:.82rem;color:var(--pine);display:block;margin-top:.15rem}
 @media (max-width:560px){.tl li{grid-template-columns:2.2rem 1fr}.tl .tm{grid-column:2;padding:0}.tl li>div{grid-column:2}}
+.mode{display:inline-flex;border:1px solid var(--pine-line);border-radius:9px;overflow:hidden}
+.mode button{font:inherit;font-size:.84rem;border:0;background:var(--card);color:var(--pine);padding:.35rem .8rem;cursor:pointer}
+.mode button.on{background:var(--pine);color:var(--bg);font-weight:700}
+.node.sup{border-color:var(--ink);background:var(--card-2);width:10.6rem}
+.node.sup .rd{font-size:.7rem;color:var(--ink-2)}
+.node .ex{align-self:flex-start;font-size:.66rem;font-weight:700;border-radius:5px;padding:0 .35rem;border:1px solid}
+.ex.gpt{color:var(--pine);border-color:var(--pine-line)} .ex.cc{color:var(--brass);border-color:var(--brass)} .ex.codex{color:var(--ink-2);border-color:var(--ink-3)}
+.fan{display:flex;flex-direction:column;gap:.5rem;justify-content:center;border-left:2px solid var(--rule-2);border-right:2px solid var(--rule-2);padding:0 .55rem;margin:0 .1rem}
+.fr{display:flex;align-items:center;gap:.35rem}
+.fr .ar{font-size:1rem;color:var(--pine);font-weight:700}
+.fan .node{width:9.4rem}
+.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.84em}
 @media print{.toc,.bar{display:none}.pl{padding-block:0}}
 </style>
 
@@ -239,6 +251,11 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     <p>全体にかける決まりです。入れてはいけない情報、人の承認が要る操作、止め方、点検。箱がいくつ増えても、この囲いの中で動かします。</p>
   </div>
 </div>
+<div class="lg" style="margin:0 0 1.2rem">
+  <div class="pic"><div class="mini" style="border-color:var(--ink);background:var(--card-2)"></div><span class="arrow">⇄</span><div style="display:flex;flex-direction:column;gap:4px"><div class="mini sm" style="height:16px"></div><div class="mini sm" style="height:16px"></div><div class="mini sm" style="height:16px"></div></div></div>
+  <h4>スーパーバイザー ＝ 取りまとめ役</h4>
+  <p>箱が増えてきたら、取りまとめ役を1つ置きます。仕事を分けて各ワーカーに渡し、結果を集めて点検します。自分では作業をしません。ワーカーは ChatGPT・Claude Code・Codex のどれでも動かせます。設計ボードの「スーパーバイザーが振り分ける」で切り替えます。</p>
+</div>
 <p class="fine">設計の順番は、<strong>囲い → 箱を1つ → つなぐ</strong>です。先に囲いを決めておくと、あとから箱を足しても事故が起きにくくなります。</p>
 
 <h2 id="board"><span class="no">02</span>設計ボード</h2>
@@ -249,7 +266,9 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   <button class="b" data-preset="minutes">議事録 → 状況まとめ</button>
   <button class="b" data-preset="proposal">提案書の点検</button>
   <button class="b" data-preset="inquiry">問い合わせの一次回答</button>
+  <button class="b" data-preset="sup">スーパーバイザーで調べてまとめる</button>
   <span class="sp"></span>
+  <span class="mode"><button data-mode="pipe">順番に流す</button><button data-mode="sup">スーパーバイザーが振り分ける</button></span>
   <button class="b" id="addBtn">＋ 箱を足す</button>
   <button class="b warn" id="delBtn">選んだ箱を消す</button>
 </div>
@@ -263,7 +282,8 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     <span><i style="border-color:var(--brass)"></i>確認してから実行</span>
     <span><i style="border-color:var(--alert)"></i>自動で実行</span>
     <span><i style="border-color:var(--brass);background:var(--brass)"></i>関所（人が確認）</span>
-    <span><i style="border:0;background:var(--alert);height:6px;border-radius:3px;width:22px"></i>誤りの広がり</span>
+    <span id="errKey"><i style="border:0;background:var(--alert);height:6px;border-radius:3px;width:22px"></i>誤りの広がり</span>
+    <span id="supKey" hidden><i style="border-color:var(--ink);background:var(--card-2)"></i>スーパーバイザー（分ける・集める・点検）</span>
   </div>
 </div>
 
@@ -273,8 +293,24 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
 <div class="panels">
   <div class="panel">
     <h3 id="agTitle">箱の中身</h3>
+    <div id="supFields" hidden>
+      <label class="f" for="fSupName">名前</label>
+      <input type="text" id="fSupName">
+      <label class="f">動かす場所</label>
+      <div class="tg" id="fSupExec"></div>
+      <label class="f">差し戻しの上限（1つの依頼につき）</label>
+      <div class="tg" id="fRounds"></div>
+      <label class="f">関所</label>
+      <div id="fSupGates"></div>
+      <p class="fine">スーパーバイザーは自分では作業をしません。仕事を分けてワーカーに渡し、結果を集めて点検します。</p>
+    </div>
+    <div id="agFields">
     <label class="f" for="fName">名前（役割が分かる名前に）</label>
     <input type="text" id="fName">
+    <label class="f">動かす場所</label>
+    <div class="tg" id="fExec"></div>
+    <div id="idWrap"><label class="f" for="fId">英字の名前（Claude Code・Codex で使う）</label>
+    <input type="text" id="fId"></div>
     <label class="f">どこまで任せるか</label>
     <div class="lvl" id="fLevel"></div>
     <label class="f">使ってよい道具</label>
@@ -283,6 +319,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     <textarea id="fDo"></textarea>
     <label class="f" for="fDont">やらないこと</label>
     <textarea id="fDont"></textarea>
+    </div>
   </div>
   <div class="panel">
     <h3>ガードレール <small>全体にかける決まり</small></h3>
@@ -299,7 +336,13 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
 <div class="card">
   <div class="outhead"><h3 id="promptTitle">指示文</h3><button class="b solid" data-copy="prompt">コピーする</button></div>
   <pre class="out" id="prompt"></pre>
+  <p class="fine" id="promptNote"></p>
   <p class="fine">選んでいる箱の指示文です。箱を1つにつき、ChatGPTのプロジェクトを1つ作り、その「指示」の欄に貼ります。最後の「動きの記録」が、下の「動きを図にする」の材料になります。</p>
+</div>
+<div class="card">
+  <div class="outhead"><h3>設定ファイル一式（スーパーバイザーとワーカー全員）</h3><button class="b solid" data-copy="kit">コピーする</button></div>
+  <pre class="out" id="kit"></pre>
+  <p class="fine">Claude Code・Codex で動かすときに置くファイルを、フォルダの形と一緒に並べています。「# ファイル：」の行ごとに分けて保存します。ChatGPT の箱は、その文面をプロジェクトの「指示」に貼ります。</p>
 </div>
 <div class="card">
   <div class="outhead"><h3>動きを図にする頼み方</h3><button class="b solid" data-copy="flowp">コピーする</button></div>
@@ -359,6 +402,31 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   <p class="fine">プレビューできるのは、HTMLのページ、図（Mermaid・SVG）、グラフなどです。使えるかどうかは、プラン・端末・アカウントの設定で変わります。「プレビュー」が出ないときは、コードをファイルに保存して、ブラウザで開きます。</p>
 </div>
 
+<div class="card">
+  <h3 style="margin:0 0 .5rem;font-size:1rem">スーパーバイザーとワーカーを、Codex・Claude Code で動かす</h3>
+  <p style="margin:0 0 .6rem">設計ボードで「スーパーバイザーが振り分ける」を選ぶと、スーパーバイザーが仕事を分けて、ワーカーに渡し、結果を集めて点検する形になります。ワーカーは1体ずつ、ChatGPT・Claude Code・Codex のどれで動かすかを選べます。</p>
+  <div class="tbl"><table>
+    <thead><tr><th>動かす場所</th><th>スーパーバイザーからの渡し方</th><th>置くもの</th></tr></thead>
+    <tbody>
+      <tr><td>Claude Code</td><td>スーパーバイザー（Claude Code のメインの会話）が、サブエージェントとして呼ぶ</td><td><span class="code">.claude/agents/英字の名前.md</span></td></tr>
+      <tr><td>Codex</td><td>スーパーバイザーが <span class="code">codex exec</span> のコマンドで起動する。作業フォルダはワーカーごとに分ける</td><td><span class="code">workers/英字の名前/AGENTS.md</span></td></tr>
+      <tr><td>ChatGPT</td><td>自動では呼べない。スーパーバイザーが出した依頼票を、人が貼って渡し、結果を貼り返す</td><td>プロジェクトの「指示」</td></tr>
+    </tbody>
+  </table></div>
+  <p style="margin:.8rem 0 .4rem"><strong>任せる深さは、それぞれの設定にこう置き換えます。</strong></p>
+  <div class="tbl"><table>
+    <thead><tr><th>任せる深さ</th><th>Claude Code（サブエージェント）</th><th>Codex</th></tr></thead>
+    <tbody>
+      <tr><td>読むだけ</td><td>道具は Read, Grep, Glob（Webで調べるなら WebSearch, WebFetch も）／<span class="code">permissionMode: plan</span></td><td><span class="code">--sandbox read-only</span></td></tr>
+      <tr><td>下書きまで</td><td>道具に Write を足す／<span class="code">permissionMode: acceptEdits</span>。書いてよいフォルダを指示で決める</td><td><span class="code">--sandbox workspace-write --ask-for-approval never</span>。<span class="code">--cd</span> で作業フォルダを分ける</td></tr>
+      <tr><td>確認してから実行</td><td><span class="code">permissionMode: default</span>。人が承認するので、画面を開いた会話で動かす</td><td><span class="code">--ask-for-approval on-request</span>。画面を開いた <span class="code">codex</span> で動かす</td></tr>
+      <tr><td>自動で実行</td><td><span class="code">permissionMode: acceptEdits</span> ＋ 道具を絞る</td><td><span class="code">--sandbox workspace-write --ask-for-approval never</span></td></tr>
+      <tr><td>使わない</td><td><span class="code">bypassPermissions</span></td><td><span class="code">--sandbox danger-full-access</span>／<span class="code">--yolo</span></td></tr>
+    </tbody>
+  </table></div>
+  <p class="fine">Claude Code では、メインの会話（スーパーバイザー）が acceptEdits や auto で動いていると、サブエージェントの permissionMode は無視され、メインの設定が使われます。スーパーバイザーは default（毎回確認）で動かします。設定名は2026年10月時点の公式ドキュメントで確かめたものです。版が変わると名前が変わることがあります。</p>
+</div>
+
 <h2 id="road"><span class="no">05</span>これからの進め方（案）</h2>
 <p class="h2sub">ご自身で作っていけることを目標に、残りの回をこの順に組み替える案です。その場のお話に合わせて入れ替えます。</p>
 <div class="card tbl" style="padding:.4rem .6rem">
@@ -406,8 +474,26 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
       agents:[ag('分類する係',0,['mailr'],'届いた問い合わせを、種類と急ぎ度で分ける','返信しない'),
               ag('調べる係',0,['src'],'社内の資料から、答えの根拠になる所を探す','資料にないことを推測しない'),
               ag('下書き係',1,['draft'],'根拠つきの返信の下書きを作る','送信しない／金額を約束しない')],
-      gates:[true,false,true],rails:{in1:1,in2:1,ap1:1,ap2:1,set1:1,op1:1}}
+      gates:[true,false,true],rails:{in1:1,in2:1,ap1:1,ap2:1,set1:1,op1:1}},
+    sup:{name:'スーパーバイザーで調べてまとめる',mode:'sup',trig:0,out:1,fin:1,
+      sup:{name:'取りまとめ係',exec:'cc',plan:1,rounds:2},
+      agents:[ex(ag('資料を探す係',0,['src'],'社内の資料から、依頼に関係する所を探して抜き出す','資料にないことを推測しない／資料を書き換えない'),'cc','doc-finder'),
+              ex(ag('外の情報を調べる係',0,['web'],'公開されている情報を調べ、出典つきで3点にまとめる','出典のない数字を使わない／社内の資料を外に出さない'),'cc','web-researcher'),
+              ex(ag('下書き係',1,['src','draft'],'集まった材料から、報告の下書きを作る','材料にないことを書かない／送信しない'),'codex','drafter')],
+      gates:[false,false,false],rails:{in1:1,in2:1,ap2:1,set1:1,op1:1}}
   };
+  function ex(a,e,id){a.exec=e;a.id=id;return a}
+  var EXEC=[['gpt','ChatGPT'],['cc','Claude Code'],['codex','Codex']];
+  function exName(e){return {gpt:'ChatGPT',cc:'Claude Code',codex:'Codex'}[e]||'ChatGPT'}
+  function norm(){
+    S.mode=S.mode||'pipe';
+    S.sup=S.sup||{name:'取りまとめ係',exec:'cc',plan:1,rounds:2};
+    if(S.fin===undefined) S.fin=1;
+    S.agents.forEach(function(a,i){a.exec=a.exec||'gpt'; if(!a.id) a.id='worker-'+(i+1)});
+  }
+  function isSup(){return S.mode==='sup'}
+  function gAfter(i){return isSup()? (i===S.agents.length-1?S.fin:false) : S.gates[i]}
+  function lastGate(){return isSup()? S.fin : S.gates[S.agents.length-1]}
   var S, sel=0;
   function clone(o){return JSON.parse(JSON.stringify(o))}
   function load(){try{var v=JSON.parse(localStorage.getItem(KEY));if(v&&v.agents&&v.agents.length)return v}catch(e){}return clone(PRESETS.minutes)}
@@ -418,15 +504,24 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   function checks(){
     var r=[], n=S.agents.length, R=S.rails||{}, flag={};
     S.agents.forEach(function(a,i){
-      var gateBefore = i>0 ? S.gates[i-1] : false, gateAfter=S.gates[i];
-      if(a.level===3 && (a.tools.send || (i===n-1 && S.out===2)) && !gateAfter){r.push(['r','「'+a.name+'」が、自動で社外に出します','「確認してから実行」に下げるか、直後に関所を置きます。社外に出るものは、人が出します。']);flag[i]=1}
+      var gateAfter=isSup()?S.fin:S.gates[i];
+      if(a.level===3 && (a.tools.send || ((isSup()||i===n-1) && S.out===2)) && !gateAfter){r.push(['r','「'+a.name+'」が、自動で社外に出します','「確認してから実行」に下げるか、直後に関所を置きます。社外に出るものは、人が出します。']);flag[i]=1}
       if(a.tools.send && a.level>=2 && !R.ap2){r.push(['r','「'+a.name+'」はメールを送れますが、社外に出る前の承認が決まっていません','ガードレールの「社外に出る前に、人が見る」を入れます。']);flag[i]=1}
       if(a.tools.file && a.level>=2 && !R.ap3){r.push(['r','「'+a.name+'」はファイルを書き換えられますが、取り消せない操作の承認が決まっていません','ガードレールの「取り消せない操作の前に、人が見る」を入れます。']);flag[i]=1}
       if(!String(a.dont||'').trim()){r.push(['a','「'+a.name+'」に「やらないこと」が書かれていません','頼んでいないことまでやります。範囲を1行で区切ります。']);flag[i]=1}
       if(a.tools.mailr && !R.in1){r.push(['a','「'+a.name+'」はメールを読みますが、個人情報の扱いが決まっていません','ガードレールの「個人名・給与は入れない」を入れるか、読ませる範囲を絞ります。'])}
+      if(a.exec!=='gpt' && (a.tools.send||a.tools.mailr||a.tools.cal)){r.push(['a','「'+a.name+'」は'+exName(a.exec)+'で動かしますが、メールや予定の道具を持っています',exName(a.exec)+'には、メールや予定の道具が最初からはありません。つなぐ設定を別に用意するか、ChatGPTの箱に移します。']);flag[i]=1}
+      if(a.exec!=='gpt' && !/^[a-z0-9-]+$/.test(a.id||'')){r.push(['a','「'+a.name+'」の英字の名前が使えない形です','小文字の英字・数字・ハイフンだけにします（例：doc-finder）。']);flag[i]=1}
+      if(isSup() && S.sup.exec==='cc' && a.exec==='gpt'){r.push(['a','「'+a.name+'」はChatGPTで動かすので、スーパーバイザーから自動では呼べません','依頼票を人が貼って渡し、結果を貼り返します。自動で回したいなら、Claude Code か Codex に移します。'])}
     });
+    if(isSup()){
+      if(S.sup.exec==='gpt' && S.agents.some(function(a){return a.exec!=='gpt'})) r.push(['a','スーパーバイザーがChatGPTなので、Claude Code・Codex のワーカーは人が起動します','自動で振り分けたいなら、スーパーバイザーを Claude Code にします。']);
+      if(n>=2 && !S.sup.plan) r.push(['a','振り分けの計画を、人が見ずに進みます','分け方を間違えると、全員が間違った仕事をします。計画の関所を置きます。']);
+      if(S.out>=1 && !S.fin) r.push([S.out===2?'r':'a','まとめを出す前に、関所がありません',OUT[S.out]+'前に、人が1回読む場所を置きます。']);
+    } else {
     if(n>=2 && !S.gates[0]) r.push(['a','最初の箱の直後に、関所がありません','最初の取り違えが、最後まで残って広がります。確認は、いちばん上流に1つ置きます。']);
     if(S.out>=1 && !S.gates[n-1]) r.push([S.out===2?'r':'a','出す直前に、関所がありません',OUT[S.out]+'前に、人が1回読む場所を置きます。']);
+    }
     if(S.out===2 && !R.ap2) r.push(['a','出力先が社外ですが、社外に出る前の承認が決まっていません','ガードレールの「社外に出る前に、人が見る」を入れます。']);
     if(S.trig>0 && !R.op1) r.push(['a','自動で動き出しますが、止め方が決まっていません','「スケジュール済み」から一時停止できることを確かめ、スイッチを入れます。']);
     if(S.trig>0 && !R.op2) r.push(['a','止まったときに、手作業に戻す手順がありません','自動が止まった日に、誰が何をするかを1行で書きます。']);
@@ -438,7 +533,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     var e=0,out=[];S.agents.forEach(function(a,i){e+=1;out.push(e);if(S.gates[i])e=0});return out;
   }
   function render(){
-    var n=S.agents.length; if(sel>=n) sel=n-1;
+    norm(); var n=S.agents.length; if(sel>=n) sel=n-1; if(sel<0 && !isSup()) sel=0;
     while(S.gates.length<n) S.gates.push(false); S.gates.length=n;
     var R=S.rails||(S.rails={});
     var C=checks(), sp=spread();
@@ -447,12 +542,23 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     RAILS.forEach(function(g){g[1].forEach(function(x){cap+='<span class="chip'+(R[x[0]]?' on':'')+'">'+esc(x[1])+'</span>'})});
     $('cap').innerHTML=cap;
     // 流れ
-    var h='<div class="end"><b>きっかけ</b><select id="selTrig">'+TRIG.map(function(t,i){return '<option value="'+i+'"'+(S.trig===i?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div><div class="conn plain"><button class="gate">－</button></div>';
-    S.agents.forEach(function(a,i){
+    var h='<div class="end"><b>きっかけ</b><select id="selTrig">'+TRIG.map(function(t,i){return '<option value="'+i+'"'+(S.trig===i?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div>';
+    function nodeHtml(a,i,withErr){
       var tl=TOOLS.filter(function(t){return a.tools[t[0]]}).map(function(t){return '<span'+(t[2]?' class="risk"':'')+'>'+t[1]+'</span>'}).join('');
-      h+='<button class="node l'+a.level+(i===sel?' sel':'')+(C.flag[i]?' flag':'')+'" data-i="'+i+'"><span class="n">箱 '+(i+1)+'</span><span class="nm">'+esc(a.name||'（名前なし）')+'</span><span class="lv">'+LV[a.level]+'</span><span class="tl">'+tl+'</span><span class="err"><i style="width:'+Math.min(100,sp[i]*100/Math.max(3,n))+'%"></i></span><span class="errl">誤りの広がり</span></button>';
+      return '<button class="node l'+a.level+(i===sel?' sel':'')+(C.flag[i]?' flag':'')+'" data-i="'+i+'"><span class="n">'+(isSup()?'ワーカー ':'箱 ')+(i+1)+'</span><span class="nm">'+esc(a.name||'（名前なし）')+'</span><span class="ex '+a.exec+'">'+exName(a.exec)+'</span><span class="lv">'+LV[a.level]+'</span><span class="tl">'+tl+'</span>'+(withErr?'<span class="err"><i style="width:'+Math.min(100,sp[i]*100/Math.max(3,n))+'%"></i></span><span class="errl">誤りの広がり</span>':'')+'</button>';
+    }
+    if(isSup()){
+      h+='<div class="conn"><button class="gate'+(S.sup.plan?' on':'')+'" data-pg="1">'+(S.sup.plan?'計画を<br>人が確認':'関所を<br>置く')+'</button></div>';
+      h+='<button class="node sup'+(sel===-1?' sel':'')+'" data-i="-1"><span class="n">スーパーバイザー</span><span class="nm">'+esc(S.sup.name||'（名前なし）')+'</span><span class="ex '+S.sup.exec+'">'+exName(S.sup.exec)+'</span><span class="rd">分ける → 渡す → 集める → 点検</span><span class="rd">差し戻しは最大 '+S.sup.rounds+' 回</span></button>';
+      h+='<div class="fan">'+S.agents.map(function(a,i){return '<div class="fr"><span class="ar">⇄</span>'+nodeHtml(a,i,false)+'</div>'}).join('')+'</div>';
+      h+='<div class="conn"><button class="gate'+(S.fin?' on':'')+'" data-fg="1">'+(S.fin?'関所<br>人が確認':'関所を<br>置く')+'</button></div>';
+    } else {
+    h+='<div class="conn plain"><button class="gate">－</button></div>';
+    S.agents.forEach(function(a,i){
+      h+=nodeHtml(a,i,true);
       h+='<div class="conn"><button class="gate'+(S.gates[i]?' on':'')+'" data-g="'+i+'">'+(S.gates[i]?'関所<br>人が確認':'関所を<br>置く')+'</button></div>';
     });
+    }
     h+='<div class="end"><b>出す先</b><select id="selOut">'+OUT.map(function(t,i){return '<option value="'+i+'"'+(S.out===i?' selected':'')+'>'+t+'</option>'}).join('')+'</select></div>';
     $('flow').innerHTML=h;
     // 点検
@@ -461,31 +567,58 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     var msg=red?'このまま動かすと事故になりうる所が '+red+' つあります':(amb?'動かす前に決めておきたい所が '+amb+' つあります':'大きな穴は見当たりません。本番の題材で、1回流してみます');
     $('lamp').innerHTML='<div class="lamp '+cls+'"><span class="dot"></span><span>'+msg+'</span></div>';
     $('diag').innerHTML=C.list.map(function(x){return '<li class="'+x[0]+'"><div><b>'+esc(x[1])+'</b><span>'+esc(x[2])+'</span></div></li>'}).join('');
+    // モード
+    [].forEach.call(document.querySelectorAll('[data-mode]'),function(b){b.classList.toggle('on',b.dataset.mode===S.mode)});
+    $('addBtn').textContent=isSup()?'＋ ワーカーを足す':'＋ 箱を足す';
+    $('delBtn').textContent=isSup()?'選んだワーカーを消す':'選んだ箱を消す';
+    $('errKey').hidden=isSup(); $('supKey').hidden=!isSup();
     // 箱の中身
-    var a=S.agents[sel];
-    $('agTitle').innerHTML='箱 '+(sel+1)+' の中身 <small>'+esc(a.name)+'</small>';
+    $('supFields').hidden=(sel!==-1); $('agFields').hidden=(sel===-1);
+    if(sel===-1){
+      $('agTitle').innerHTML='スーパーバイザーの中身 <small>'+esc(S.sup.name)+'</small>';
+      if(document.activeElement!==$('fSupName')) $('fSupName').value=S.sup.name;
+      $('fSupExec').innerHTML=[['cc','Claude Code（自動で振り分ける）'],['gpt','ChatGPT（人が受け渡す）']].map(function(x){return '<button class="'+(S.sup.exec===x[0]?'on':'')+'" data-sexec="'+x[0]+'">'+x[1]+'</button>'}).join('');
+      $('fRounds').innerHTML=[1,2,3].map(function(k){return '<button class="'+(S.sup.rounds===k?'on':'')+'" data-rounds="'+k+'">'+k+' 回</button>'}).join('');
+      $('fSupGates').innerHTML='<button class="sw'+(S.sup.plan?' on':'')+'" data-splan="1"><i></i><span>振り分けの計画を、人が見てから進める</span></button><button class="sw'+(S.fin?' on':'')+'" data-sfin="1"><i></i><span>まとめを、人が見てから出す</span></button>';
+    }
+    var a=S.agents[Math.max(sel,0)];
+    if(sel!==-1){
+    $('agTitle').innerHTML=(isSup()?'ワーカー ':'箱 ')+(sel+1)+' の中身 <small>'+esc(a.name)+'</small>';
+    $('fExec').innerHTML=EXEC.map(function(x){return '<button class="'+(a.exec===x[0]?'on':'')+'" data-exec="'+x[0]+'">'+x[1]+'</button>'}).join('');
+    $('idWrap').hidden=(a.exec==='gpt');
+    if(document.activeElement!==$('fId')) $('fId').value=a.id||'';
     if(document.activeElement!==$('fName')) $('fName').value=a.name;
     if(document.activeElement!==$('fDo')) $('fDo').value=a.doo||'';
     if(document.activeElement!==$('fDont')) $('fDont').value=a.dont||'';
     $('fLevel').innerHTML=LV.map(function(t,i){return '<button class="v'+i+(a.level===i?' on':'')+'" data-lv="'+i+'">'+t+'</button>'}).join('');
     $('fTools').innerHTML=TOOLS.map(function(t){return '<button class="'+(a.tools[t[0]]?'on':'')+(t[2]?' risk':'')+'" data-tool="'+t[0]+'">'+t[1]+'</button>'}).join('');
+    }
     // ガードレール
     $('rails').innerHTML=RAILS.map(function(g){return '<div class="grp">'+g[0]+'</div>'+g[1].map(function(x){return '<button class="sw'+(R[x[0]]?' on':'')+'" data-rail="'+x[0]+'"><i></i><span>'+x[1]+'</span></button>'}).join('')}).join('');
     // 出力
-    $('spec').textContent=spec(); $('prompt').textContent=prompt(a); $('view').textContent=viewPrompt(); $('flowp').textContent=flowPrompt(); $('replay').textContent=replayPrompt(); $('promptTitle').textContent='指示文（箱 '+(sel+1)+'：'+a.name+'）';
+    $('spec').textContent=spec(); $('kit').textContent=kit();
+    if(sel===-1){ $('prompt').textContent=supPrompt(); $('promptTitle').textContent='スーパーバイザーの指示（'+exName(S.sup.exec)+'）'; $('promptNote').textContent=S.sup.exec==='cc'?'Claude Code の作業フォルダに CLAUDE.md として置き、画面を開いた claude で動かします。':'ChatGPT のプロジェクトの「指示」に貼ります。'; }
+    else { $('prompt').textContent=workerFile(a); $('promptNote').textContent=a.exec==='cc'?'作業フォルダの .claude/agents/ に、この名前のファイルとして置きます。':(a.exec==='codex'?'workers/英字の名前/ のフォルダに AGENTS.md として置きます。下のコマンドで動かします。':'箱を1つにつき、ChatGPTのプロジェクトを1つ作り、その「指示」の欄に貼ります。'); } $('view').textContent=viewPrompt(); $('flowp').textContent=flowPrompt(); $('replay').textContent=replayPrompt(); if(sel!==-1) $('promptTitle').textContent='指示文（'+(isSup()?'ワーカー ':'箱 ')+(sel+1)+'：'+a.name+'／'+exName(a.exec)+'）';
     save();
   }
   function toolNames(a){var t=TOOLS.filter(function(x){return a.tools[x[0]]}).map(function(x){return x[1]});return t.length?t.join('、'):'なし'}
   function railList(){var R=S.rails||{},o=[];RAILS.forEach(function(g){g[1].forEach(function(x){if(R[x[0]])o.push(x[1])})});return o}
   function spec(){
-    var L=['■ 仕組みの名前：'+(S.name||'（未定）'),'■ きっかけ：'+TRIG[S.trig],'■ 出す先：'+OUT[S.out],''];
+    var L=['■ 仕組みの名前：'+(S.name||'（未定）'),'■ 形：'+(isSup()?'スーパーバイザーが振り分ける':'順番に流す'),'■ きっかけ：'+TRIG[S.trig],'■ 出す先：'+OUT[S.out],''];
+    if(isSup()){
+      L.push('【スーパーバイザー】'+S.sup.name+'（'+exName(S.sup.exec)+'）');
+      L.push('　役目：分ける → 渡す → 集める → 点検');
+      L.push('　差し戻しの上限：1つの依頼につき '+S.sup.rounds+' 回');
+      L.push('　計画の関所：'+(S.sup.plan?'あり':'なし')+'／まとめの関所：'+(S.fin?'あり':'なし'));
+      L.push('');
+    }
     S.agents.forEach(function(a,i){
-      L.push('【箱 '+(i+1)+'】'+a.name);
+      L.push('【'+(isSup()?'ワーカー ':'箱 ')+(i+1)+'】'+a.name+'（'+exName(a.exec)+(a.exec!=='gpt'?'・'+a.id:'')+'）');
       L.push('　任せる深さ：'+LV[a.level]);
       L.push('　使ってよい道具：'+toolNames(a));
       L.push('　やること：'+(a.doo||'（未記入）'));
       L.push('　やらないこと：'+(a.dont||'（未記入）'));
-      L.push('　└ 直後の関所：'+(S.gates[i]?'あり（人が確認してから次へ）':'なし'));
+      if(!isSup()) L.push('　└ 直後の関所：'+(S.gates[i]?'あり（人が確認してから次へ）':'なし'));
       L.push('');
     });
     var rl=railList();
@@ -496,6 +629,15 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
   }
   function chain(){
     var L=['きっかけ：'+TRIG[S.trig]];
+    if(isSup()){
+      if(S.sup.plan) L.push('関所：振り分けの計画を人が確認');
+      L.push('スーパーバイザー：'+S.sup.name+'（仕事を分けて渡す）');
+      S.agents.forEach(function(a,i){L.push('　ワーカー'+(i+1)+'：'+a.name+'（'+exName(a.exec)+'・'+LV[a.level]+'）※ワーカーどうしは並んで動く')});
+      L.push('スーパーバイザー：結果を集めて点検（差し戻しは最大'+S.sup.rounds+'回）');
+      if(S.fin) L.push('関所：まとめを人が確認（出す前）');
+      L.push('出す先：'+OUT[S.out]);
+      return L;
+    }
     S.agents.forEach(function(a,i){L.push('箱'+(i+1)+'：'+a.name+'（'+LV[a.level]+'）');if(S.gates[i])L.push('関所：人が確認'+(i===S.agents.length-1?'（出す前）':'（箱'+(i+2)+'へ渡す前）'))});
     L.push('出す先：'+OUT[S.out]);
     return L;
@@ -505,6 +647,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     L.push('【図の作り方】');
     L.push('・Mermaidで書いてください。');
     L.push('・箱ごとに「受け取ったもの → やったこと → 渡すもの」を矢印でつなぐ。');
+    if(isSup()) L.push('・スーパーバイザーから各ワーカーへ枝分かれし、スーパーバイザーに戻る形にする。差し戻しがあれば、戻りの矢印を別の色で描く。');
     L.push('・「やらなかったこと」は、その箱の横に点線で添える。');
     L.push('・「自信がない所」は赤で目立たせる。');
     L.push('・人が確認する場所（関所）は、別の色の四角で入れる。');
@@ -514,7 +657,8 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     chain().forEach(function(x){L.push('・'+x)});
     L.push('');
     L.push('【動きの記録】');
-    S.agents.forEach(function(a,i){L.push('（ここに、箱'+(i+1)+'「'+a.name+'」の動きの記録を貼る）')});
+    if(isSup()) L.push('（ここに、スーパーバイザー「'+S.sup.name+'」の動きの記録を貼る）');
+    S.agents.forEach(function(a,i){L.push('（ここに、'+(isSup()?'ワーカー':'箱')+(i+1)+'「'+a.name+'」の動きの記録を貼る）')});
     return L.join('\n');
   }
   function replayPrompt(){
@@ -524,7 +668,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     L.push('・表示はすべて日本語にしてください。スマホの幅でも崩れないようにしてください。');
     L.push('');
     L.push('【画面に出すもの】');
-    L.push('・左から右へ、きっかけ → 箱 → 関所 → 箱 … → 出す先 の順に並べる。');
+    L.push(isSup()?'・左に「きっかけ」と「スーパーバイザー」、その右にワーカーを縦に並べ、スーパーバイザーから各ワーカーへ枝分かれして、スーパーバイザーに戻る形にする。最後に「出す先」。':'・左から右へ、きっかけ → 箱 → 関所 → 箱 … → 出す先 の順に並べる。');
     L.push('・「再生」を押すと、箱と関所が順番に光る。今どこを流れているかが分かるようにする。');
     L.push('・箱を押すと、その箱の「受け取ったもの・やったこと・やらなかったこと・渡すもの・自信がない所」を下に出す。');
     L.push('・「自信がない所」がある箱には、赤い印を付ける。');
@@ -534,6 +678,7 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     chain().forEach(function(x){L.push('・'+x)});
     L.push('');
     L.push('【動きの記録（正常に流したとき）】');
+    if(isSup()) L.push('（ここに、スーパーバイザー「'+S.sup.name+'」の動きの記録を貼る）');
     S.agents.forEach(function(a,i){L.push('（ここに、箱'+(i+1)+'「'+a.name+'」の動きの記録を貼る）')});
     L.push('');
     L.push('【動きの記録（わざと壊したとき）※あれば】');
@@ -575,6 +720,115 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     L.push(spec());
     return L.join('\n');
   }
+  function ccTools(a){
+    var t=['Read','Grep','Glob'];
+    if(a.tools.web) t.push('WebSearch','WebFetch');
+    if(a.level>=1 && (a.tools.draft||a.tools.file)) t.push('Write');
+    if(a.level>=2 && a.tools.file) t.push('Edit');
+    return t;
+  }
+  function ccMode(a){
+    if(a.level===0) return 'plan';
+    if(a.level===2) return 'default';
+    return (a.tools.draft||a.tools.file)?'acceptEdits':'plan';
+  }
+  function cxFlags(a){
+    if(a.level===0) return '--sandbox read-only --ask-for-approval never';
+    if(a.level===2) return '--sandbox workspace-write --ask-for-approval on-request';
+    return '--sandbox workspace-write --ask-for-approval never';
+  }
+  function cxCmd(a,req){
+    var f=cxFlags(a);
+    if(a.level===2) return 'codex --cd workers/'+a.id+' '+f+'   ← 承認が要るので、画面を開いて動かす';
+    return 'codex exec --cd workers/'+a.id+' '+f+' "'+(req||'（依頼票をここに）')+'"';
+  }
+  function missingTools(a){var m=[];if(a.tools.mailr)m.push('メールを読む');if(a.tools.cal)m.push('予定を見る');if(a.tools.send)m.push('メールを送る');return m}
+  function workerFile(a){
+    if(a.exec==='gpt') return prompt(a);
+    var body=prompt(a).replace('あなたは「'+a.name+'」です。','あなたは「'+a.name+'」です。スーパーバイザーから渡される「依頼票」の範囲だけを行います。');
+    var L=[], m=missingTools(a);
+    if(a.exec==='cc'){
+      L.push('# ファイル：.claude/agents/'+a.id+'.md');
+      L.push('---');
+      L.push('name: '+a.id);
+      L.push('description: '+a.name+'。'+(a.doo||'')+'（スーパーバイザーから依頼されたときに使う）');
+      L.push('tools: '+ccTools(a).join(', '));
+      L.push('permissionMode: '+ccMode(a));
+      L.push('maxTurns: 20');
+      L.push('---');
+      L.push(body);
+      if(m.length){L.push('');L.push('# 注意：'+m.join('・')+' は Claude Code に最初からはありません。使うなら、つなぐ設定（MCP）を別に用意します。')}
+    } else {
+      L.push('# ファイル：workers/'+a.id+'/AGENTS.md');
+      L.push(body);
+      L.push('');
+      L.push('# 動かし方（スーパーバイザーが実行するコマンド。渡す材料は workers/'+a.id+'/ に置く）');
+      L.push(cxCmd(a));
+      L.push('# --sandbox danger-full-access や --yolo は使わない。');
+      if(m.length) L.push('# 注意：'+m.join('・')+' は Codex に最初からはありません。');
+    }
+    return L.join('\n');
+  }
+  function supPrompt(){
+    var R=S.rails||{}, L=[];
+    if(S.sup.exec==='cc') L.push('# ファイル：CLAUDE.md（スーパーバイザーの指示）');
+    L.push('あなたは「'+S.sup.name+'」（スーパーバイザー）です。自分では作業をせず、仕事を分けてワーカーに渡し、結果を集めて点検します。');
+    L.push('');
+    L.push('【ワーカー】');
+    S.agents.forEach(function(a){
+      L.push('・'+(a.exec!=='gpt'?a.id+'「'+a.name+'」':'「'+a.name+'」')+'（'+exName(a.exec)+'・'+LV[a.level]+'）');
+      L.push('　やること：'+(a.doo||'（未記入）'));
+      L.push('　やらないこと：'+(a.dont||'（未記入）'));
+    });
+    L.push('');
+    L.push('【進め方】');
+    var k=1;
+    L.push((k++)+'. 依頼を読み、ワーカーごとの「依頼票」に分ける。どのワーカーにも当てはまらない仕事は、分けずに人に知らせる。');
+    if(S.sup.plan) L.push((k++)+'. 依頼票を一覧にして見せ、人が「進めてよい」と言うまで待つ。');
+    L.push((k++)+'. 依頼票を渡す。');
+    S.agents.forEach(function(a){
+      if(a.exec==='cc') L.push('　・'+a.id+'：サブエージェント「'+a.id+'」に依頼票を渡す。');
+      else if(a.exec==='codex') L.push('　・'+a.id+'：渡す材料を workers/'+a.id+'/ に置いてから、次のコマンドを実行する → '+cxCmd(a,'依頼票')+'　最後に表示された文面を結果として受け取る。');
+      else L.push('　・「'+a.name+'」：ChatGPTで動くので、依頼票をそのまま出力し、人に貼ってもらう。結果を貼り返してもらう。');
+    });
+    L.push((k++)+'. 返ってきた結果を、依頼票の「終わりの条件」で点検する。満たさないものは、理由をつけて差し戻す。差し戻しは1つの依頼票につき最大'+S.sup.rounds+'回。それでも満たさなければ止めて、人に知らせる。');
+    L.push((k++)+'. 結果をまとめる。どのワーカーの結果を、まとめのどこに使ったかを書く。');
+    if(S.fin) L.push((k++)+'. まとめを人に見せ、「出してよい」と言われるまで待ってから出す。');
+    L.push('');
+    L.push('【依頼票の形】');
+    L.push('目的／渡すもの（入力）／やってよいこと／やってはいけないこと／終わりの条件／返し方（成果と「動きの記録」5項目）');
+    L.push('');
+    L.push('【守ること】');
+    L.push('・ワーカーに、そのワーカーの「やらないこと」を越える仕事を渡さない。');
+    L.push('・ワーカーの代わりに、自分で作業をしない。');
+    var RR=S.rails||{}; RAILS.slice(0,2).forEach(function(g){g[1].forEach(function(x){if(RR[x[0]])L.push('・'+x[1]+'（ガードレール）')})});
+    if(S.sup.exec==='cc') L.push('・この会話は permissionMode を default（毎回確認）のまま動かす。acceptEdits や auto にすると、ワーカーの設定が上書きされる。');
+    L.push('');
+    L.push('【最後に、「動きの記録」として書くこと】');
+    L.push('1. どう分けたか　2. 誰に何を渡したか　3. 差し戻した回数と理由　4. まとめに使ったもの　5. 自信がない所');
+    return L.join('\n');
+  }
+  function kit(){
+    var L=[], cc=S.agents.filter(function(a){return a.exec==='cc'}), cx=S.agents.filter(function(a){return a.exec==='codex'}), gp=S.agents.filter(function(a){return a.exec==='gpt'});
+    L.push('【フォルダの形】');
+    L.push('（作業フォルダ）');
+    if(isSup() && S.sup.exec==='cc') L.push('├ CLAUDE.md　　　　　　　← スーパーバイザー');
+    cc.forEach(function(a){L.push('├ .claude/agents/'+a.id+'.md　← '+a.name)});
+    cx.forEach(function(a){L.push('├ workers/'+a.id+'/AGENTS.md　← '+a.name)});
+    L.push('└ out/　　　　　　　　　　← 結果の置き場');
+    if(gp.length||(isSup()&&S.sup.exec==='gpt')) L.push('（ChatGPT のプロジェクト：'+(isSup()&&S.sup.exec==='gpt'?S.sup.name+'、':'')+gp.map(function(a){return a.name}).join('、')+'）');
+    L.push('');
+    if(isSup()){L.push(supPrompt());L.push('');L.push('');}
+    S.agents.forEach(function(a){
+      if(a.exec==='gpt'){L.push('# ChatGPT のプロジェクト「'+a.name+'」の指示');}
+      L.push(workerFile(a));L.push('');L.push('');
+    });
+    if(isSup() && S.sup.exec==='cc'){
+      L.push('# 起動のしかた');
+      L.push('作業フォルダで claude を開き、依頼を話しかける（--permission-mode default のまま）。');
+    }
+    return L.join('\n');
+  }
   function prompt(a){
     var R=S.rails||{}, L=[];
     L.push('あなたは「'+a.name+'」です。');
@@ -607,13 +861,19 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     var t=e.target.closest('button'); if(!t) return;
     var a=S.agents[sel];
     if(t.dataset.i!==undefined){sel=+t.dataset.i;render()}
+    else if(t.dataset.mode){S.mode=t.dataset.mode; if(S.mode==='sup' && sel>=0) sel=-1; render()}
+    else if(t.dataset.exec){a.exec=t.dataset.exec;render()}
+    else if(t.dataset.sexec){S.sup.exec=t.dataset.sexec;render()}
+    else if(t.dataset.rounds){S.sup.rounds=+t.dataset.rounds;render()}
+    else if(t.dataset.splan||t.dataset.pg){S.sup.plan=S.sup.plan?0:1;render()}
+    else if(t.dataset.sfin||t.dataset.fg){S.fin=S.fin?0:1;render()}
     else if(t.dataset.g!==undefined){S.gates[+t.dataset.g]=!S.gates[+t.dataset.g];render()}
     else if(t.dataset.lv!==undefined){a.level=+t.dataset.lv;render()}
     else if(t.dataset.tool){a.tools[t.dataset.tool]=a.tools[t.dataset.tool]?0:1;render()}
     else if(t.dataset.rail){S.rails[t.dataset.rail]=S.rails[t.dataset.rail]?0:1;render()}
     else if(t.dataset.preset){S=clone(PRESETS[t.dataset.preset]);sel=0;render()}
-    else if(t.id==='addBtn'){if(S.agents.length<6){S.agents.push(ag('新しい箱',0,['src'],'',''));S.gates.push(false);sel=S.agents.length-1;render()}}
-    else if(t.id==='delBtn'){if(S.agents.length>1){S.agents.splice(sel,1);S.gates.splice(sel,1);sel=Math.max(0,sel-1);render()}}
+    else if(t.id==='addBtn'){if(S.agents.length<6){var na=ag(isSup()?'新しいワーカー':'新しい箱',0,['src'],'','');na.exec=isSup()?'cc':'gpt';na.id='worker-'+(S.agents.length+1);S.agents.push(na);S.gates.push(false);sel=S.agents.length-1;render()}}
+    else if(t.id==='delBtn'){if(sel>=0 && S.agents.length>1){S.agents.splice(sel,1);S.gates.splice(sel,1);sel=Math.max(0,sel-1);render()}}
     else if(t.dataset.copy){var tx=$(t.dataset.copy).textContent;var done=function(){var o=t.textContent;t.textContent='コピーしました';setTimeout(function(){t.textContent=o},1400)};
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(tx).then(done,function(){})}else{var ta=document.createElement('textarea');ta.value=tx;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(_){ }document.body.removeChild(ta)}}
   });
@@ -621,6 +881,8 @@ pre.out{white-space:pre-wrap;word-break:break-word;font-family:ui-monospace,SFMo
     if(e.target.id==='selTrig'){S.trig=+e.target.value;render()}
     if(e.target.id==='selOut'){S.out=+e.target.value;render()}
   });
+  $('fSupName').addEventListener('input',function(e){S.sup.name=e.target.value;render()});
+  $('fId').addEventListener('input',function(e){S.agents[sel].id=e.target.value.trim();render()});
   [['fName','name'],['fDo','doo'],['fDont','dont']].forEach(function(p){
     $(p[0]).addEventListener('input',function(e){S.agents[sel][p[1]]=e.target.value;render()});
   });
